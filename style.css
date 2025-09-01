@@ -69,7 +69,7 @@ nav a {
 }
 
 nav a:hover {
-    color: #00bcd4;
+    color: #e72d2dbe;
 }
 
 /* Secciones de contenido */
@@ -95,7 +95,7 @@ section {
 #home .team-name {
     font-size: 4rem;
     text-align: center;
-    color: #790069;
+    color: #e72d2dbe;
     margin-bottom: 2rem;
     position: relative;
     letter-spacing: 5px;
@@ -110,7 +110,7 @@ section {
     width: 200px;
     height: 200px;
     border-radius: 50%;
-    border: 5px solid #720042;
+    border: 5px solid rgb(255, 0, 0);
     transition: transform 0.3s ease;
 }
 
@@ -155,7 +155,7 @@ section {
     display: flex;
     flex-direction: row;
     align-items: center;
-    background-color: #e0f7fa;
+    background-color: #e72d2dbe; /* Esta es la línea que debes cambiar */
     padding: 2rem;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -198,7 +198,7 @@ section {
 }
 
 .detail-button {
-    background-color: #790079;
+    background-color: #e72d2dbe;
     color: white;
     padding: 0.5rem 1rem;
     border-radius: 5px;
@@ -207,7 +207,7 @@ section {
 }
 
 .detail-button:hover {
-    background-color: #004d40;
+    background-color: #e72d2dbe;
 }
 
 /* Sección de participantes */
@@ -250,7 +250,7 @@ section {
     height: 150px;
     border-radius: 50%;
     object-fit: cover;
-    border: 3px solid #d40000;
+    border: 3px solid #e72d2dbe;
 }
 
 /* Mapa de ubicación */
@@ -280,7 +280,7 @@ section {
 }
 /* Estilos para los enlaces de correo dentro de las tarjetas de participante */
 .participant-card p a {
-    color: #79004b; /* Un tono verde oscuro que podría combinar, puedes cambiarlo */
+    color: #e72d2dbe; /* Un tono verde oscuro que podría combinar, puedes cambiarlo */
     text-decoration: none; /* Elimina el subrayado */
     transition: color 0.3s ease; /* Transición suave para el hover */
 
