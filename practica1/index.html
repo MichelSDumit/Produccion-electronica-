@@ -1,169 +1,153 @@
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="" />
-        <meta name="author" content="" />
-        <title>Práctica 1 | Ibero Puebla</title>
-        <!-- Favicon-->
-        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
-        <!-- Bootstrap icons-->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
-        <!-- Core theme CSS (includes Bootstrap)-->
-        <link href="css/styles.css" rel="stylesheet" />
-    </head>
-    <body class="d-flex flex-column h-100">
-        <main class="flex-shrink-0">
-            <!-- Navigation-->
-            <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-                <div class="container px-5">
-                    <a class="navbar-brand">Menu</a>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                            <li class="nav-item"><a class="nav-link" href="../">Home</a></li>                    
-                            <li class="nav-item"><a class="nav-link" href="../index.html#resumen">Acerca de mi</a></li>
-                            <li class="nav-item"><a class="nav-link" href="../index.html#practicas">Prácticas</a></li>
-                        </ul>
-                    </div>
-                </div>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Producción Electrónica</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div id="video-bg">
+        <video autoplay muted loop playsinline>
+            <source src="assets/intro.mp4" type="video/mp4">
+        </video>
+    </div>
+
+    <div id="main-content">
+        <header>
+            <nav>
+                <a href="#home">CASA</a>
+                <a href="#info">INFORMACIÓN</a>
+                <a href="#participants">PARTICIPANTES</a>
             </nav>
+        </header>
 
-            <!-- Seccion TITULO de Portafolio-->
-            <header class="bg-primary py-2 mt-6">
-                <div class="container px-5">
-                    <div class="row gx-5 align-items-center justify-content-center">
-                        <div class="col-lg-8 col-xl-7 col-xxl-6">
-                            <div class="my-5 text-center text-xl-start">
-                                <h1 class="display-6 fw-bolder text-white mb-2">Portafolio de Actividades</h1>
-                                <h1 class="display-8 fw-bolder text-white mb-2">Introduccion a Ing. Mecatrónica</h1>
-                                <p id="resumen" class="display-8 fw-normal text-white-50 mb-4">Departamento de Ciencias e Ingenierías | Universidad Iberoamericana Puebla, México.</p>
-                            </div>
-                        </div>
+        <section id="home" class="fade-in">
+            <div class="logo-container">
+                <img src="assets/logo_equipo.png" alt="Logo del Equipo" class="team-logo">
+            </div>
+            <p class="general-info">
+               <p> Nuestro equipo esta conformado por tres integrantes de la carrera <strong>Ingeniería Mecatrónica</strong>. Esta página sirve como carpeta de evidencias de lo que realizamos durante el semestre en la materia de “Producción Electrónica” impartida por el Maestro Javier Osorio Figueroa. </p>
+    <p>
+        Dentro de esta asignatura se abordan temas fundamentales para el desarrollo de proyectos electrónicos, que incluyen:
+    </p>
+    <ul>
+        <li>Diseño de circuitos esquemáticos.</li>
+        <li>Elaboración de placas electrónicas utilizando <strong>MonoFab</strong> y <strong>xTool</strong>.</li>
+        <li>Uso de software especializado como <strong>Altium</strong> y <strong>KiCad</strong> para el modelado y validación de los diseños.</li>
+    </ul>
+    <p>
+        El objetivo principal es adquirir experiencia práctica en el proceso completo de producción electrónica, desde el diseño conceptual hasta la materialización del prototipo.
+    </p>
+
+            <img src="assets/logoo.png" alt="Logo de la Universidad" class="university-logo">
+        </section>
+
+        <section id="info" class="fade-in">
+            <h2>Nuestros Proyectos</h2>
+            <div class="project-gallery">
+                <img src="proyecto1.jpg" alt="Imagen del proyecto 1">
+                <img src="proyecto2.jpg" alt="Imagen del proyecto 2">
+                <img src="proyecto3.jpg" alt="Imagen del proyecto 3">
+            </div>
+
+            <div class="machine-section">
+                <div class="machine-info-card">
+                    <div class="machine-image-container">
+                        <img src="assets/maquina.1.png" alt="Imagen de la máquina">
                     </div>
-                </div>
-            </header>
-
-            <!-- Seccion TITULO de la Práctica-->
-            <section class="py-3" id="scroll-target">
-                <div class="container px-5 my-2">
-                    <!-- Post header-->
-                    <header class="mb-4">
-                        <!-- Post title-->
-                        <h1 class="fw-bolder mb-1">Titulo de la practica de laboratorio</h1>
-
-                        <!-- ETIQUETA DE ALUMNO (Hacer una por cada alumno)-->
-                            <img class="img-fluid rounded-circle" width="50px" src="assets/Huber.jpg" alt="..." />
-                            <div class="ms-2">
-                                <div class="fw-bold">Nombre de integrante del equipo</div>
-                                <div class="text-muted">Carrera que estudia</div>
-                            </div>
-                        <!--Aqui termina etiqueta de alumno-->
-
-                        <div class="text-muted fst-italic mt-2 mb-2">Fecha: Mes dia, Año</div>
-                        <!-- ETIQUETAS O TOPICOS IMPORTANTES DE LA PRACTICA-->
-                        <a class="badge bg-primary text-decoration-none link-light" >Arduino</a>
-                        <a class="badge bg-primary text-decoration-none link-light" >Electrónica</a>
-
-                    </header>
-                </div>
-            </section>
-
-            <!-- Seccion de CONTENIDO de la Práctica-->
-            <section>
-                <div class="container px-5">
-
-                    <figure class="mb-4"><img class="img-fluid rounded" width="800px" src="img/web.jpg" alt="..." /></figure>
-                                
-                    <p id="resumen">
-                        <h2 class="fw-bolder mb-4 mt-5 fs-5" >- Resumen -</h2>
-                        <p class="fs-6 mb-4">Science is an enterprise that should be cherished as an activity of the free human mind. Because it transforms who we are, how we live, and it gives us an understanding of our place in the universe. The universe is large and old, and the ingredients for life as we know it are everywhere, so there's no reason to think that Earth would be unique in that regard. Whether of not the life became intelligent is a different question, and we'll see if we find that.Science is an enterprise that should be cherished as an activity of the free human mind. Because it transforms who we are, how we live, and it gives us an understanding of our place in the universe. The universe is large and old, and the ingredients for life as we know it are everywhere, so there's no reason to think that Earth would be unique in that regard. Whether of not the life became intelligent is a different question, and we'll see if we find that.</p>
-                        <p class="fs-6 mb-4">If you get asteroids about a kilometer in size, those are large enough and carry enough energy into our system to disrupt transportation, communication, the food chains, and that can be a really bad day on Earth.</p>
-                        
-                        <p id="intro">
-                        <h2 class="fw-bolder mb-4 mt-5 fs-5" >- Introducción -</h2>
-                        <p class="fs-6 mb-4">Science is an enterprise that should be cherished as an activity of the free human mind. Because it transforms who we are, how we live, and it gives us an understanding of our place in the universe. The universe is large and old, and the ingredients for life as we know it are everywhere, so there's no reason to think that Earth would be unique in that regard. Whether of not the life became intelligent is a different question, and we'll see if we find that.Science is an enterprise that should be cherished as an activity of the free human mind. Because it transforms who we are, how we live, and it gives us an understanding of our place in the universe. The universe is large and old, and the ingredients for life as we know it are everywhere, so there's no reason to think that Earth would be unique in that regard. Whether of not the life became intelligent is a different question, and we'll see if we find that.</p>
-                        <p class="fs-6 mb-4">If you get asteroids about a kilometer in size, those are large enough and carry enough energy into our system to disrupt transportation, communication, the food chains, and that can be a really bad day on Earth.</p>
-                        
-                        <p id="materiales">
-                        <h2 class="fw-bolder mb-4 mt-5 fs-5" >- Materiales -</h2>
-                        <p class="fs-6 mb-4">Science is an enterprise that should be cherished as an activity of the free human mind. Because it transforms who we are, how we live, and it gives us an understanding of our place in the universe. The universe is large and old, and the ingredients for life as we know it are everywhere, so there's no reason to think that Earth would be unique in that regard. Whether of not the life became intelligent is a different question, and we'll see if we find that.Science is an enterprise that should be cherished as an activity of the free human mind. Because it transforms who we are, how we live, and it gives us an understanding of our place in the universe. The universe is large and old, and the ingredients for life as we know it are everywhere, so there's no reason to think that Earth would be unique in that regard. Whether of not the life became intelligent is a different question, and we'll see if we find that.</p>
-                        <p class="fs-6 mb-4">If you get asteroids about a kilometer in size, those are large enough and carry enough energy into our system to disrupt transportation, communication, the food chains, and that can be a really bad day on Earth.</p>
-                        
-                        <p id="desarrollo">
-                        <h2 class="fw-bolder mb-4 mt-5 fs-5">- Desarrollo -</h2>
-                        <p class="fs-6 mb-4">Science is an enterprise that should be cherished as an activity of the free human mind. Because it transforms who we are, how we live, and it gives us an understanding of our place in the universe. The universe is large and old, and the ingredients for life as we know it are everywhere, so there's no reason to think that Earth would be unique in that regard. Whether of not the life became intelligent is a different question, and we'll see if we find that.Science is an enterprise that should be cherished as an activity of the free human mind. Because it transforms who we are, how we live, and it gives us an understanding of our place in the universe. The universe is large and old, and the ingredients for life as we know it are everywhere, so there's no reason to think that Earth would be unique in that regard. Whether of not the life became intelligent is a different question, and we'll see if we find that.</p>
-                        <p class="fs-6 mb-4">If you get asteroids about a kilometer in size, those are large enough and carry enough energy into our system to disrupt transportation, communication, the food chains, and that can be a really bad day on Earth.</p>
-                        
-                            <p id="simulacion">
-                            <h1 class="fw-bolder2 mb-4 mt-5 fs-5">Simulación</h1>
-                            <p class="fs-6 mb-4">Science is an enterprise that should be cherished as an activity of the free human mind. Because it transforms who we are, how we live, and it gives us an understanding of our place in the universe. The universe is large and old, and the ingredients for life as we know it are everywhere, so there's no reason to think that Earth would be unique in that regard. Whether of not the life became intelligent is a different question, and we'll see if we find that.Science is an enterprise that should be cherished as an activity of the free human mind. Because it transforms who we are, how we live, and it gives us an understanding of our place in the universe. The universe is large and old, and the ingredients for life as we know it are everywhere, so there's no reason to think that Earth would be unique in that regard. Whether of not the life became intelligent is a different question, and we'll see if we find that.</p>
-                            <p class="fs-6 mb-4">If you get asteroids about a kilometer in size, those are large enough and carry enough energy into our system to disrupt transportation, communication, the food chains, and that can be a really bad day on Earth.</p>
-                            <figure class="mb-4" align="center"><img class="img-fluid rounded"  width="600px" src="img/ne555.png" alt="..." /></figure>
-                    
-                            <p id="diseño">
-                            <h1 class="fw-bolder2 mb-4 mt-5 fs-5">Diseño</h1>
-                            <p class="fs-6 mb-4">Science is an enterprise that should be cherished as an activity of the free human mind. Because it transforms who we are, how we live, and it gives us an understanding of our place in the universe. The universe is large and old, and the ingredients for life as we know it are everywhere, so there's no reason to think that Earth would be unique in that regard. Whether of not the life became intelligent is a different question, and we'll see if we find that.Science is an enterprise that should be cherished as an activity of the free human mind. Because it transforms who we are, how we live, and it gives us an understanding of our place in the universe. The universe is large and old, and the ingredients for life as we know it are everywhere, so there's no reason to think that Earth would be unique in that regard. Whether of not the life became intelligent is a different question, and we'll see if we find that.</p>
-                            <p class="fs-6 mb-4">If you get asteroids about a kilometer in size, those are large enough and carry enough energy into our system to disrupt transportation, communication, the food chains, and that can be a really bad day on Earth.</p>
-                            
-                            <p id="construccion">
-                            <h1 class="fw-bolder2 mb-4 mt-5 fs-5">Construcción</h1>
-                            <p class="fs-6 mb-4">Science is an enterprise that should be cherished as an activity of the free human mind. Because it transforms who we are, how we live, and it gives us an understanding of our place in the universe. The universe is large and old, and the ingredients for life as we know it are everywhere, so there's no reason to think that Earth would be unique in that regard. Whether of not the life became intelligent is a different question, and we'll see if we find that.Science is an enterprise that should be cherished as an activity of the free human mind. Because it transforms who we are, how we live, and it gives us an understanding of our place in the universe. The universe is large and old, and the ingredients for life as we know it are everywhere, so there's no reason to think that Earth would be unique in that regard. Whether of not the life became intelligent is a different question, and we'll see if we find that.</p>
-                            <p class="fs-6 mb-4">If you get asteroids about a kilometer in size, those are large enough and carry enough energy into our system to disrupt transportation, communication, the food chains, and that can be a really bad day on Earth.</p>
-                            
-
-                        <p id="resultados">
-                        <h2 class="fw-bolder mb-4 mt-5 fs-5">- Resultados -</h2>
-                        <p class="fs-6 mb-4">Science is an enterprise that should be cherished as an activity of the free human mind. Because it transforms who we are, how we live, and it gives us an understanding of our place in the universe. The universe is large and old, and the ingredients for life as we know it are everywhere, so there's no reason to think that Earth would be unique in that regard. Whether of not the life became intelligent is a different question, and we'll see if we find that.Science is an enterprise that should be cherished as an activity of the free human mind. Because it transforms who we are, how we live, and it gives us an understanding of our place in the universe. The universe is large and old, and the ingredients for life as we know it are everywhere, so there's no reason to think that Earth would be unique in that regard. Whether of not the life became intelligent is a different question, and we'll see if we find that.</p>
-                        <p class="fs-6 mb-4">If you get asteroids about a kilometer in size, those are large enough and carry enough energy into our system to disrupt transportation, communication, the food chains, and that can be a really bad day on Earth.</p>
-                        <figure class="mb-4" align="center"><video width="80%"  controls>
-                            <source src="video/Robot.mp4" type="video/mp4">
-                        </video></p></figure>
-
-                        <p id="conclusiones">
-                        <h2 class="fw-bolder mb-4 mt-5 fs-5">- Conclusiones -</h2>
-                        <p class="fs-6 mb-4">Science is an enterprise that should be cherished as an activity of the free human mind. Because it transforms who we are, how we live, and it gives us an understanding of our place in the universe. The universe is large and old, and the ingredients for life as we know it are everywhere, so there's no reason to think that Earth would be unique in that regard. Whether of not the life became intelligent is a different question, and we'll see if we find that.Science is an enterprise that should be cherished as an activity of the free human mind. Because it transforms who we are, how we live, and it gives us an understanding of our place in the universe. The universe is large and old, and the ingredients for life as we know it are everywhere, so there's no reason to think that Earth would be unique in that regard. Whether of not the life became intelligent is a different question, and we'll see if we find that.</p>
-                        <p class="fs-6 mb-4">If you get asteroids about a kilometer in size, those are large enough and carry enough energy into our system to disrupt transportation, communication, the food chains, and that can be a really bad day on Earth.</p>
-                        
-
-                        <p id="referencias">
-                        <h2 class="fw-bolder mb-4 mt-5 fs-5">- Referencias -</h2>
-                        <p class="fs-6 mb-4">Microchip AVR® microcontroller primer: programming and interfacing, third edition (synthesis lectures on digital circuits and systems), BARRETT, Steven F. Pack Daniel J., Editorial Morgan & Claypool, 2019.</p>
-                        <p class="fs-6 mb-4">K. He, X. Zhang, S. Ren and J. Sun, "Deep Residual Learning for Image Recognition," 2016 IEEE Conference on Computer Vision and Pattern Recognition (CVPR), Las Vegas, NV, USA, 2016, pp. 770-778, doi: 10.1109/CVPR.2016.90.</p>
-                        <p class="fs-6 mb-4">J. D. Hunter, "Matplotlib: A 2D Graphics Environment," in Computing in Science & Engineering, vol. 9, no. 3, pp. 90-95, May-June 2007, doi: 10.1109/MCSE.2007.55.</p>
-                        
-                        <p id="descargables">
-                        <h2 class="fw-bolder mb-4 mt-5 fs-5">- Descargables -</h2>
-                        <p class="fs-6 mb-4">Descargar documento PDF: <a href="files/Documento.pdf">documento.pdf</a> </p>
-                        <p class="fs-6 mb-4">Descargar codigo Arduino: <a href="files/Ejemplo_arduino_bluetooth.ino">codigo.ino</a> </p>
-                        <p class="fs-6 mb-4">Descargar Archivo 3d .STL: <a href="files/Pieza_3D.STL">pieza.stl</a> </p>
-
-                </div>
-            </section>
-
-            
-        </main>
-
-        <!-- Footer-->
-        <footer class="bg-dark py-4 mt-auto">
-            <div class="container px-5">
-                <div class="row align-items-center justify-content-between flex-column flex-sm-row">
-                    <div class="col-auto"><div class="small m-0 text-white">Copyright &copy; Ingenierias-iberopuebla.mx 2023</div></div>
-                    <div class="col-auto">
-                        <a class="link-light small" href="#!">Privacy</a>
-                        <span class="text-white mx-1">&middot;</span>
-                        <a class="link-light small" href="#!">Terms</a>
-                        <span class="text-white mx-1">&middot;</span>
-                        <a class="link-light small" href="#!">Contact</a>
+                    <div class="machine-text-container">
+                        <h3>MonoFAB</h3>
+                        <p>La fresadora de sobremesa monoFab SRM-20 es una máquina CNC de tres ejes diseñada para el prototipado sustractivo, ofreciendo un tamaño compacto y una funcionalidad potente a un precio asequible.
+La máquina tiene un gabinete totalmente encubierto que reduce el polvo y el ruido, y cuenta con una ventana lateral para visualizar el progreso del fresado. Incluye un interruptor de traba de seguridad que pausa automáticamente la operación cuando se abre la cubierta.</p>
                     </div>
                 </div>
             </div>
-        </footer>
 
-        <!-- Bootstrap core JS-->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-        <!-- Core theme JS-->
-        <script src="js/scripts.js"></script>
-    </body>
+            <div class="machine-section">
+                <div class="machine-info-card">
+                    <div class="machine-image-container">
+                        <img src="assets/maquina.png" alt="Imagen de la máquina">
+                    </div>
+                    <div class="machine-text-container">
+                        <h3>Xtool</h3>
+                        <p>Es un dispositivo de grabado y corte láser multifuncional que combina tecnologías de láser diodo e infrarrojo para cortar y grabar una amplia variedad de materiales con alta precisión. Su enfoque automático y posicionamiento visual permiten ajustes precisos para grabados detallados. Incorpora software compatible con múltiples sistemas operativos que facilita el diseño y control de los proyectos. Entre sus usos destacan la personalización de productos, creación de prototipos y fabricación de piezas en materiales como madera, cuero, acrílicos y metal blando. </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="work-section">
+                <h3>Trabajos realizados</h3>
+                <div class="work-item">
+                    <img src="img/imagen kicad.webp" alt="Miniatura del trabajo 1">
+                    <p>En esta práctica aprendimos a utilizar el programa KiCad, una herramienta de diseño electrónico que permite crear esquemáticos y transformarlos en circuitos impresos (PCB). Como parte del ejercicio, diseñamos y elaboramos una placa, aplicando los conocimientos adquiridos sobre la organización de componentes y el trazado de conexiones.</p>
+                    <a href="detalle-proyecto1.html" class="detail-button">Ver detalle</a>
+                </div>
+                <div class="work-item">
+                    <img src="trabajo2.jpg" alt="Miniatura del trabajo 2">
+                    <p>Descripción del trabajo 2. Breve reseña de lo que se logró en este proyecto.</p>
+                    <a href="detalle-proyecto2.html" class="detail-button">Ver detalle</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="participants" class="fade-in">
+            <h2>Nuestro equipo</h2>
+            <div class="participants-container">
+                <div class="participant-card">
+                    <img src="assets/gio.png" alt="Foto de participante 1">
+                    <h4>Giovanna González Martínez </h4>
+                    <p>Diseño de esquematicos</p>
+                    <p><a href="giovanna.gonzalez@iberopuebla.mx">giovanna.gonzalez@iberopuebla.mx</a></p>
+                </div>
+                <div class="participant-card">
+                    <img src="assets/michel.png" alt="Foto de participante 2">
+                    <h4>Michel Sánchez Dumit </h4>
+                    <p>Diseño de esquematicos</p>
+                    <p><a href="michel.sanchez.dumit@iberopuebla.mx">michel.sanchez.dumit@iberopuebla.mx</a></p>
+                </div>
+                <div class="participant-card">
+                    <img src="assets/Image (4).jpeg" alt="Foto de participante 3">
+                    <h4>Iván Rojas Robles </h4>
+                    <p>Diseño de esquematicos</p>
+                    <p><a href="ivan.rojas@iberopuebla.mx">ivan.rojas@iberopuebla.mx</a></p>
+                </div>
+            </div>
+        </section>
+
+        <section id="location" class="fade-in">
+            <h2>Ubicación de Universidad</h2>
+            <div class="map-container">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15088.484819715859!2d-98.2760029!3d19.014380049999996!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85cfc73e6e9e0efd%3A0x85adde493a769062!2sUniversidad%20Iberoamericana%20Puebla!5e0!3m2!1ses-419!2smx!4v1756693198982!5m2!1ses-419!2smx" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const sections = document.querySelectorAll('.fade-in');
+
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+        });
+    </script>
+</body>
 </html>
