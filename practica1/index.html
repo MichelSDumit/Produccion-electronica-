@@ -3,132 +3,881 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Producción Electrónica</title>
-    <link rel="stylesheet" href="esti.css">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <title>Práctica 1 - KiCad y MODs | Producción Electrónica</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #e72d2d;
+            --primary-alpha: rgba(231, 45, 45, 0.9);
+            --secondary-color: #2c3e50;
+            --dark-bg: rgba(0, 0, 0, 0.8);
+            --light-bg: rgba(255, 255, 255, 0.95);
+            --text-dark: #333;
+            --text-light: #666;
+            --border-radius: 15px;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            --hover-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+            --success-color: #27ae60;
+            --info-color: #3498db;
+            --warning-color: #f39c12;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        /* Video de fondo */
+        #video-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            overflow: hidden;
+        }
+
+        #video-bg video {
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            object-fit: cover;
+            filter: brightness(0.6) contrast(1.1);
+        }
+
+        #video-bg::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(231, 45, 45, 0.2), rgba(0, 0, 0, 0.7));
+            z-index: -1;
+        }
+
+        #main-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Header mejorado */
+        header {
+            background: var(--dark-bg);
+            backdrop-filter: blur(15px);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 3px solid var(--primary-color);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .home-button {
+            background: linear-gradient(45deg, var(--primary-color), #ff6b6b);
+            color: white;
+            padding: 0.7rem 1.5rem;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(231, 45, 45, 0.3);
+        }
+
+        .home-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(231, 45, 45, 0.4);
+        }
+
+        .page-title {
+            color: white;
+            font-size: 1.3rem;
+            font-weight: 500;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            background: var(--primary-alpha);
+            transform: translateY(-2px);
+        }
+
+        /* Secciones */
+        section {
+            margin: 3rem auto;
+            max-width: 1200px;
+            padding: 3rem 2rem;
+            background: var(--light-bg);
+            backdrop-filter: blur(15px);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Introducción */
+        #intro {
+            text-align: center;
+            background: linear-gradient(135deg, var(--light-bg), rgba(231, 45, 45, 0.05));
+        }
+
+        .intro-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .intro-title {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .intro-subtitle {
+            font-size: 1.3rem;
+            color: var(--text-light);
+            margin-bottom: 2rem;
+        }
+
+        .intro-description {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            text-align: left;
+            color: var(--text-dark);
+        }
+
+        /* Títulos de sección */
+        .section-title {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+            font-weight: 700;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-color), #ff6b6b);
+            border-radius: 2px;
+        }
+
+        .section-title i {
+            margin-right: 1rem;
+        }
+
+        /* Pasos del proceso */
+        .process-steps {
+            display: grid;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .step-card {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            border-left: 5px solid var(--primary-color);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .step-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--hover-shadow);
+        }
+
+        .step-number {
+            position: absolute;
+            top: -15px;
+            left: 20px;
+            background: linear-gradient(45deg, var(--primary-color), #ff6b6b);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+            box-shadow: 0 5px 15px rgba(231, 45, 45, 0.3);
+        }
+
+        .step-title {
+            color: var(--primary-color);
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            margin-top: 0.5rem;
+            font-weight: 600;
+        }
+
+        .step-description {
+            color: var(--text-dark);
+            line-height: 1.7;
+            margin-bottom: 1rem;
+        }
+
+        .step-image {
+            width: 100%;
+            max-width: 400px;
+            border-radius: var(--border-radius);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            margin: 1rem auto;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+
+        .step-image:hover {
+            transform: scale(1.02);
+        }
+
+        /* Información de herramientas */
+        .tool-info {
+            background: linear-gradient(135deg, rgba(52, 152, 219, 0.1), rgba(46, 204, 113, 0.1));
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            margin: 2rem 0;
+            border-left: 4px solid var(--info-color);
+        }
+
+        .tool-info h4 {
+            color: var(--info-color);
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* Galería de proyectos */
+        .projects-section {
+            margin-top: 4rem;
+        }
+
+        .project-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .project-card {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--hover-shadow);
+        }
+
+        .project-card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .project-card:hover img {
+            transform: scale(1.05);
+        }
+
+        .project-info {
+            padding: 1.5rem;
+        }
+
+        .project-title {
+            color: var(--primary-color);
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-author {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Participantes */
+        .participants-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            padding: 2rem 0;
+        }
+
+        .participant-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(231, 45, 45, 0.05));
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: all 0.4s ease;
+            border: 1px solid rgba(231, 45, 45, 0.1);
+        }
+
+        .participant-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: var(--hover-shadow);
+        }
+
+        .participant-card img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--primary-color);
+            margin-bottom: 1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 25px rgba(231, 45, 45, 0.3);
+        }
+
+        .participant-card:hover img {
+            transform: scale(1.1);
+            border-color: #ff6b6b;
+        }
+
+        .participant-card h4 {
+            color: var(--primary-color);
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .participant-card p {
+            color: var(--text-light);
+            margin-bottom: 0.5rem;
+        }
+
+        .participant-card a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-size: 0.9rem;
+            word-wrap: break-word;
+            transition: color 0.3s ease;
+        }
+
+        .participant-card a:hover {
+            color: #ff6b6b;
+            text-decoration: underline;
+        }
+
+        /* Alertas y notas */
+        .alert {
+            padding: 1rem 1.5rem;
+            border-radius: 10px;
+            margin: 1rem 0;
+            border-left: 4px solid;
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .alert-success {
+            background: rgba(39, 174, 96, 0.1);
+            border-color: var(--success-color);
+            color: #1e8449;
+        }
+
+        .alert-info {
+            background: rgba(52, 152, 219, 0.1);
+            border-color: var(--info-color);
+            color: #2471a3;
+        }
+
+        .alert-warning {
+            background: rgba(243, 156, 18, 0.1);
+            border-color: var(--warning-color);
+            color: #b7950b;
+        }
+
+        .alert i {
+            font-size: 1.2rem;
+            margin-top: 0.2rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+                gap: 1rem;
+                padding: 1rem;
+            }
+
+            .nav-left {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .nav-links {
+                gap: 1rem;
+            }
+
+            section {
+                margin: 2rem 1rem;
+                padding: 2rem 1rem;
+            }
+
+            .intro-title {
+                font-size: 2.5rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .project-gallery {
+                grid-template-columns: 1fr;
+            }
+
+            .participants-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Scroll indicator */
+        .scroll-indicator {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.2);
+            z-index: 9999;
+        }
+
+        .scroll-progress {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary-color), #ff6b6b);
+            width: 0%;
+            transition: width 0.1s ease;
+        }
+    </style>
 </head>
 <body>
+    <!-- Scroll indicator -->
+    <div class="scroll-indicator">
+        <div class="scroll-progress" id="scrollProgress"></div>
+    </div>
 
     <div id="video-bg">
         <video autoplay muted loop playsinline>
-            <source src="assets/intro.mp4" type="video/mp4">
+            <source src="../assets/intro.mp4" type="video/mp4">
         </video>
     </div>
 
     <div id="main-content">
         <header>
             <nav>
-                <a href="#home">CASA</a>
-                <a href="#info">INFORMACIÓN</a>
-                <a href="#participants">PARTICIPANTES</a>
+                <div class="nav-left">
+                    <a href="../index.html" class="home-button">
+                        <i class="fas fa-home"></i> MENÚ PRINCIPAL
+                    </a>
+                    <div class="page-title">Práctica 1 - Diseño PCB</div>
+                </div>
+                <div class="nav-links">
+                    <a href="#intro"><i class="fas fa-info-circle"></i> Introducción</a>
+                    <a href="#kicad-process"><i class="fas fa-microchip"></i> KiCad</a>
+                    <a href="#mods-process"><i class="fas fa-cogs"></i> MODs</a>
+                    <a href="#projects"><i class="fas fa-project-diagram"></i> Proyectos</a>
+                    <a href="#participants"><i class="fas fa-users"></i> Equipo</a>
+                </div>
             </nav>
         </header>
 
-        <section id="home" class="fade-in">
-            <div class="logo-container">
-                <img src="assets/logo_equipo.png" alt="Logo del Equipo" class="team-logo">
+        <section id="intro" class="fade-in">
+            <div class="intro-content">
+                <h1 class="intro-title">Práctica 1</h1>
+                <p class="intro-subtitle">Diseño de PCB con KiCad y Fabricación con MODs</p>
+                <div class="intro-description">
+                    <p>En esta práctica aprendimos el proceso completo de diseño y fabricación de placas de circuito impreso (PCB), desde el diseño esquemático en KiCad hasta la fabricación física utilizando la fresadora MonoFab a través del software MODs.</p>
+                    
+                    <div class="alert alert-info">
+                        <i class="fas fa-lightbulb"></i>
+                        <div>
+                            <strong>Objetivo:</strong> Comprender el flujo de trabajo completo para la creación de PCBs, aplicando conocimientos de diseño electrónico y fabricación digital.
+                        </div>
+                    </div>
+                </div>
             </div>
-            <p class="general-info">
-               <p> 
-Después de realizar el diseño en KiCad, utilizamos la Monofab, una máquina que se encarga de fabricar físicamente la placa. Esta herramienta permite fresar el material para trazar las pistas de cobre, así como perforar los espacios destinados a los componentes. De esta forma, pasamos de un diseño digital a un prototipo real y funcional, comprendiendo mejor el proceso completo de creación de una PCB.
-    </p>
         </section>
 
-        <section id="info" class="fade-in">
-            <h2>Nuestros Proyectos</h2>
-            <div class="project-gallery">
-                <img src="img/Image (5).jpg" alt="Imagen del proyecto de Gio">
-                <img src="img/Image (6).jpg" alt="Imagen del proyecto de Michel">
-                <img src="proyecto3.jpg" alt="Imagen del proyecto de Iván">
-            </div>
-
-            <div class="machine-section">
-                <div class="machine-info-card">
-                    <div class="machine-image-container">
-                        <img src="assets/Image (4).jpg" alt="Imagen de la máquina">
-                    </div>
-                    <div class="machine-text-container">
-                        <h3>KiCad</h3>
-                        <p>En esta práctica comenzamos con el uso más detallado de KiCad. Lo primero que realizamos fue la descarga de la librería del FabLab, la cual contiene los componentes necesarios para elaborar nuestros respectivos circuitos con las especificaciones adecuadas.
-
-Cada integrante del equipo diseñó su propio circuito. En la mayoría de los casos, el diseño consistía en cuatro interruptores (switches) con una salida, un voltaje de 3.3 V, ocho resistencias, cuatro LEDs y la conexión a tierra. La única excepción fue el circuito de Iván, que incluía 14 resistencias en su diseño.
-
-Una vez definidos los componentes, pasamos a la sección de diseño de placas en KiCad, donde se realizaron las conexiones correspondientes. En esta parte desarrollamos el esquemático, es decir, la representación gráfica del circuito donde se muestran de manera clara y organizada las conexiones entre cada uno de los elementos.</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="machine-section">
-                <div class="machine-info-card">
-                    <div class="machine-image-container">
-                        <img src="img/mods.png" alt="Imagen de la máquina">
-                    </div>
-                    <div class="machine-text-container">
-                        <h3>Mods</h3>
-                        <p>Después de diseñar nuestros respectivos esquematicos, utilizamos la página MODs (modsproject.org), una herramienta en línea que permite convertir los diseños de nuestros circuitos en archivos compatibles con la máquina de fresado. Primero cargamos en el programa los archivos en formato PNG que generamos en KiCad (las pistas, el contorno de la placa y los diseños). Después configuramos los parámetros de fresado, como el tipo de fresa, la profundidad y la velocidad de corte. MODs funciona mediante módulos conectados entre sí, donde cada uno realiza una función específica: lectura de la imagen, definición de trayectorias y generación del archivo de salida. Al finalizar, obtuvimos el código que la Monofab utiliza para fabricar físicamente la placa, completando así el proceso que va del diseño digital al prototipo real. </p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="machine-section">
-                <div class="machine-info-card">
-                    <div class="machine-image-container">
-                        <img src="assets/Image (3).jpg" alt="Imagen de la máquina">
-                    </div>
-                    <div class="machine-text-container">
-                        <h3>Monofab</h3>
-                    <p>Una vez que generamos los archivos de trayectorias en MODs, procedimos a utilizar la Monofab, la máquina encargada de fabricar la placa de circuito impreso. El proceso inició colocando en la máquina la placa virgen de cobre, asegurándola correctamente para evitar movimientos durante el fresado. Después, seleccionamos y colocamos la fresa adecuada (primero la de 1/64” para las pistas y posteriormente la de 1/32” para el contorno), ajustando la altura inicial de la herramienta con precisión para asegurar cortes uniformes.
-
-Posteriormente, cargamos en la Monofab los archivos obtenidos en MODs y configuramos los parámetros básicos, como el punto de origen (home), la velocidad y la profundidad de corte. Al iniciar el proceso de fresado, la máquina fue retirando el cobre de la superficie, dejando definidas las pistas del circuito según el diseño digital. Una vez terminado este paso, se cambió la fresa para realizar el corte del contorno, obteniendo así la forma final de la placa.
-
-Finalmente, al concluir el mecanizado, retiramos la placa ya terminada y revisamos que las pistas estuvieran correctamente delineadas y sin imperfecciones. Con este procedimiento, pasamos del diseño virtual a un prototipo físico funcional, comprendiendo de manera práctica cómo se fabrica una PCB mediante fresado.</p>
-                    </div>
-                </div>
-            </div>
+        <section id="kicad-process" class="fade-in">
+            <h2 class="section-title"><i class="fas fa-microchip"></i>Proceso en KiCad</h2>
             
+            <div class="tool-info">
+                <h4><i class="fas fa-info-circle"></i>¿Qué es KiCad?</h4>
+                <p>KiCad es una suite de software libre para automatización de diseño electrónico (EDA). Nos permite crear esquemas electrónicos y diseños de placas de circuito impreso de manera profesional.</p>
+            </div>
+
+            <div class="process-steps">
+                <div class="step-card">
+                    <div class="step-number">1</div>
+                    <h3 class="step-title">Instalación de Librerías FabLab</h3>
+                    <p class="step-description">
+                        El primer paso fue descargar e instalar la librería del FabLab en KiCad. Esta librería contiene componentes específicos optimizados para fabricación digital, con las especificaciones y footprints adecuados para el proceso de fresado que utilizaríamos posteriormente.
+                    </p>
+                    <div class="alert alert-warning">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <div>Es crucial usar componentes de la librería FabLab ya que están diseñados específicamente para el proceso de fabricación que usaremos.</div>
+                    </div>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-number">2</div>
+                    <h3 class="step-title">Creación del Esquemático</h3>
+                    <p class="step-description">
+                        Cada integrante del equipo diseñó su propio circuito. La mayoría incluyó:
+                    </p>
+                    <ul style="margin: 1rem 0; padding-left: 2rem;">
+                        <li><strong>4 interruptores (switches)</strong> con salida</li>
+                        <li><strong>Voltaje de alimentación:</strong> 3.3V</li>
+                        <li><strong>8 resistencias</strong> para limitación de corriente</li>
+                        <li><strong>4 LEDs</strong> como indicadores</li>
+                        <li><strong>Conexión a tierra (GND)</strong></li>
+                    </ul>
+                    <div class="alert alert-info">
+                        <i class="fas fa-info-circle"></i>
+                        <div><strong>Excepción:</strong> El circuito de Iván incluyó 14 resistencias en su diseño para una configuración más compleja.</div>
+                    </div>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-number">3</div>
+                    <h3 class="step-title">Asignación de Footprints</h3>
+                    <p class="step-description">
+                        Después de completar el esquemático, asignamos los footprints correspondientes a cada componente. Los footprints definen la forma física y las dimensiones de soldadura de cada componente en la PCB.
+                    </p>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-number">4</div>
+                    <h3 class="step-title">Diseño del Layout de PCB</h3>
+                    <p class="step-description">
+                        Pasamos al editor de PCB donde realizamos el ruteo de las conexiones. Este proceso incluye:
+                    </p>
+                    <ul style="margin: 1rem 0; padding-left: 2rem;">
+                        <li>Colocación estratégica de componentes</li>
+                        <li>Ruteo de pistas evitando cruces</li>
+                        <li>Definición del contorno de la placa</li>
+                        <li>Verificación de reglas de diseño (DRC)</li>
+                    </ul>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-number">5</div>
+                    <h3 class="step-title">Generación de Archivos Gerber</h3>
+                    <p class="step-description">
+                        Finalmente, exportamos los archivos necesarios para la fabricación en formato PNG de alta resolución, incluyendo las capas de pistas de cobre y el contorno de corte de la placa.
+                    </p>
+                    <div class="alert alert-success">
+                        <i class="fas fa-check-circle"></i>
+                        <div>Los archivos PNG generados son compatibles con el software MODs para la fabricación.</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="mods-process" class="fade-in">
+            <h2 class="section-title"><i class="fas fa-cogs"></i>Proceso en MODs</h2>
+            
+            <div class="tool-info">
+                <h4><i class="fas fa-info-circle"></i>¿Qué es MODs?</h4>
+                <p>MODs (modsproject.org) es una herramienta web modular que convierte archivos de diseño en códigos de control para máquinas de fabricación digital, como fresadoras CNC.</p>
+            </div>
+
+            <div class="process-steps">
+                <div class="step-card">
+                    <div class="step-number">1</div>
+                    <h3 class="step-title">Carga de Archivos PNG</h3>
+                    <p class="step-description">
+                        Importamos los archivos PNG generados en KiCad al entorno web de MODs. Cargamos tanto el archivo de pistas como el de contorno de la placa, cada uno requiere configuraciones específicas de fresado.
+                    </p>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-number">2</div>
+                    <h3 class="step-title">Configuración de Parámetros de Fresado</h3>
+                    <p class="step-description">
+                        Configuramos los parámetros esenciales para el proceso:
+                    </p>
+                    <ul style="margin: 1rem 0; padding-left: 2rem;">
+                        <li><strong>Tipo de fresa:</strong> 1/64" para pistas, 1/32" para contorno</li>
+                        <li><strong>Profundidad de corte:</strong> 0.1mm para pistas</li>
+                        <li><strong>Velocidad de avance:</strong> Optimizada para cobre</li>
+                        <li><strong>Velocidad del husillo:</strong> Según especificaciones de MonoFab</li>
+                    </ul>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-number">3</div>
+                    <h3 class="step-title">Configuración de Módulos</h3>
+                    <p class="step-description">
+                        MODs funciona mediante módulos interconectados. Configuramos la cadena de procesamiento:
+                    </p>
+                    <ul style="margin: 1rem 0; padding-left: 2rem;">
+                        <li><strong>Entrada:</strong> Módulo de lectura de imagen PNG</li>
+                        <li><strong>Procesamiento:</strong> Módulo de cálculo de trayectorias</li>
+                        <li><strong>Salida:</strong> Módulo de generación de G-code</li>
+                    </ul>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-number">4</div>
+                    <h3 class="step-title">Generación de Trayectorias</h3>
+                    <p class="step-description">
+                        El software calcula automáticamente las trayectorias de la fresa, optimizando el recorrido para minimizar el tiempo de mecanizado y evitar dañar las pistas ya fresadas.
+                    </p>
+                    <div class="alert alert-info">
+                        <i class="fas fa-info-circle"></i>
+                        <div>Es importante revisar visualmente las trayectorias antes de proceder al fresado para detectar posibles errores.</div>
+                    </div>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-number">5</div>
+                    <h3 class="step-title">Exportación de G-code</h3>
+                    <p class="step-description">
+                        Finalmente, exportamos el código G que controla los movimientos de la fresadora MonoFab. Este archivo contiene todas las instrucciones necesarias para fabricar la PCB físicamente.
+                    </p>
+                    <div class="alert alert-success">
+                        <i class="fas fa-check-circle"></i>
+                        <div>El archivo G-code está listo para ser cargado en la fresadora MonoFab.</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="monofab-process" class="fade-in">
+            <h2 class="section-title"><i class="fas fa-industry"></i>Proceso en MonoFab</h2>
+            
+            <div class="process-steps">
+                <div class="step-card">
+                    <div class="step-number">1</div>
+                    <h3 class="step-title">Preparación del Material</h3>
+                    <p class="step-description">
+                        Colocamos la placa virgen de cobre en la fresadora, asegurándonos de que esté perfectamente nivelada y fijada para evitar movimientos durante el fresado. La preparación correcta del material es crucial para obtener resultados precisos.
+                    </p>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-number">2</div>
+                    <h3 class="step-title">Instalación y Calibración de Fresas</h3>
+                    <p class="step-description">
+                        Instalamos primero la fresa de 1/64" para el fresado de pistas. Calibramos la altura de la herramienta utilizando el sistema de auto-nivelación de la MonoFab, asegurando un contacto preciso con el material.
+                    </p>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-number">3</div>
+                    <h3 class="step-title">Fresado de Pistas</h3>
+                    <p class="step-description">
+                        Ejecutamos el primer archivo G-code para fresar las pistas del circuito. La máquina retira el cobre de la superficie, dejando definidas las conexiones eléctricas según el diseño digital. Este proceso requiere precisión para mantener la continuidad de las pistas.
+                    </p>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-number">4</div>
+                    <h3 class="step-title">Cambio de Fresa y Corte de Contorno</h3>
+                    <p class="step-description">
+                        Cambiamos a la fresa de 1/32" y ejecutamos el segundo archivo para cortar el contorno de la placa. Esto define la forma final de la PCB y la separa del material base.
+                    </p>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-number">5</div>
+                    <h3 class="step-title">Inspección y Acabado</h3>
+                    <p class="step-description">
+                        Retiramos la placa terminada y realizamos una inspección visual para verificar que las pistas estén correctamente delineadas y sin imperfecciones. Limpiamos los residuos de cobre y preparamos la PCB para el proceso de soldadura de componentes.
+                    </p>
+                    <div class="alert alert-success">
+                        <i class="fas fa-check-circle"></i>
+                        <div>¡PCB fabricada exitosamente! El diseño digital se ha materializado en un prototipo físico funcional.</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects" class="fade-in projects-section">
+            <h2 class="section-title"><i class="fas fa-project-diagram"></i>Nuestros Proyectos</h2>
+            
+            <div class="alert alert-info">
+                <i class="fas fa-info-circle"></i>
+                <div>
+                    <strong>Resultados de la práctica:</strong> Cada integrante del equipo logró diseñar y fabricar su propia PCB, aplicando los conocimientos adquiridos en el proceso completo de producción electrónica.
+                </div>
+            </div>
+
+            <div class="project-gallery">
+                <div class="project-card">
+                    <img src="../img/Image (5).jpg" alt="PCB diseñada por Giovanna">
+                    <div class="project-info">
+                        <h3 class="project-title">PCB de Corazón</h3>
+                        <p class="project-author">Por: Giovanna González Martínez</p>
+                        <p>pequeña descrpcion de que es</p>
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <img src="../img/Image (6).jpg" alt="PCB diseñada por Michel">
+                    <div class="project-info">
+                        <h3 class="project-title">PCB de Concha de Mar</h3>
+                        <p class="project-author">Por: Michel Sánchez Dumit</p>
+                        <p>pequeña descrpcion de que es </p>
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <img src="../proyecto3.jpg" alt="PCB diseñada por Iván">
+                    <div class="project-info">
+                        <h3 class="project-title">PCB con Configuración Extendida</h3>
+                        <p class="project-author">Por: Iván Rojas Robles</p>
+                        <p>pequeña descrpcion de que es.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tool-info">
+                <h4><i class="fas fa-lightbulb"></i>Lecciones Aprendidas</h4>
+                <ul style="padding-left: 2rem; margin-top: 1rem;">
+                    <li><strong>Importancia del diseño:</strong> Un buen esquemático facilita enormemente el proceso de fabricación</li>
+                    <li><strong>Precisión en parámetros:</strong> La configuración correcta en MODs es crucial para resultados exitosos</li>
+                    <li><strong>Preparación del material:</strong> La correcta fijación y nivelación evita errores de fabricación</li>
+                    <li><strong>Inspección continua:</strong> Revisar cada etapa del proceso ayuda a detectar problemas temprano</li>
+                </ul>
+            </div>
         </section>
 
         <section id="participants" class="fade-in">
-            <h2>Nuestro equipo</h2>
+            <h2 class="section-title"><i class="fas fa-users"></i>Nuestro Equipo</h2>
             <div class="participants-container">
                 <div class="participant-card">
-                    <img src="assets/gio.png" alt="Foto de participante 1">
-                    <h4>Giovanna González Martínez </h4>
-                    <p>Diseño de esquematicos</p>
-                    <p><a href="giovanna.gonzalez@iberopuebla.mx">giovanna.gonzalez@iberopuebla.mx</a></p>
+                    <img src="../assets/gio.png" alt="Giovanna González Martínez">
+                    <h4>Giovanna González Martínez</h4>
+                    <p><i class="fas fa-drafting-compass"></i> Especialista en Diseño de Esquemáticos</p>
+                    <p><i class="fas fa-tools"></i> Experta en KiCad y Ruteo de PCB</p>
+                    <p><a href="mailto:giovanna.gonzalez@iberopuebla.mx">
+                        <i class="fas fa-envelope"></i> giovanna.gonzalez@iberopuebla.mx
+                    </a></p>
                 </div>
                 <div class="participant-card">
-                    <img src="assets/michel.png" alt="Foto de participante 2">
-                    <h4>Michel Sánchez Dumit </h4>
-                    <p>Diseño de esquematicos</p>
-                    <p><a href="michel.sanchez.dumit@iberopuebla.mx">michel.sanchez.dumit@iberopuebla.mx</a></p>
+                    <img src="../assets/michel.png" alt="Michel Sánchez Dumit">
+                    <h4>Michel Sánchez Dumit</h4>
+                    <p><i class="fas fa-drafting-compass"></i> Especialista en Diseño de Esquemáticos</p>
+                    <p><i class="fas fa-cogs"></i> Experto en MODs y Fabricación</p>
+                    <p><a href="mailto:michel.sanchez.dumit@iberopuebla.mx">
+                        <i class="fas fa-envelope"></i> michel.sanchez.dumit@iberopuebla.mx
+                    </a></p>
                 </div>
                 <div class="participant-card">
-                    <img src="assets/Image (4).jpeg" alt="Foto de participante 3">
-                    <h4>Iván Rojas Robles </h4>
-                    <p>Diseño de esquematicos</p>
-                    <p><a href="ivan.rojas@iberopuebla.mx">ivan.rojas@iberopuebla.mx</a></p>
+                    <img src="../assets/Image (4).jpeg" alt="Iván Rojas Robles">
+                    <h4>Iván Rojas Robles</h4>
+                    <p><i class="fas fa-drafting-compass"></i> Especialista en Diseño de Esquemáticos</p>
+                    <p><i class="fas fa-microchip"></i> Experto en Circuitos Complejos</p>
+                    <p><a href="mailto:ivan.rojas@iberopuebla.mx">
+                        <i class="fas fa-envelope"></i> ivan.rojas@iberopuebla.mx
+                    </a></p>
+                </div>
+            </div>
+
+            <div class="alert alert-success" style="margin-top: 2rem;">
+                <i class="fas fa-trophy"></i>
+                <div>
+                    <strong>¡Práctica completada exitosamente!</strong> El equipo logró dominar el flujo completo de diseño y fabricación de PCBs, desde el concepto hasta el prototipo físico funcional.
                 </div>
             </div>
         </section>
-
-        
     </div>
 
     <script>
+        // Scroll progress indicator
+        window.addEventListener('scroll', function() {
+            const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+            const scrollHeight = document.documentElement.scrollHeight || document.body.scrollHeight;
+            const clientHeight = document.documentElement.clientHeight || window.innerHeight;
+            const scrollPercent = scrollTop / (scrollHeight - clientHeight) * 100;
+            document.getElementById('scrollProgress').style.width = scrollPercent + '%';
+        });
+
+        // Intersection Observer for fade-in animations
         document.addEventListener("DOMContentLoaded", function() {
             const sections = document.querySelectorAll('.fade-in');
 
             const observerOptions = {
                 root: null,
-                rootMargin: '0px',
+                rootMargin: '0px 0px -100px 0px',
                 threshold: 0.1
             };
 
-            const observer = new IntersectionObserver((entries, observer) => {
-                entries.forEach(entry => {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry, index) => {
                     if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
+                        setTimeout(() => {
+                            entry.target.classList.add('visible');
+                        }, index * 200);
                         observer.unobserve(entry.target);
                     }
                 });
@@ -137,6 +886,149 @@ Finalmente, al concluir el mecanizado, retiramos la placa ya terminada y revisam
             sections.forEach(section => {
                 observer.observe(section);
             });
+        });
+
+        // Smooth scroll for navigation links
+        document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add parallax effect to video background
+        window.addEventListener('scroll', function() {
+            const scrolled = window.pageYOffset;
+            const video = document.querySelector('#video-bg video');
+            if (video) {
+                video.style.transform = `translate(-50%, -50%) translateY(${scrolled * 0.3}px)`;
+            }
+        });
+
+        // Dynamic header background on scroll
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(0, 0, 0, 0.95)';
+                header.style.borderBottom = '3px solid var(--primary-color)';
+            } else {
+                header.style.background = 'rgba(0, 0, 0, 0.8)';
+                header.style.borderBottom = '3px solid var(--primary-color)';
+            }
+        });
+
+        // Image lightbox effect
+        document.querySelectorAll('.project-card img').forEach(img => {
+            img.addEventListener('click', function() {
+                const overlay = document.createElement('div');
+                overlay.style.cssText = `
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background: rgba(0, 0, 0, 0.9);
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    z-index: 10000;
+                    cursor: pointer;
+                `;
+                
+                const imgClone = this.cloneNode(true);
+                imgClone.style.cssText = `
+                    max-width: 90%;
+                    max-height: 90%;
+                    object-fit: contain;
+                    border-radius: 10px;
+                    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+                `;
+                
+                overlay.appendChild(imgClone);
+                document.body.appendChild(overlay);
+                
+                overlay.addEventListener('click', () => {
+                    document.body.removeChild(overlay);
+                });
+            });
+        });
+
+        // Add step counter animation
+        function animateStepCounters() {
+            const stepNumbers = document.querySelectorAll('.step-number');
+            stepNumbers.forEach((step, index) => {
+                setTimeout(() => {
+                    step.style.transform = 'scale(1.2)';
+                    setTimeout(() => {
+                        step.style.transform = 'scale(1)';
+                    }, 200);
+                }, index * 300);
+            });
+        }
+
+        // Trigger step animation when KiCad section is visible
+        const kicadSection = document.querySelector('#kicad-process');
+        const kicadObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateStepCounters();
+                    kicadObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.3 });
+
+        if (kicadSection) {
+            kicadObserver.observe(kicadSection);
+        }
+
+        // Add hover effects to step cards
+        document.querySelectorAll('.step-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.borderLeft = '5px solid #ff6b6b';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.borderLeft = '5px solid var(--primary-color)';
+            });
+        });
+
+        // Add typing effect to alerts
+        function typeEffect(element, text, speed = 50) {
+            let i = 0;
+            element.innerHTML = '';
+            function type() {
+                if (i < text.length) {
+                    element.innerHTML += text.charAt(i);
+                    i++;
+                    setTimeout(type, speed);
+                }
+            }
+            type();
+        }
+
+        // Initialize typing effect on success alerts
+        document.querySelectorAll('.alert-success').forEach(alert => {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const textElement = entry.target.querySelector('div');
+                        if (textElement && !textElement.classList.contains('typed')) {
+                            textElement.classList.add('typed');
+                            const originalText = textElement.textContent;
+                            typeEffect(textElement, originalText, 30);
+                        }
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.5 });
+            
+            observer.observe(alert);
         });
     </script>
 </body>
