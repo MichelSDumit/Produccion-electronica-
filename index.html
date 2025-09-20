@@ -4,10 +4,584 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Producción Electrónica</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #e72d2d;
+            --primary-alpha: rgba(231, 45, 45, 0.9);
+            --secondary-color: #2c3e50;
+            --dark-bg: rgba(0, 0, 0, 0.8);
+            --light-bg: rgba(255, 255, 255, 0.95);
+            --text-dark: #333;
+            --text-light: #666;
+            --border-radius: 15px;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            --hover-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+            --success-color: #27ae60;
+            --info-color: #3498db;
+            --warning-color: #f39c12;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        /* Video de fondo */
+        #video-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            overflow: hidden;
+        }
+
+        #video-bg video {
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            object-fit: cover;
+            filter: brightness(0.6) contrast(1.1);
+        }
+
+        #video-bg::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(231, 45, 45, 0.2), rgba(0, 0, 0, 0.7));
+            z-index: -1;
+        }
+
+        #main-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Scroll indicator */
+        .scroll-indicator {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.2);
+            z-index: 9999;
+        }
+
+        .scroll-progress {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary-color), #ff6b6b);
+            width: 0%;
+            transition: width 0.1s ease;
+        }
+
+        /* Header mejorado */
+        header {
+            background: var(--dark-bg);
+            backdrop-filter: blur(15px);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 3px solid var(--primary-color);
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            gap: 3rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            padding: 0.7rem 1.5rem;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-links a:hover {
+            background: var(--primary-alpha);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(231, 45, 45, 0.4);
+        }
+
+        /* Secciones */
+        section {
+            margin: 3rem auto;
+            max-width: 1200px;
+            padding: 3rem 2rem;
+            background: var(--light-bg);
+            backdrop-filter: blur(15px);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Sección home */
+        #home {
+            text-align: center;
+            background: linear-gradient(135deg, var(--light-bg), rgba(231, 45, 45, 0.05));
+            min-height: 90vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .logo-container {
+            margin-bottom: 2rem;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .team-logo {
+            max-width: 300px;
+            width: 100%;
+            height: auto;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .team-logo:hover {
+            transform: scale(1.05);
+        }
+
+        .general-info {
+            max-width: 800px;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--text-dark);
+            margin-bottom: 2rem;
+            text-align: left;
+        }
+
+        .general-info p {
+            margin-bottom: 1.5rem;
+        }
+
+        .general-info ul {
+            margin: 1.5rem 0;
+            padding-left: 2rem;
+        }
+
+        .general-info li {
+            margin-bottom: 0.8rem;
+            position: relative;
+        }
+
+        .general-info li::marker {
+            color: var(--primary-color);
+        }
+
+        .university-logo {
+            max-width: 200px;
+            width: 100%;
+            height: auto;
+            margin-top: 2rem;
+            opacity: 0.8;
+            transition: opacity 0.3s ease;
+        }
+
+        .university-logo:hover {
+            opacity: 1;
+        }
+
+        /* Títulos de sección */
+        .section-title {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+            font-weight: 700;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-color), #ff6b6b);
+            border-radius: 2px;
+        }
+
+        .section-title i {
+            margin-right: 1rem;
+        }
+
+        /* Sección de información */
+        #info {
+            background: linear-gradient(135deg, var(--light-bg), rgba(52, 152, 219, 0.05));
+        }
+
+        /* Galería de proyectos */
+        .project-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .project-card {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--hover-shadow);
+        }
+
+        .project-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .project-card:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Sección de máquinas */
+        .machine-section {
+            margin: 3rem 0;
+        }
+
+        .machine-info-card {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 2rem;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            border-left: 5px solid var(--primary-color);
+            transition: all 0.3s ease;
+            align-items: center;
+        }
+
+        .machine-info-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--hover-shadow);
+        }
+
+        .machine-image-container img {
+            width: 100%;
+            height: auto;
+            border-radius: var(--border-radius);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .machine-image-container img:hover {
+            transform: scale(1.02);
+        }
+
+        .machine-text-container h3 {
+            color: var(--primary-color);
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .machine-text-container p {
+            color: var(--text-dark);
+            line-height: 1.7;
+            font-size: 1rem;
+        }
+
+        /* Sección de trabajos */
+        .work-section {
+            margin-top: 4rem;
+        }
+
+        .work-section h3 {
+            color: var(--primary-color);
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .work-item {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            border-left: 5px solid var(--info-color);
+            transition: all 0.3s ease;
+            margin-bottom: 2rem;
+            display: grid;
+            grid-template-columns: 200px 1fr auto;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .work-item:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--hover-shadow);
+        }
+
+        .work-item img {
+            width: 100%;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .work-item img:hover {
+            transform: scale(1.05);
+        }
+
+        .work-item p {
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        .detail-button {
+            background: linear-gradient(45deg, var(--primary-color), #ff6b6b);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(231, 45, 45, 0.3);
+            white-space: nowrap;
+        }
+
+        .detail-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(231, 45, 45, 0.4);
+        }
+
+        /* Participantes */
+        #participants {
+            background: linear-gradient(135deg, var(--light-bg), rgba(39, 174, 96, 0.05));
+        }
+
+        .participants-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            padding: 2rem 0;
+        }
+
+        .participant-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(231, 45, 45, 0.05));
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: all 0.4s ease;
+            border: 1px solid rgba(231, 45, 45, 0.1);
+        }
+
+        .participant-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: var(--hover-shadow);
+        }
+
+        .participant-card img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--primary-color);
+            margin-bottom: 1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 25px rgba(231, 45, 45, 0.3);
+        }
+
+        .participant-card:hover img {
+            transform: scale(1.1);
+            border-color: #ff6b6b;
+        }
+
+        .participant-card h4 {
+            color: var(--primary-color);
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .participant-card p {
+            color: var(--text-light);
+            margin-bottom: 0.5rem;
+        }
+
+        .participant-card a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-size: 0.9rem;
+            word-wrap: break-word;
+            transition: color 0.3s ease;
+        }
+
+        .participant-card a:hover {
+            color: #ff6b6b;
+            text-decoration: underline;
+        }
+
+        /* Sección de ubicación */
+        #location {
+            background: linear-gradient(135deg, var(--light-bg), rgba(155, 89, 182, 0.05));
+        }
+
+        .map-container {
+            margin: 2rem 0;
+            text-align: center;
+        }
+
+        .map-container iframe {
+            width: 100%;
+            max-width: 800px;
+            height: 400px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            border: none;
+        }
+
+        /* Alertas informativas */
+        .info-alert {
+            background: rgba(52, 152, 219, 0.1);
+            border: 1px solid rgba(52, 152, 219, 0.3);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-left: 4px solid var(--info-color);
+        }
+
+        .info-alert i {
+            color: var(--info-color);
+            margin-right: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .info-alert h4 {
+            color: var(--info-color);
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+                gap: 1rem;
+                padding: 1rem;
+            }
+
+            section {
+                margin: 2rem 1rem;
+                padding: 2rem 1rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .machine-info-card {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .work-item {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 1rem;
+            }
+
+            .work-item img {
+                width: 200px;
+                margin: 0 auto;
+            }
+
+            .project-gallery {
+                grid-template-columns: 1fr;
+            }
+
+            .participants-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Efectos adicionales */
+        .highlight {
+            background: linear-gradient(120deg, transparent 0%, rgba(231, 45, 45, 0.1) 50%, transparent 100%);
+            padding: 0.2rem 0.5rem;
+            border-radius: 5px;
+        }
+
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+    </style>
 </head>
 <body>
+    <!-- Scroll indicator -->
+    <div class="scroll-indicator">
+        <div class="scroll-progress" id="scrollProgress"></div>
+    </div>
 
     <div id="video-bg">
         <video autoplay muted loop playsinline>
@@ -17,51 +591,104 @@
 
     <div id="main-content">
         <header>
-            <nav>
-                <a href="#home">CASA</a>
-                <a href="#info">INFORMACIÓN</a>
-                <a href="#participants">PARTICIPANTES</a>
+            <nav class="nav-links">
+                <a href="#home"><i class="fas fa-home"></i> INICIO</a>
+                <a href="#info"><i class="fas fa-info-circle"></i> INFORMACIÓN</a>
+                <a href="#participants"><i class="fas fa-users"></i> PARTICIPANTES</a>
+                <a href="#trabajos"><i class="fas fa-clipboard-list"></i> TRABAJOS</a>
+                <a href="#location"><i class="fas fa-map-marker-alt"></i> UBICACIÓN</a>
             </nav>
         </header>
 
         <section id="home" class="fade-in">
             <div class="logo-container">
-                <img src="assets/logo_equipo.png" alt="Logo del Equipo" class="team-logo">
+                <img src="assets/logo_equipo.png" alt="Logo del Equipo" class="team-logo pulse">
             </div>
-            <p class="general-info">
-               <p> Nuestro equipo esta conformado por tres integrantes de la carrera <strong>Ingeniería Mecatrónica</strong>. Esta página sirve como carpeta de evidencias de lo que realizamos durante el semestre en la materia de “Producción Electrónica” impartida por el Maestro Javier Osorio Figueroa. </p>
-    <p>
-        Dentro de esta asignatura se abordan temas fundamentales para el desarrollo de proyectos electrónicos, que incluyen:
-    </p>
-    <ul>
-        <li>Diseño de circuitos esquemáticos.</li>
-        <li>Elaboración de placas electrónicas utilizando <strong>MonoFab</strong> y <strong>xTool</strong>.</li>
-        <li>Uso de software especializado como <strong>Altium</strong> y <strong>KiCad</strong> para el modelado y validación de los diseños.</li>
-    </ul>
-    <p>
-        El objetivo principal es adquirir experiencia práctica en el proceso completo de producción electrónica, desde el diseño conceptual hasta la materialización del prototipo.
-    </p>
+            
+            <div class="general-info">
+                <p>Nuestro equipo está conformado por tres integrantes de la carrera <span class="highlight"><strong>Ingeniería Mecatrónica</strong></span>. Esta página sirve como carpeta de evidencias de lo que realizamos durante el semestre en la materia de "Producción Electrónica" impartida por el Maestro Javier Osorio Figueroa.</p>
+                
+                <div class="info-alert">
+                    <i class="fas fa-lightbulb"></i>
+                    <div>
+                        <h4>Objetivo de la Materia</h4>
+                        <p>Desarrollar competencias en el diseño y fabricación de sistemas electrónicos mediante el uso de tecnologías de fabricación digital y software especializado.</p>
+                    </div>
+                </div>
+
+                <p>Dentro de esta asignatura se abordan temas fundamentales para el desarrollo de proyectos electrónicos, que incluyen:</p>
+                
+                <ul>
+                    <li><strong>Diseño de circuitos esquemáticos</strong> - Creación y validación de diagramas electrónicos</li>
+                    <li><strong>Elaboración de placas electrónicas</strong> utilizando <span class="highlight"><strong>MonoFab</strong></span> y <span class="highlight"><strong>xTool</strong></span></li>
+                    <li><strong>Uso de software especializado</strong> como <span class="highlight"><strong>Altium</strong></span> y <span class="highlight"><strong>KiCad</strong></span> para el modelado y validación de los diseños</li>
+                    <li><strong>Fabricación digital</strong> - Procesos de fresado y grabado láser</li>
+                    <li><strong>Soldadura y ensamble</strong> de componentes electrónicos</li>
+                </ul>
+                
+                <p>El <strong>objetivo principal</strong> es adquirir experiencia práctica en el proceso completo de producción electrónica, desde el diseño conceptual hasta la materialización del prototipo funcional.</p>
+            </div>
 
             <img src="assets/logoo.png" alt="Logo de la Universidad" class="university-logo">
         </section>
 
         <section id="info" class="fade-in">
-            <h2>Nuestros Proyectos</h2>
+            <h2 class="section-title"><i class="fas fa-cogs"></i>Nuestros Proyectos</h2>
+            
+            <div class="info-alert">
+                <i class="fas fa-info-circle"></i>
+                <div>
+                    <h4>Portafolio de Proyectos</h4>
+                    <p>Aquí documentamos todos los proyectos realizados durante el semestre, mostrando la evolución de nuestras habilidades en producción electrónica.</p>
+                </div>
+            </div>
+
             <div class="project-gallery">
-                <img src="proyecto1.jpg" alt="Imagen del proyecto 1">
-                <img src="proyecto2.jpg" alt="Imagen del proyecto 2">
-                <img src="proyecto3.jpg" alt="Imagen del proyecto 3">
+                <div class="project-card">
+                    <img src="proyecto1.jpg" alt="Imagen del proyecto 1">
+                    <div style="padding: 1rem;">
+                        <h4 style="color: var(--primary-color); margin-bottom: 0.5rem;">Proyecto 1</h4>
+                        <p style="color: var(--text-dark); font-size: 0.9rem;">Diseño básico de PCB</p>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <img src="proyecto2.jpg" alt="Imagen del proyecto 2">
+                    <div style="padding: 1rem;">
+                        <h4 style="color: var(--primary-color); margin-bottom: 0.5rem;">Proyecto 2</h4>
+                        <p style="color: var(--text-dark); font-size: 0.9rem;">Circuito avanzado</p>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <img src="proyecto3.jpg" alt="Imagen del proyecto 3">
+                    <div style="padding: 1rem;">
+                        <h4 style="color: var(--primary-color); margin-bottom: 0.5rem;">Proyecto 3</h4>
+                        <p style="color: var(--text-dark); font-size: 0.9rem;">Sistema integrado</p>
+                    </div>
+                </div>
             </div>
 
             <div class="machine-section">
+                <h3 style="color: var(--primary-color); font-size: 2rem; margin-bottom: 2rem; text-align: center; font-weight: 600;">
+                    <i class="fas fa-tools"></i> Herramientas de Fabricación
+                </h3>
+                
                 <div class="machine-info-card">
                     <div class="machine-image-container">
-                        <img src="assets/maquina.1.png" alt="Imagen de la máquina">
+                        <img src="assets/maquina.1.png" alt="MonoFab SRM-20">
                     </div>
                     <div class="machine-text-container">
-                        <h3>MonoFAB</h3>
-                        <p>La fresadora de sobremesa monoFab SRM-20 es una máquina CNC de tres ejes diseñada para el prototipado sustractivo, ofreciendo un tamaño compacto y una funcionalidad potente a un precio asequible.
-La máquina tiene un gabinete totalmente encubierto que reduce el polvo y el ruido, y cuenta con una ventana lateral para visualizar el progreso del fresado. Incluye un interruptor de traba de seguridad que pausa automáticamente la operación cuando se abre la cubierta.</p>
+                        <h3><i class="fas fa-microchip"></i> MonoFAB SRM-20</h3>
+                        <p>La fresadora de sobremesa monoFab SRM-20 es una máquina CNC de tres ejes diseñada para el prototipado sustractivo, ofreciendo un tamaño compacto y una funcionalidad potente a un precio asequible.</p>
+                        <p style="margin-top: 1rem;">La máquina tiene un gabinete totalmente encubierto que reduce el polvo y el ruido, y cuenta con una ventana lateral para visualizar el progreso del fresado. Incluye un interruptor de traba de seguridad que pausa automáticamente la operación cuando se abre la cubierta.</p>
+                        
+                        <div style="margin-top: 1.5rem; padding: 1rem; background: rgba(52, 152, 219, 0.1); border-radius: 8px; border-left: 3px solid var(--info-color);">
+                            <h4 style="color: var(--info-color); margin-bottom: 0.5rem;"><i class="fas fa-wrench"></i> Especificaciones Técnicas</h4>
+                            <ul style="color: var(--text-dark); padding-left: 1.5rem;">
+                                <li>Área de trabajo: 203.2 × 152.4 × 60.5 mm</li>
+                                <li>Resolución: 0.01 mm (XY), 0.001 mm (Z)</li>
+                                <li>Velocidad del husillo: 6,000-7,000 rpm</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -69,76 +696,237 @@ La máquina tiene un gabinete totalmente encubierto que reduce el polvo y el rui
             <div class="machine-section">
                 <div class="machine-info-card">
                     <div class="machine-image-container">
-                        <img src="assets/maquina.png" alt="Imagen de la máquina">
+                        <img src="assets/maquina.png" alt="xTool Laser">
                     </div>
                     <div class="machine-text-container">
-                        <h3>Xtool</h3>
-                        <p>Es un dispositivo de grabado y corte láser multifuncional que combina tecnologías de láser diodo e infrarrojo para cortar y grabar una amplia variedad de materiales con alta precisión. Su enfoque automático y posicionamiento visual permiten ajustes precisos para grabados detallados. Incorpora software compatible con múltiples sistemas operativos que facilita el diseño y control de los proyectos. Entre sus usos destacan la personalización de productos, creación de prototipos y fabricación de piezas en materiales como madera, cuero, acrílicos y metal blando. </p>
+                        <h3><i class="fas fa-laser"></i> xTool Laser Engraver</h3>
+                        <p>Es un dispositivo de grabado y corte láser multifuncional que combina tecnologías de láser diodo e infrarrojo para cortar y grabar una amplia variedad de materiales con alta precisión.</p>
+                        <p style="margin-top: 1rem;">Su enfoque automático y posicionamiento visual permiten ajustes precisos para grabados detallados. Incorpora software compatible con múltiples sistemas operativos que facilita el diseño y control de los proyectos.</p>
+                        
+                        <div style="margin-top: 1.5rem; padding: 1rem; background: rgba(39, 174, 96, 0.1); border-radius: 8px; border-left: 3px solid var(--success-color);">
+                            <h4 style="color: var(--success-color); margin-bottom: 0.5rem;"><i class="fas fa-list"></i> Aplicaciones</h4>
+                            <ul style="color: var(--text-dark); padding-left: 1.5rem;">
+                                <li>Personalización de productos</li>
+                                <li>Creación de prototipos</li>
+                                <li>Fabricación de piezas en madera, cuero, acrílicos y metal blando</li>
+                                <li>Grabado de alta precisión en múltiples materiales</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
 
             <div class="work-section">
-                <h3>Trabajos realizados</h3>
+                <h3><i class="fas fa-clipboard-list"></i> Trabajos Realizados</h3>
+                
                 <div class="work-item">
-                    <img src="img/imagen kicad.webp" alt="Miniatura del trabajo 1">
-                    <p>En esta práctica aprendimos a utilizar el programa KiCad, una herramienta de diseño electrónico que permite crear esquemáticos y transformarlos en circuitos impresos (PCB). Como parte del ejercicio, diseñamos y elaboramos una placa, aplicando los conocimientos adquiridos sobre la organización de componentes y el trazado de conexiones.</p>
-                    <a href="practica1/index.html" class="detail-button">Ver detalle</a>
-                </div>
-                <div class="work-item">
-                    <img src="trabajo2.jpg" alt="Miniatura del trabajo 2">
-                    <p>Descripción del trabajo 2. Breve reseña de lo que se logró en este proyecto.</p>
-                    <a href="detalle-proyecto2.html" class="detail-button">Ver detalle</a>
+                    <img src="img/imagen kicad.webp" alt="Práctica 1 - KiCad">
+                    <div>
+                        <h4 style="color: var(--primary-color); margin-bottom: 1rem; font-size: 1.3rem;">
+                            <i class="fas fa-microchip"></i> Práctica 1: Diseño de PCB con KiCad y MODs
+                        </h4>
+                        <p>En esta práctica aprendimos a utilizar el programa KiCad, una herramienta de diseño electrónico que permite crear esquemáticos y transformarlos en circuitos impresos (PCB). Como parte del ejercicio, diseñamos y elaboramos una placa, aplicando los conocimientos adquiridos sobre la organización de componentes y el trazado de conexiones.</p>
+                        
+                        <div style="margin-top: 1rem; padding: 0.8rem; background: rgba(52, 152, 219, 0.1); border-radius: 5px;">
+                            <small style="color: var(--info-color); font-weight: 500;">
+                                <i class="fas fa-tools"></i> Herramientas: Altium Designer, xTool Laser
+                            </small>
+                        </div>
+                    </div>
+                    <a href="detalle-proyecto2.html" class="detail-button">
+                        <i class="fas fa-eye"></i> Ver Detalle
+                    </a>
                 </div>
             </div>
         </section>
 
         <section id="participants" class="fade-in">
-            <h2>Nuestro equipo</h2>
+            <h2 class="section-title"><i class="fas fa-users"></i>Nuestro Equipo</h2>
+            
+            <div class="info-alert">
+                <i class="fas fa-graduation-cap"></i>
+                <div>
+                    <h4>Estudiantes de Ingeniería Mecatrónica</h4>
+                    <p>Equipo multidisciplinario enfocado en el desarrollo de sistemas electrónicos y mecatrónicos innovadores.</p>
+                </div>
+            </div>
+
             <div class="participants-container">
                 <div class="participant-card">
-                    <img src="assets/gio.png" alt="Foto de participante 1">
-                    <h4>Giovanna González Martínez </h4>
-                    <p>Diseño de esquematicos</p>
-                    <p><a href="giovanna.gonzalez@iberopuebla.mx">giovanna.gonzalez@iberopuebla.mx</a></p>
+                    <img src="assets/gio.png" alt="Giovanna González Martínez">
+                    <h4>Giovanna González Martínez</h4>
+                    <p><i class="fas fa-microchip"></i> Especialista en Diseño de Esquemáticos</p>
+                    <div style="margin-top: 1rem; padding: 0.8rem; background: rgba(231, 45, 45, 0.1); border-radius: 8px;">
+                        <small style="color: var(--primary-color); font-weight: 500;">
+                            <i class="fas fa-star"></i> Líder en diseño creativo de PCBs
+                        </small>
+                    </div>
+                    <p style="margin-top: 1rem;">
+                        <a href="mailto:giovanna.gonzalez@iberopuebla.mx">
+                            <i class="fas fa-envelope"></i> giovanna.gonzalez@iberopuebla.mx
+                        </a>
+                    </p>
                 </div>
+                
                 <div class="participant-card">
-                    <img src="assets/michel.png" alt="Foto de participante 2">
-                    <h4>Michel Sánchez Dumit </h4>
-                    <p>Diseño de esquematicos</p>
-                    <p><a href="michel.sanchez.dumit@iberopuebla.mx">michel.sanchez.dumit@iberopuebla.mx</a></p>
+                    <img src="assets/michel.png" alt="Michel Sánchez Dumit">
+                    <h4>Michel Sánchez Dumit</h4>
+                    <p><i class="fas fa-microchip"></i> Especialista en Diseño de Esquemáticos</p>
+                    <div style="margin-top: 1rem; padding: 0.8rem; background: rgba(52, 152, 219, 0.1); border-radius: 8px;">
+                        <small style="color: var(--info-color); font-weight: 500;">
+                            <i class="fas fa-cogs"></i> Experto en fabricación digital
+                        </small>
+                    </div>
+                    <p style="margin-top: 1rem;">
+                        <a href="mailto:michel.sanchez.dumit@iberopuebla.mx">
+                            <i class="fas fa-envelope"></i> michel.sanchez.dumit@iberopuebla.mx
+                        </a>
+                    </p>
                 </div>
+                
                 <div class="participant-card">
-                    <img src="assets/Image (4).jpeg" alt="Foto de participante 3">
-                    <h4>Iván Rojas Robles </h4>
-                    <p>Diseño de esquematicos</p>
-                    <p><a href="ivan.rojas@iberopuebla.mx">ivan.rojas@iberopuebla.mx</a></p>
+                    <img src="assets/Image (4).jpeg" alt="Iván Rojas Robles">
+                    <h4>Iván Rojas Robles</h4>
+                    <p><i class="fas fa-microchip"></i> Especialista en Diseño de Esquemáticos</p>
+                    <div style="margin-top: 1rem; padding: 0.8rem; background: rgba(39, 174, 96, 0.1); border-radius: 8px;">
+                        <small style="color: var(--success-color); font-weight: 500;">
+                            <i class="fas fa-project-diagram"></i> Innovador en sistemas complejos
+                        </small>
+                    </div>
+                    <p style="margin-top: 1rem;">
+                        <a href="mailto:ivan.rojas@iberopuebla.mx">
+                            <i class="fas fa-envelope"></i> ivan.rojas@iberopuebla.mx
+                        </a>
+                    </p>
+                </div>
+            </div>
+
+            <div style="margin-top: 3rem; text-align: center; background: rgba(255, 255, 255, 0.8); padding: 2rem; border-radius: var(--border-radius); border-left: 5px solid var(--success-color);">
+                <h4 style="color: var(--success-color); margin-bottom: 1rem;">
+                    <i class="fas fa-handshake"></i> Metodología de Trabajo
+                </h4>
+                <p style="color: var(--text-dark); line-height: 1.7;">
+                    Nuestro equipo trabaja de manera colaborativa, combinando las fortalezas individuales para lograr resultados excepcionales en cada proyecto. Aplicamos metodologías ágiles y revisión continua para asegurar la calidad en todos los entregables.
+                </p>
+            </div>
+        </section>
+
+        <section id="location" class="fade-in">
+            <h2 class="section-title"><i class="fas fa-map-marker-alt"></i>Ubicación de la Universidad</h2>
+            
+            <div class="info-alert">
+                <i class="fas fa-university"></i>
+                <div>
+                    <h4>Universidad Iberoamericana Puebla</h4>
+                    <p>Campus universitario equipado con laboratorios de última generación para el desarrollo de proyectos de ingeniería mecatrónica y producción electrónica.</p>
+                </div>
+            </div>
+
+            <div class="map-container">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15088.484819715859!2d-98.2760029!3d19.014380049999996!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85cfc73e6e9e0efd%3A0x85adde493a769062!2sUniversidad%20Iberoamericana%20Puebla!5e0!3m2!1ses-419!2smx!4v1756693198982!5m2!1ses-419!2smx" 
+                        allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+            </div>
+
+        </section>
+
+        <section id="trabajos" class="fade-in">
+            <div class="work-section">
+                <h2 class="section-title"><i class="fas fa-clipboard-list"></i> Trabajos Realizados</h2>
+                
+                <div class="info-alert">
+                    <i class="fas fa-folder-open"></i>
+                    <div>
+                        <h4>Portafolio de Evidencias</h4>
+                        <p>Documentación completa de todas las prácticas y proyectos desarrollados durante el curso de Producción Electrónica.</p>
+                    </div>
+                </div>
+                
+                <div class="work-item">
+                    <img src="img/imagen kicad.webp" alt="Práctica 1 - KiCad">
+                    <div>
+                        <h4 style="color: var(--primary-color); margin-bottom: 1rem; font-size: 1.3rem;">
+                            <i class="fas fa-microchip"></i> Práctica 1: Diseño de PCB con KiCad y MODs
+                        </h4>
+                        <p>En esta práctica aprendimos a utilizar el programa KiCad, una herramienta de diseño electrónico que permite crear esquemáticos y transformarlos en circuitos impresos (PCB). Como parte del ejercicio, diseñamos y elaboramos una placa, aplicando los conocimientos adquiridos sobre la organización de componentes y el trazado de conexiones.</p>
+                        
+                        <div style="margin-top: 1rem; padding: 0.8rem; background: rgba(231, 45, 45, 0.1); border-radius: 5px;">
+                            <small style="color: var(--primary-color); font-weight: 500;">
+                                <i class="fas fa-tools"></i> Herramientas: KiCad, MODs, MonoFab SRM-20
+                            </small>
+                        </div>
+                    </div>
+                    <a href="practica1/index.html" class="detail-button">
+                        <i class="fas fa-eye"></i> Ver Detalle
+                    </a>
+                </div>
+                
+                <div class="work-item">
+                    <img src="trabajo2.jpg" alt="Práctica 2">
+                    <div>
+                        <h4 style="color: var(--primary-color); margin-bottom: 1rem; font-size: 1.3rem;">
+                            <i class="fas fa-circuit-board"></i> Práctica 2: Proyecto Avanzado
+                        </h4>
+                        <p>Descripción del trabajo 2. Breve reseña de lo que se logró en este proyecto, incluyendo los objetivos alcanzados y las técnicas aplicadas en el desarrollo del sistema electrónico.</p>
+                        
+                        <div style="margin-top: 1rem; padding: 0.8rem; background: rgba(52, 152, 219, 0.1); border-radius: 5px;">
+                            <small style="color: var(--info-color); font-weight: 500;">
+                                <i class="fas fa-tools"></i> Herramientas: Altium Designer, xTool Laser
+                            </small>
+                        </div>
+                    </div>
+                    <a href="detalle-proyecto2.html" class="detail-button">
+                        <i class="fas fa-eye"></i> Ver Detalle
+                    </a>
                 </div>
             </div>
         </section>
 
         <section id="location" class="fade-in">
-            <h2>Ubicación de Universidad</h2>
+            <h2 class="section-title"><i class="fas fa-map-marker-alt"></i>Ubicación de la Universidad</h2>
+            
+            <div class="info-alert">
+                <i class="fas fa-university"></i>
+                <div>
+                    <h4>Universidad Iberoamericana Puebla</h4>
+                    <p>Campus universitario equipado con laboratorios de última generación para el desarrollo de proyectos de ingeniería mecatrónica y producción electrónica.</p>
+                </div>
+            </div>
+
             <div class="map-container">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15088.484819715859!2d-98.2760029!3d19.014380049999996!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85cfc73e6e9e0efd%3A0x85adde493a769062!2sUniversidad%20Iberoamericana%20Puebla!5e0!3m2!1ses-419!2smx!4v1756693198982!5m2!1ses-419!2smx" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15088.484819715859!2d-98.2760029!3d19.014380049999996!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85cfc73e6e9e0efd%3A0x85adde493a769062!2sUniversidad%20Iberoamericana%20Puebla!5e0!3m2!1ses-419!2smx!4v1756693198982!5m2!1ses-419!2smx" 
+                        allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
             </div>
         </section>
     </div>
 
     <script>
+        // Scroll progress indicator
+        window.addEventListener('scroll', function() {
+            const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+            const scrollHeight = document.documentElement.scrollHeight || document.body.scrollHeight;
+            const clientHeight = document.documentElement.clientHeight || window.innerHeight;
+            const scrollPercent = scrollTop / (scrollHeight - clientHeight) * 100;
+            document.getElementById('scrollProgress').style.width = scrollPercent + '%';
+        });
+
+        // Intersection Observer for fade-in animations
         document.addEventListener("DOMContentLoaded", function() {
             const sections = document.querySelectorAll('.fade-in');
 
             const observerOptions = {
                 root: null,
-                rootMargin: '0px',
+                rootMargin: '0px 0px -100px 0px',
                 threshold: 0.1
             };
 
-            const observer = new IntersectionObserver((entries, observer) => {
-                entries.forEach(entry => {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry, index) => {
                     if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
+                        setTimeout(() => {
+                            entry.target.classList.add('visible');
+                        }, index * 200);
                         observer.unobserve(entry.target);
                     }
                 });
@@ -148,6 +936,185 @@ La máquina tiene un gabinete totalmente encubierto que reduce el polvo y el rui
                 observer.observe(section);
             });
         });
+
+        // Smooth scroll for navigation links
+        document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add parallax effect to video background
+        window.addEventListener('scroll', function() {
+            const scrolled = window.pageYOffset;
+            const video = document.querySelector('#video-bg video');
+            if (video) {
+                video.style.transform = `translate(-50%, -50%) translateY(${scrolled * 0.3}px)`;
+            }
+        });
+
+        // Dynamic header background on scroll
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(0, 0, 0, 0.95)';
+                header.style.borderBottom = '3px solid var(--primary-color)';
+            } else {
+                header.style.background = 'rgba(0, 0, 0, 0.8)';
+                header.style.borderBottom = '3px solid var(--primary-color)';
+            }
+        });
+
+        // Image lightbox effect for project gallery
+        document.querySelectorAll('.project-card img').forEach(img => {
+            img.addEventListener('click', function() {
+                const overlay = document.createElement('div');
+                overlay.style.cssText = `
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background: rgba(0, 0, 0, 0.9);
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    z-index: 10000;
+                    cursor: pointer;
+                `;
+                
+                const imgClone = this.cloneNode(true);
+                imgClone.style.cssText = `
+                    max-width: 90%;
+                    max-height: 90%;
+                    object-fit: contain;
+                    border-radius: 10px;
+                    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+                `;
+                
+                overlay.appendChild(imgClone);
+                document.body.appendChild(overlay);
+                
+                overlay.addEventListener('click', () => {
+                    document.body.removeChild(overlay);
+                });
+            });
+        });
+
+        // Add hover effects to machine cards
+        document.querySelectorAll('.machine-info-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.borderLeft = '5px solid #ff6b6b';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.borderLeft = '5px solid var(--primary-color)';
+            });
+        });
+
+        // Add typing effect to important text
+        function typeEffect(element, text, speed = 50) {
+            let i = 0;
+            element.innerHTML = '';
+            function type() {
+                if (i < text.length) {
+                    element.innerHTML += text.charAt(i);
+                    i++;
+                    setTimeout(type, speed);
+                }
+            }
+            type();
+        }
+
+        // Initialize typing effect on info alerts
+        document.querySelectorAll('.info-alert').forEach(alert => {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const textElement = entry.target.querySelector('p');
+                        if (textElement && !textElement.classList.contains('typed')) {
+                            textElement.classList.add('typed');
+                            const originalText = textElement.textContent;
+                            setTimeout(() => {
+                                typeEffect(textElement, originalText, 30);
+                            }, 500);
+                        }
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.5 });
+            
+            observer.observe(alert);
+        });
+
+        // Add counter animation to statistics
+        function animateCounter(element, target, duration = 2000) {
+            let start = 0;
+            const increment = target / (duration / 50);
+            
+            const timer = setInterval(() => {
+                start += increment;
+                element.textContent = Math.floor(start);
+                
+                if (start >= target) {
+                    element.textContent = target;
+                    clearInterval(timer);
+                }
+            }, 50);
+        }
+
+        // Enhanced particle background effect
+        function createParticles() {
+            const particleContainer = document.createElement('div');
+            particleContainer.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                pointer-events: none;
+                z-index: -1;
+            `;
+            
+            for (let i = 0; i < 50; i++) {
+                const particle = document.createElement('div');
+                particle.style.cssText = `
+                    position: absolute;
+                    width: 2px;
+                    height: 2px;
+                    background: rgba(255, 255, 255, 0.1);
+                    border-radius: 50%;
+                    animation: float ${Math.random() * 10 + 5}s infinite ease-in-out;
+                    left: ${Math.random() * 100}%;
+                    top: ${Math.random() * 100}%;
+                    animation-delay: ${Math.random() * 5}s;
+                `;
+                particleContainer.appendChild(particle);
+            }
+            
+            document.body.appendChild(particleContainer);
+        }
+
+        // Initialize particle effect
+        createParticles();
     </script>
 </body>
-</html>
+</html>231, 45, 45, 0.1); border-radius: 5px;">
+                            <small style="color: var(--primary-color); font-weight: 500;">
+                                <i class="fas fa-tools"></i> Herramientas: KiCad, MODs, MonoFab SRM-20
+                            </small>
+                        </div>
+                    </div>
+                    <a href="practica1/index.html" class="detail-button">
+                        <i class="fas fa-eye"></i> Ver Detalle
+                    </a>
+                </div>
+                
+               
