@@ -568,7 +568,7 @@
             <div class="tool-info">
                 <h4><i class="fas fa-info-circle"></i>¿Qué es Ni Multisim?</h4>
                 <p>NI Multisim es un software estándar en la industria para el diseño de circuitos y simulación SPICE, ampliamente utilizado en educación e investigación para electrónica analógica, digital y de potencia. Desarrollado por National Instruments, integra una simulación SPICE de alta precisión con un entorno esquemático interactivo que permite visualizar y analizar el comportamiento de circuitos electrónicos en tiempo real. Puede descargarse desde el sitio oficial de National Instruments o utilizarse en línea mediante Multisim Live, que ofrece simulación SPICE sin necesidad de instalación.</p>
-                <p>Link donde puedes tener acceso a Multisim live para poder simular circuitos sin istalación: https://www.multisim.com/</p>
+                <p>Link donde puedes tener acceso a Multisim live para poder simular circuitos sin istalación:<link url:"https://www.multisim.com/"> </p>
             </div>
 
             <div class="process-steps">
@@ -576,7 +576,22 @@
                     <div class="step-number">1</div>
                     <h3 class="step-title">Iniciación de Ni Multisim</Main></h3>
                     <p class="step-description">
-                        El primer paso fue descargar e instalar la librería del FabLab en KiCad. Esta librería contiene componentes específicos optimizados para fabricación digital, con las especificaciones y footprints adecuados para el proceso de fresado que utilizaríamos posteriormente.
+                        La versión completa y de escritorio de NI Multisim es un software de pago. Para usar todas sus funciones sin restricciones, necesitas comprar una licencia.
+
+                        <p>Sin embargo, tienes algunas opciones gratuitas o más económicas para acceder a él, dependiendo de tus necesidades:.</p>
+                       <li><strong> 1. Multisim Live (Versión en línea) </strong></li> 
+                        <li>Esta es la forma más fácil y rápida de usar Multisim sin pagar. Es una versión que funciona directamente en tu navegador web.</li>
+
+                        <li>Plan Gratuito: Es bastante funcional para circuitos básicos y para aprender. Sin embargo, tiene limitaciones, como un número máximo de componentes por circuito y una biblioteca de componentes más pequeña.</li>
+
+                        <li>Planes de Pago: Ofrecen componentes ilimitados, análisis más avanzados y la capacidad de tener circuitos privados.</li>
+
+                        <li><strong>2. Versión Educativa (Para Estudiantes)</strong></li>
+                        <li>Si eres estudiante, esta es tu mejor opción.</li>
+
+                        <li>Licencia Universitaria: Muchas universidades y escuelas técnicas compran una licencia académica para sus estudiantes. Pregunta a tu profesor o al departamento de TI si tu institución ofrece un número de serie gratuito para que puedas instalar la versión de escritorio completa.</li>
+
+                        <li>Versión de Prueba: National Instruments (NI) generalmente ofrece un periodo de prueba gratuito (por ejemplo, 7 días) de la versión de escritorio completa para que puedas evaluarla antes de comprar.</li>
                     </p>
                    <img src="img/Ni_Multisim.png" alt="Librerías" width="300" height="200">
                     <div class="alert alert-warning">
@@ -589,234 +604,113 @@
                     <div class="step-number">2</div>
                     <h3 class="step-title">Creación del Esquemático</h3>
                     <p class="step-description">
-                        Cada integrante del equipo diseñó su propio circuito. La mayoría incluyó:
+                        Para este proyecto, diseñamos un circuito sencillo que incluye los siguientes componentes:
                     </p>
                     <ul style="margin: 1rem 0; padding-left: 2rem;">
-                        <li><strong>4 interruptores (switches)</strong> con salida</li>
                         <li><strong>Voltaje de alimentación:</strong> 3.3V</li>
-                        <li><strong>8 resistencias</strong> para limitación de corriente</li>
-                        <li><strong>4 LEDs</strong> como indicadores</li>
                         <li><strong>Conexión a tierra (GND)</strong></li>
+                        <li><strong>1 resistencia variable (potenciometro)</strong> 50K ohms.</li>
+                        <li><strong>1 capacitor electrolitico </strong> de 10uf (microfaradios)</li>
+                        <li><strong>1 circuito integrado (IC)</strong> (555)</li>
+                        <li><strong>1 contador DC4017B</strong> para la salida y dar señal a los leds</li>
+                        <li><strong>12 resistencias</strong> para limitación de corriente</li>
+                        <li><strong>11 LEDs</strong> como indicadores</li>
                     </ul>
-                    <img src="img/circuito michel.png" alt="CIRCUITO MIO" width="300" height="200">
-                    <div class="alert alert-info">
-                        <i class="fas fa-info-circle"></i>
-                        <div><strong>Excepción:</strong> El circuito de Iván incluyó 14 resistencias en su diseño para una configuración más compleja.</div>
-                        <img src="img/Captura de pantalla 2025-09-12 130439.png" alt="ESQUEMATICO IVÁN" width="300" height="200">
-                    </div>
+                    <img src="img/circuitoNi_Multisim.png" alt="CIRCUITO MIO" width="300" height="200">
                 </div>
 
                 <div class="step-card">
                     <div class="step-number">3</div>
-                    <h3 class="step-title">Asignación de Huellas</h3>
+                    <h3 class="step-title">Simulación</h3>
                     <p class="step-description">
-                        Después de completar el esquemático, asignamos las huellas correspondientes a cada componente. Las huellas definen la forma física y las dimensiones de soldadura de cada componente en la PCB.
+                        Después de completar el esquemático, podemos simular el circuito para verificar su funcionamiento. La simulación nos permite observar cómo se comporta el circuito bajo diferentes condiciones sin necesidad de construirlo físicamente.
                     </p>
+                    <video width="300" height="200" controls>
+                        <source src="video/luces 1 - Multisim.mp4" type="video/mp4">
                     <img src="img/HUELLAS.png" alt="HUELLAS" width="300" height="200">
                 </div>
 
                 <div class="step-card">
                     <div class="step-number">4</div>
-                    <h3 class="step-title">Diseño del Layout de PCB</h3>
+                    <h3 class="step-title">Descripcion de Simulación</h3>
                     <p class="step-description">
-                        Pasamos al editor de PCB donde realizamos el ruteo de las conexiones. Este proceso incluye:
+                        Este es un proyecto clásico y muy popular conocido como secuenciador de luces o "luces del auto increíble". Su función es encender una serie de LEDs, uno después del otro, en un ciclo continuo. El circuito se divide en dos partes principales:
                     </p>
                     <ul style="margin: 1rem 0; padding-left: 2rem;">
-                        <li>Colocación estratégica de componentes</li>
-                        <li>Ruteo de pistas evitando cruces</li>
-                        <li>Definición del contorno de la placa</li>
-                        <li>Verificación de reglas de diseño (DRC)</li>
+                        <li><strong> Oscilador (El "Corazón" del Circuito):</strong> La parte izquierda, construida alrededor del chip 555 Timer.</li>
+                        <li><strong>El Contador (El "Cerebro" de la Secuencia):</strong> La parte derecha, que utiliza el chip CD4017.</li>
+                        <li><strong>Descripción</strong></li>
+                        <li>El Oscilador con el 555 Timer
+                        <p>El chip U1 (el 555) está configurado en su modo más común: astable. Esto significa que actúa como un generador de pulsos o un "reloj", produciendo una señal cuadrada que oscila constantemente entre encendido y apagado.</p>
+
+                        </li>¿Cómo funciona?
+
+                        <p>La velocidad de estos pulsos (la frecuencia) está controlada por la resistencia R1, el potenciómetro RV1 y el capacitor C1.</p>
+
+                        <p>Al girar la perilla del potenciómetro (RV1), cambias la resistencia total en esa parte del circuito. Esto hace que el capacitor se cargue y descargue más rápido o más lento.</p>
+
+                        <p>El resultado es que la señal que sale por el pin 3 del 555 es una onda de pulsos cuya velocidad puedes ajustar a tu gusto. Si giras el potenciómetro, las luces irán más rápido o más lento.</p>
+
+                        <p>En resumen, el 555 crea el "tic-tac" que le dirá al siguiente chip cuándo cambiar de luz.</p></li>
+                        <li><strong> El Contador con el CD4017.</strong>
+                        <li>El chip U2 (el CD4017) es un contador de décadas. Su trabajo es muy simple: cada vez que recibe un pulso en su entrada de reloj (CLK, pin 14), apaga la salida que estaba activa y enciende la siguiente en orden.</li>
+
+                        <li><strong>¿Cómo funciona?</strong></li>
+
+                        <li>La salida de pulsos del 555 (pin 3) se conecta directamente a la entrada de reloj (CLK) del 4017.</li>
+
+                        <li>El 4017 tiene 10 salidas (desde Q0 hasta Q9). Cuando recibe el primer pulso del 555, enciende la salida Q0. Con el segundo pulso, apaga Q0 y enciende Q1. Con el tercero, apaga Q1 y enciende Q2, y así sucesivamente.</li>
+
+                        <li>Después de la última salida (Q9), el ciclo vuelve a empezar desde Q0.</li>
+
+                        <li>Las patas MR (Reset) y E (Enable) están conectadas a tierra (GND) para que el contador esté siempre activo y funcionando en su ciclo normal.</li></li>
+                        <li><strong>La Etapa de Salida (Los LEDs)</strong>
+                        <li>Cada una de las salidas del CD4017 (Q0 a Q9) está conectada a un LED (U4 a U13).</li>
+
+                        <li>Entre el chip y cada LED hay una resistencia de 330Ω (R2 a R12). La función de estas resistencias es muy importante: limitan la corriente que pasa por los LEDs para evitar que se quemen.</li></li>
+                        <li><strong>Funcionamiento General del Circuito</strong>
+                        <li> 555 genera una serie de pulsos a una velocidad que tú controlas con el potenciómetro.</li>
+
+                        <li>Cada pulso viaja desde el 555 hasta el 4017.</li>
+
+                        <li>Por cada pulso que recibe, el 4017 activa una de sus salidas en secuencia, del 0 al 9.</li>
+
+                        <li>La salida activa del 4017 envía corriente a través de su resistencia y enciende el LED correspondiente.</li>
+
+                        <li>El resultado es una secuencia de luces que se mueven de un LED al siguiente, creando un efecto visual muy llamativo.</li></li>
                     </ul>
                     <img src="img/Image (7).jpg" alt="PLACA KICAD" width="300" height="200">
-                </div>
-
-                <div class="step-card">
-                    <div class="step-number">5</div>
-                    <h3 class="step-title">Generación de Archivos Gerber</h3>
-                    <p class="step-description">
-                        Finalmente, exportamos los archivos necesarios para la fabricación en formato PNG de alta resolución, incluyendo las capas de pistas de cobre y el contorno de corte de la placa.
-                    </p>
-                    <img src="img/GE1.png" alt="Gerber" width="300" height="200">
-                    <img src="img/G2.png" alt="Gerber" width="300" height="200">
-                    <div class="alert alert-success">
-                        <i class="fas fa-check-circle"></i>
-                        <div>Los archivos PNG generados son compatibles con el software MODs para la fabricación.</div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="mods-process" class="fade-in">
-            <h2 class="section-title"></i>Proceso en MODs</h2>
-            
-            <div class="tool-info">
-                <h4><i class="fas fa-info-circle"></i>¿Qué es MODs?</h4>
-                <p>MODs (modsproject.org) es una herramienta web modular que convierte archivos de diseño en códigos de control para máquinas de fabricación digital, como fresadoras CNC.</p>
-            </div>
-
-            <div class="process-steps">
-                <div class="step-card">
-                    <div class="step-number">1</div>
-                    <h3 class="step-title">Carga de Archivos PNG</h3>
-                    <p class="step-description">
-                        Importamos los archivos PNG generados en KiCad al entorno web de MODs. Cargamos tanto el archivo de pistas como el de contorno de la placa, cada uno requiere configuraciones específicas de fresado.
-                    </p>
-                    <img src="img/1M.png" alt="MODS" width="300" height="200">
-                    <img src="img/2M.png" alt="MODS" width="300" height="200">
-                    <img src="img/3M.png" alt="MODS" width="300" height="200">
-                    <img src="img/4M.png" alt="MODS" width="300" height="200">
-                    <img src="img/5M.png" alt="MODS" width="300" height="200">
-                </div>
-                
-                <div class="step-card">
-                    <div class="step-number">2</div>
-                    <h3 class="step-title">Configuración de Parámetros de Fresado</h3>
-                    <p class="step-description">
-                        Configuramos los parámetros esenciales para el proceso:
-                    </p>
-                    <ul style="margin: 1rem 0; padding-left: 2rem;">
-                        <li><strong>Tipo de fresa:</strong> 1/64" para pistas, 1/32" para contorno</li>
-                        <li><strong>Profundidad de corte:</strong> 0.1mm para pistas</li>
-                        <li><strong>Velocidad de avance:</strong> Optimizada para cobre</li>
-                        <li><strong>Velocidad del husillo:</strong> Según especificaciones de MonoFab</li>
-                    </ul>
-                    <img src="img/PARAMETROS.png" alt="MODS" width="300" height="200">
-                </div>
-
-                <div class="step-card">
-                    <div class="step-number">3</div>
-                    <h3 class="step-title">Configuración de Módulos</h3>
-                    <p class="step-description">
-                        MODs funciona mediante módulos interconectados. Configuramos la cadena de procesamiento:
-                    </p>
-                    <ul style="margin: 1rem 0; padding-left: 2rem;">
-                        <li><strong>Entrada:</strong> Módulo de lectura de imagen PNG</li>
-                        <li><strong>Procesamiento:</strong> Módulo de cálculo de trayectorias</li>
-                        <li><strong>Salida:</strong> Módulo de generación de G-code</li>
-                    </ul>
-                </div>
-
-                <div class="step-card">
-                    <div class="step-number">4</div>
-                    <h3 class="step-title">Generación de Trayectorias</h3>
-                    <p class="step-description">
-                        El software calcula automáticamente las trayectorias de la fresa, optimizando el recorrido para minimizar el tiempo de mecanizado y evitar dañar las pistas ya fresadas.
-                    </p>
-                    <img src="img/TRAYECTORIAS.png" alt="MODS" width="300" height="200">
-                    <div class="alert alert-info">
-                        <i class="fas fa-info-circle"></i>
-                        <div>Es importante revisar visualmente las trayectorias antes de proceder al fresado para detectar posibles errores.</div>
-                    </div>
-                </div>
-
-                <div class="step-card">
-                    <div class="step-number">5</div>
-                    <h3 class="step-title">Exportación de G-code</h3>
-                    <p class="step-description">
-                        Finalmente, exportamos el código G que controla los movimientos de la fresadora MonoFab. Este archivo contiene todas las instrucciones necesarias para fabricar la PCB físicamente.
-                    </p>
-                    <img src="img/EXPORTAR MODS.png" alt="MODS" width="300" height="200">
-                    <div class="alert alert-success">
-                        <i class="fas fa-check-circle"></i>
-                        <div>El archivo G-code está listo para ser cargado en la fresadora MonoFab.</div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="monofab-process" class="fade-in">
-            <h2 class="section-title"></i>Proceso en MonoFab</h2>
-            
-            <div class="process-steps">
-                <div class="step-card">
-                    <div class="step-number">1</div>
-                    <h3 class="step-title">Preparación del Material</h3>
-                    <p class="step-description">
-                        Colocamos la placa virgen de cobre en la fresadora, asegurándonos de que esté perfectamente nivelada y fijada para evitar movimientos durante el fresado. La preparación correcta del material es crucial para obtener resultados precisos.
-                    </p>
-                </div>
-
-                <div class="step-card">
-                    <div class="step-number">2</div>
-                    <h3 class="step-title">Instalación y Calibración de Fresas</h3>
-                    <p class="step-description">
-                        Instalamos primero la fresa de 1/64" para el fresado de pistas. Calibramos la altura de la herramienta utilizando el sistema de auto-nivelación de la MonoFab, asegurando un contacto preciso con el material.
-                    </p>
-                </div>
-
-                <div class="step-card">
-                    <div class="step-number">3</div>
-                    <h3 class="step-title">Fresado de Pistas</h3>
-                    <p class="step-description">
-                        Ejecutamos el primer archivo G-code para fresar las pistas del circuito. La máquina retira el cobre de la superficie, dejando definidas las conexiones eléctricas según el diseño digital. Este proceso requiere precisión para mantener la continuidad de las pistas.
-                    </p>
-                </div>
-
-                <div class="step-card">
-                    <div class="step-number">4</div>
-                    <h3 class="step-title">Cambio de Fresa y Corte de Contorno</h3>
-                    <p class="step-description">
-                        Cambiamos a la fresa de 1/32" y ejecutamos el segundo archivo para cortar el contorno de la placa. Esto define la forma final de la PCB y la separa del material base.
-                    </p>
-                </div>
-
-                <div class="step-card">
-                    <div class="step-number">5</div>
-                    <h3 class="step-title">Inspección y Acabado</h3>
-                    <p class="step-description">
-                        Retiramos la placa terminada y realizamos una inspección visual para verificar que las pistas estén correctamente delineadas y sin imperfecciones. Limpiamos los residuos de cobre y preparamos la PCB para el proceso de soldadura de componentes.
-                    </p>
-                    <div class="alert alert-success">
-                        <i class="fas fa-check-circle"></i>
-                        <div>¡PCB fabricada exitosamente! El diseño digital se ha materializado en un prototipo físico funcional.</div>
-                    </div>
                 </div>
             </div>
         </section>
 
         <section id="projects" class="fade-in projects-section">
-            <h2 class="section-title"></i>Nuestros Proyectos</h2>
+            <h2 class="section-title"></i>Nuestro Proyectos</h2>
             
             <div class="alert alert-info">
                 <i class="fas fa-info-circle"></i>
                 <div>
-                    <strong>Resultados de la práctica:</strong> Cada integrante del equipo logró diseñar y fabricar su propia PCB, aplicando los conocimientos adquiridos en el proceso completo de producción electrónica.
+                    <strong>Resultados de la práctica:</strong> La simulación demostró que el diseño del circuito es correcto y cumple con todos los requerimientos. La combinación del temporizador 555 como generador de frecuencia y el contador 4017 como secuenciador es un método efectivo y fiable para controlar una secuencia de luces LED. La práctica fue exitosa.
                 </div>
             </div>
 
             <div class="project-gallery">
                 <div class="project-card">
-                    <img src="img/Image (5).jpg" alt="PCB diseñada por Giovanna">
+                    <img src="img/Simulación.png" alt="PCB diseñada por Giovanna">
                     <div class="project-info">
-                        <h3 class="project-title">PCB de Corazón</h3>
-                        <p class="project-author">Por: Giovanna González Martínez</p>
+                        <h3 class="project-title">Diagrama</h3>
+                        <p class="project-author">Trabajo en equipo</p>
                     </div>
                 </div>
-                
-                <div class="project-card">
-                    <img src="img/concha michel.jpg" alt="PCB diseñada por Michel">
-                    <div class="project-info">
-                        <h3 class="project-title">PCB de Concha de Mar</h3>
-                        <p class="project-author">Por: Michel Sánchez Dumit</p>
-                    </div>
-                </div>
-                
-                <div class="project-card">
-                    <img src="img/Placa_ivan.png" alt="PCB diseñada por Iván">
-                    <div class="project-info">
-                        <h3 class="project-title">PCB de Dragón</h3>
-                        <p class="project-author">Por: Iván Rojas Robles</p>
-                    </div>
-                </div>
-            </div>
+
 
             <div class="tool-info">
                 <h4><i class="fas fa-lightbulb"></i>Lecciones Aprendidas</h4>
                 <ul style="padding-left: 2rem; margin-top: 1rem;">
-                    <li><strong>Importancia del diseño:</strong> Un buen esquemático facilita enormemente el proceso de fabricación</li>
-                    <li><strong>Precisión en parámetros:</strong> La configuración correcta en MODs es crucial para resultados exitosos</li>
-                    <li><strong>Preparación del material:</strong> La correcta fijación y nivelación evita errores de fabricación</li>
-                    <li><strong>Inspección continua:</strong> Revisar cada etapa del proceso ayuda a detectar problemas temprano</li>
+                    <li><strong>Comprension de circuitos integrados:</strong>Se comprendió a nivel práctico la función específica de dos de los circuitos integrados más comunes en la electrónica</li>
+                    <li><strong>La Importancia de los Componentes Pasivos:</strong>Se reforzó la idea de que cada componente, por simple que sea, cumple una función crítica. En particular, se destacó la necesidad de las resistencias limitadoras de corriente</li>
+                    <li><strong>El Valor de la Simulación:</strong>El uso de NI Multisim demostró ser una herramienta indispensable en el diseño electrónico. Ayudando a verificar nuestro circuito</li>
+                    <li><strong>Modularidad en el Diseño:</strong> El proyecto enseñó a ver los circuitos como módulos o bloques funcionales. En lugar de un conjunto confuso de cables, el diseño se pudo separar en tres partes claras: el generador de pulsos, el secuenciador y la etapa de salida (LEDs). Esta forma de pensar facilita el diseño y la solución de problemas en proyectos más complejos.</li>
                 </ul>
             </div>
         </section>
