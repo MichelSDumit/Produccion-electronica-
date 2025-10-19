@@ -566,37 +566,36 @@
             <h2 class="section-title"></i>Proceso en la Cortadora de Vinil</h2>
             
             <div class="tool-info">
-                <h4><i class="fas fa-info-circle"></i>¿Qué es la Cortadora de Vunil Brother J103?</h4>
+                <h4><i class="fas fa-info-circle"></i>¿Qué es la Cortadora de Vinil Brother J103?</h4>
                 <p>Una cortadora de vinil (o plotter de corte) es una máquina que corta diseños en vinil adhesivo u otros materiales delgados (vinilo de señalética, termoadhesivo para ropa, vinil decorativo, entre otros).</p>
             </div>
 
             <div class="process-steps">
                 <div class="step-card">
                     <div class="step-number">1</div>
-                    <h3 class="step-title">Instalación de Librerías FabLab</h3>
+                    <h3 class="step-title">Panel de Botones</h3>
                     <p class="step-description">
-                        El primer paso fue descargar e instalar la librería del FabLab en KiCad. Esta librería contiene componentes específicos optimizados para fabricación digital, con las especificaciones y footprints adecuados para el proceso de fresado que utilizaríamos posteriormente.
+                        En el panel frontal de la cortadora Brother J-103 se encuentran los botones de control más importantes, que permiten manejar las funciones básicas del equipo de forma rápida y sencilla.
                     </p>
                    <img src="img/" alt="Librerías" width="300" height="200">
-                    <div class="alert alert-warning">
-                        <i class="fas fa-exclamation-triangle"></i>
-                        <div>Es crucial usar componentes de la librería FabLab ya que están diseñados específicamente para el proceso de fabricación que usaremos.</div>
-                    </div>
                 </div>
+                 </p>
+                    <ul style="margin: 1rem 0; padding-left: 2rem;">
+                        <li><strong>Botón de Encendido:</strong> Este botón sirve para encender o apagar la máquina. Al presionarlo, la luz indicadora se ilumina, señalando que la cortadora está lista para usarse</li>
+                        <li><strong>Botón Home (Inicio):</strong> Permite volver a la pantalla principal del menú en cualquier momento. Es útil cuando se desea cancelar una acción o iniciar un nuevo proyecto desde cero.</li>
+                        <li><strong>Botón de Carga de Tapete:</strong> Se utiliza para insertar o retirar el tapete de corte dentro del equipo. Al presionarlo, el mecanismo ajusta automáticamente la posición del tapete para comenzar el corte o escaneo.</li>
+                        <li><strong>Botón de Pausa:</strong>Este botón detiene temporalmente el proceso de corte o escaneo.</li>
+                    </ul>
 
                 <div class="step-card">
                     <div class="step-number">2</div>
-                    <h3 class="step-title">Creación del Esquemático</h3>
+                    <h3 class="step-title">Cargar archivos</h3>
                     <p class="step-description">
-                        Cada integrante del equipo diseñó su propio circuito. La mayoría incluyó:
+                        Para cargar archivos en la cortadora, es necesario contar con una memoria USB que contenga el diseño que se desea cortar.
+                        La máquina es compatible con archivos en formato PHX, PHC, FCM, PES y SVG.
+                        Una vez que el archivo esté guardado en la memoria USB, inserta la unidad en el puerto USB ubicado en el costado derecho de la máquina. A continuación, podrás acceder al archivo directamente desde la pantalla táctil para seleccionarlo y comenzar el proceso de corte.
                     </p>
-                    <ul style="margin: 1rem 0; padding-left: 2rem;">
-                        <li><strong>4 interruptores (switches)</strong> con salida</li>
-                        <li><strong>Voltaje de alimentación:</strong> 3.3V</li>
-                        <li><strong>8 resistencias</strong> para limitación de corriente</li>
-                        <li><strong>4 LEDs</strong> como indicadores</li>
-                        <li><strong>Conexión a tierra (GND)</strong></li>
-                    </ul>
+                    
                     <img src="img/circuito michel.png" alt="CIRCUITO MIO" width="300" height="200">
                     <div class="alert alert-info">
                         <i class="fas fa-info-circle"></i>
