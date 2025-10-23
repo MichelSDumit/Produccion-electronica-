@@ -622,79 +622,60 @@
         </section>
 
         <section id="mods-process" class="fade-in">
-            <h2 class="section-title"></i>Proceso de Soldadura</h2>
-            
-            <div class="tool-info">
-                <h4><i class="fas fa-info-circle"></i>¿Qué es MODs?</h4>
-                <p>MODs (modsproject.org) es una herramienta web modular que convierte archivos de diseño en códigos de control para máquinas de fabricación digital, como fresadoras CNC.</p>
-            </div>
+            <h2 class="section-title"></i>Procedimiento para soldar con cautín</h2>
 
             <div class="process-steps">
                 <div class="step-card">
                     <div class="step-number">1</div>
-                    <h3 class="step-title">Carga de Archivos PNG</h3>
+                    <h3 class="step-title">Limpieza de la placa:</h3>
                     <p class="step-description">
-                        Importamos los archivos PNG generados en KiCad al entorno web de MODs. Cargamos tanto el archivo de pistas como el de contorno de la placa, cada uno requiere configuraciones específicas de fresado.
-                    </p>
-                    <img src="img/1M.png" alt="MODS" width="300" height="200">
-                    <img src="img/2M.png" alt="MODS" width="300" height="200">
-                    <img src="img/3M.png" alt="MODS" width="300" height="200">
-                    <img src="img/4M.png" alt="MODS" width="300" height="200">
-                    <img src="img/5M.png" alt="MODS" width="300" height="200">
+                       Primero, limpiamos cuidadosamente la placa electrónica para eliminar restos de polvo, grasa o suciedad. Esto ayuda a que la soldadura se adhiera correctamente y evita fallas en las conexiones.     </p>
                 </div>
                 
                 <div class="step-card">
                     <div class="step-number">2</div>
-                    <h3 class="step-title">Configuración de Parámetros de Fresado</h3>
+                    <h3 class="step-title">Aplicación de pasta para soldar:</h3>
                     <p class="step-description">
-                        Configuramos los parámetros esenciales para el proceso:
+                        Luego, colocamos una pequeña cantidad de pasta para soldar (flux) en los puntos donde íbamos a colocar los componentes. Esta pasta facilita que el estaño se derrita y se adhiera de manera uniforme.
                     </p>
-                    <ul style="margin: 1rem 0; padding-left: 2rem;">
-                        <li><strong>Tipo de fresa:</strong> 1/64" para pistas, 1/32" para contorno</li>
-                        <li><strong>Profundidad de corte:</strong> 0.1mm para pistas</li>
-                        <li><strong>Velocidad de avance:</strong> Optimizada para cobre</li>
-                        <li><strong>Velocidad del husillo:</strong> Según especificaciones de MonoFab</li>
-                    </ul>
-                    <img src="img/PARAMETROS.png" alt="MODS" width="300" height="200">
                 </div>
 
                 <div class="step-card">
                     <div class="step-number">3</div>
-                    <h3 class="step-title">Configuración de Módulos</h3>
+                    <h3 class="step-title">Preparación del cautín:</h3>
                     <p class="step-description">
-                        MODs funciona mediante módulos interconectados. Configuramos la cadena de procesamiento:
+                        Encendimos el cautín y lo ajustamos a una temperatura de 380 °C, que es adecuada para soldar componentes electrónicos sin dañar la placa ni las piezas.
                     </p>
-                    <ul style="margin: 1rem 0; padding-left: 2rem;">
-                        <li><strong>Entrada:</strong> Módulo de lectura de imagen PNG</li>
-                        <li><strong>Procesamiento:</strong> Módulo de cálculo de trayectorias</li>
-                        <li><strong>Salida:</strong> Módulo de generación de G-code</li>
-                    </ul>
                 </div>
 
                 <div class="step-card">
                     <div class="step-number">4</div>
-                    <h3 class="step-title">Generación de Trayectorias</h3>
+                    <h3 class="step-title">Preestañado de las uniones:</h3>
                     <p class="step-description">
-                        El software calcula automáticamente las trayectorias de la fresa, optimizando el recorrido para minimizar el tiempo de mecanizado y evitar dañar las pistas ya fresadas.
-                    </p>
-                    <img src="img/TRAYECTORIAS.png" alt="MODS" width="300" height="200">
-                    <div class="alert alert-info">
-                        <i class="fas fa-info-circle"></i>
-                        <div>Es importante revisar visualmente las trayectorias antes de proceder al fresado para detectar posibles errores.</div>
+                        Calentamos brevemente con el cautín las zonas donde se colocaría el estaño, y añadimos una pequeña cantidad de este material para crear una base inicial de soldadura. </p>
                     </div>
                 </div>
 
                 <div class="step-card">
                     <div class="step-number">5</div>
-                    <h3 class="step-title">Exportación de G-code</h3>
+                    <h3 class="step-title">Colocación de los componentes:</h3>
                     <p class="step-description">
-                        Finalmente, exportamos el código G que controla los movimientos de la fresadora MonoFab. Este archivo contiene todas las instrucciones necesarias para fabricar la PCB físicamente.
-                    </p>
-                    <img src="img/EXPORTAR MODS.png" alt="MODS" width="300" height="200">
-                    <div class="alert alert-success">
-                        <i class="fas fa-check-circle"></i>
-                        <div>El archivo G-code está listo para ser cargado en la fresadora MonoFab.</div>
+                       Posteriormente, colocamos los componentes electrónicos en su posición correspondiente sobre la placa, asegurándonos de que los pines coincidieran con los puntos previamente estañados.       </p>
                     </div>
+
+                <div class="step-card">
+                    <div class="step-number">6</div>
+                    <h3 class="step-title">Soldadura final:</h3>
+                    <p class="step-description">
+                        Con el componente en su lugar, aplicamos nuevamente el cautín sobre la unión y dejamos que el estaño se derritiera, asegurando una conexión firme y brillante entre el pin del componente y la pista de la placa.      </div>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-number">7</div>
+                    <h3 class="step-title">Revisión de las uniones:</h3>
+                    <p class="step-description">
+                       Finalmente, inspeccionamos las soldaduras para verificar que no hubiera puentes de estaño ni uniones frías, asegurándonos de que todas las conexiones fueran limpias y seguras.     </div>
+                </div>
                 </div>
             </div>
         </section>
