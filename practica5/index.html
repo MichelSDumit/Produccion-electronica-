@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Práctica 4 - Cortadora de Vinil | Producción Electrónica</title>
+    <title>Práctica 2 - Soldaduras | Producción Electrónica</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
@@ -537,9 +537,9 @@
                 </div>
                 <div class="nav-links">
                     <a href="#intro"></i> Introducción</a>
-                    <a href="#kicad-process"></i> KiCad</a>
-                    <a href="#mods-process"></i> MODs</a>
-                    <a href="#projects"></i> Proyectos</a>
+                    <a href="#kicad-process"></i> Información general </a>
+                    <a href="#mods-process"></i> Proceso </a>
+                    <a href="#projects"></i> Proyectos </a>
                     <a href="#participants"></i> Equipo</a>
                 </div>
             </nav>
@@ -547,200 +547,133 @@
 
         <section id="intro" class="fade-in">
             <div class="intro-content">
-                <h1 class="intro-title">Práctica 5 </h1>
-                <p class="intro-subtitle"> Altium </p>
+                <h1 class="intro-title">Práctica 5</h1>
+                <p class="intro-subtitle">Altium</p>
                 <div class="intro-description">
                     <p>En esta práctica aprendimos a utilizar el software Altium Designer, una herramienta profesional para el diseño de circuitos impresos (PCB). Aprendimos a crear esquemáticos electrónicos, colocar y conectar componentes, generar el diseño de las pistas y preparar los archivos necesarios para la fabricación. También comprendimos la importancia de una correcta organización del proyecto y la verificación del diseño para asegurar el funcionamiento adecuado del circuito.</p>
                     <div class="alert alert-info">
                         <i class="fas fa-lightbulb"></i>
                         <div>
-                            <strong>Objetivo:</strong> Desarrollar habilidades en el uso del software Altium Designer, aplicando correctamente sus herramientas para el diseño de circuitos electrónicos. Elaborar esquemáticos y placas de circuito impreso (PCB) organizadas, realizando el enrutamiento de pistas, la colocación adecuada de componentes y la generación de archivos listos para la fabricación, garantizando precisión y funcionalidad en el diseño final.  </div>
+                            <strong>Objetivo:</strong> Desarrollar habilidades en el uso del software Altium Designer, comprendiendo y aplicando las herramientas necesarias para el diseño de circuitos impresos (PCB), desde la creación de esquemáticos hasta el enrutado de pistas y la generación de archivos de fabricación, garantizando proyectos electrónicos funcionales, organizados y de calidad.
+                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="Cortadora de Vinil" class="fade-in">
-            <h2 class="section-title"></i>Proceso en la Cortadora de Vinil</h2>
+        <section id="kicad-process" class="fade-in">
+            <h2 class="section-title"></i>Información general</h2>
             
             <div class="tool-info">
-                <h4><i class="fas fa-info-circle"></i>¿Qué es la Cortadora de Vinil Brother J103?</h4>
-                <p>Una cortadora de vinil (o plotter de corte) es una máquina que corta diseños en vinil adhesivo u otros materiales delgados (vinilo de señalética, termoadhesivo para ropa, vinil decorativo, entre otros).</p>
+                <h4><i class="fas fa-info-circle"></i>¿Qué es?</h4>
+                <p>La soldadura de componentes electrónicos es el proceso mediante el cual se unen los terminales de los componentes a las pistas de una placa de circuito impreso (PCB) utilizando un material metálico llamado estaño. Este material se funde con la ayuda de un cautín y, al enfriarse, forma una conexión eléctrica y mecánica firme. Su objetivo es asegurar que los componentes queden bien sujetos y que la corriente eléctrica pueda fluir correctamente entre ellos, permitiendo el funcionamiento adecuado del circuito.</p>
             </div>
 
+            <div class="process-steps">
                 <div class="step-card">
-                    <div class="step-number">1</div>
-                    <h3 class="step-title">Botones</h3>
+                    <h3 class="step-title">Tecnicas de soldadura con cautín</h3>
                     <p class="step-description">
-                        En el panel frontal de la cortadora Brother J-103 se encuentran los botones de control más importantes, que permiten manejar las funciones básicas del equipo de forma rápida y sencilla.
+                     </p><strong>Soldadura punto a punto:</strong> Consiste en unir cada terminal del componente de manera individual, aplicando calor y estaño en cada punto.</p>
+                    </p><strong>Soldadura por arrastre:</strong> Se desliza la punta del cautín con un poco de estaño sobre varios pines seguidos (ideal para circuitos integrados).</p>
+                    </p><strong>Soldadura por contacto:</strong> Se calientan simultáneamente la pista y el terminal del componente antes de aplicar el estaño, asegurando una buena adherencia.</p> 
+                    </p><strong>Desoldado con malla o bomba:</strong> Técnica usada para retirar estaño sobrante o corregir errores sin dañar la placa ni los componentes.</p>
+                    </p><strong>Limpieza de punta del cautín:</strong> Mantener la punta limpia mejora la conducción del calor y evita soldaduras defectuosas.</p>
+                    </p><strong>Inspección visual:</strong> Revisar que las uniones queden brillantes, sin exceso de estaño ni puentes entre pistas, para garantizar un buen funcionamiento del circuito.</p>
                     </p>
-                    <ul style="margin: 1rem 0; padding-left: 2rem;">
-                        <li><strong>Botón de encendido o apagado:</strong> Al presionarlo, la luz indicadora se ilumina, señalando que la cortadora está lista para usarse.</li>
-                        <li><strong>Botón Home (Inicio):</strong> Permite volver a la pantalla principal del menú en cualquier momento. Es útil cuando se desea cancelar una acción o iniciar un nuevo proyecto desde cero</li>
-                        <li><strong>Botón de Carga de Tapete:</strong> Se utiliza para insertar o retirar el tapete de corte dentro del equipo. Al presionarlo, el mecanismo ajusta automáticamente la posición del tapete para comenzar el corte o escaneo.</li>
-                        <li><strong>Botón de Pausa:</strong> Este botón detiene temporalmente el proceso de corte o escaneo</li>
-                    </ul>
-                    <img src="img/botones.png" alt="CIRCUITO MIO" width="300" height="200">
+                   <img src="img/ChatGPT Image 17 oct 2025, 09_38_00.png" alt="Librerías" width="300" height="200">
+                    <div class="alert alert-warning">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <div>La imagen es una representación visual de las tecnicas de soldadura (Nos gustaría recalcar que NO está bien soldado pero eso se explicara más tarde).</div>
+                </div>
                 </div>
 
                 <div class="step-card">
-                    <div class="step-number">2</div>
-                    <h3 class="step-title">Coloca el material</h3>
+                    <h3 class="step-title">Características de una buena soldadura</h3>
                     <p class="step-description">
-                        Asegúrate de tener el material bien adherido sobre el tapete adhesivo. 
-                        Inserta el tapete en la máquina con la flecha apuntando hacia adentro y presiona el botón que está justo debajo del botón “Home” para cargarlo.
+                       </p><strong> adecuada:</strong> La soldadura debe tener forma cónica o de "volcán", cubriendo completamente la unión entre el pin y el pad sin exceso de estaño ni forma de bola. Esto indica buena humectabilidad y contacto.​</p>
+                       </p><strong>Brillo:</strong> Una soldadura bien realizada presenta un acabado brillante y liso. Las soldaduras opacas o con textura arenosa pueden indicar soldaduras frías o mala conexión eléctrica.​ </p>
+                       </p><strong>Cantidad correcta de estaño:</strong> Debe usarse suficiente estaño para cubrir la unión, pero sin excederse para evitar puentes entre pines contiguos o exceso que pueda debilitar la unión.​ </p>
+                       </p><strong>Unión mecánica y eléctrica fuerte:</strong> La soldadura debe empapar y adherirse bien a ambos metales (pin y pad), garantizando buena conductividad y resistencia mecánica. </p>​
+                       </p><strong>Transferencia adecuada de calor:</strong> El calor aplicado debe ser suficiente para fundir el estaño y que fluya bien sobre las superficies, evitando que la soldadura sea fría (bola) o quemada. La temperatura ideal del soldador suele estar entre 260 y 350 °C según el tipo de estaño y componente.​</p>
+                       </p><strong>Limpieza:</strong>Las superficies deben estar limpias y libres de oxidación antes de soldar, y la punta del soldador debe mantenerse limpia para una transferencia óptima de calor.​</p>
+                       </p><strong>Uso de fundente adecuado:</strong> El fundente ayuda a eliminar la oxidación y mejora la adherencia del estaño. </p>
                     </p>
-                    <img src="img/Pegar.jpeg" alt="HUELLAS" width="250" height="300">
-                    <img src="img/material.jpeg" alt="HUELLAS" width="250" height="300">
-                    <div class="alert alert-warning">
-                        <i class="fas fa-exclamation-triangle"></i>
-                        <div> No coloques material sobre los bordes negros, ya que la máquina utiliza esas áreas para calibrar el corte.</div>
+                    </ul>
+                    
+                    <img src="img/ChatGPT Image 17 oct 2025, 09_59_44.png" alt="CIRCUITO MIO" width="300" height="200">
+                </div>
+
+                <div class="step-card">
+                    <h3 class="step-title">Componentes que se pueden soldar.</h3>
+                    <p class="step-description">
+                    <p><strong>Componentes pasivos:</strong> Resistencias, Capacitores (condensadores), Inductores (bobinas), Potenciómetros </p>
+                    <p><strong>Componentes pasivos:</strong> Diodos (rectificadores, LED, zéner), Transistores (NPN, PNP, MOSFET), Circuitos integrados (ICs), Reguladores de voltaje</p>
+                    <p><strong>Componentes pasivos:</strong> Pines y cabezales (headers), Conectores macho y hembra, Borneras (terminal blocks), Cables y jumpers</p>
+                    <p><strong>Componentes pasivos:</strong> Interruptores y pulsadores, Relevadores (relés), Motores pequeños o servos (con terminales para soldar)</p>
+                    <p><strong>Componentes pasivos:</strong> Displays (de 7 segmentos o LCD), Sensores (de temperatura, luz, movimiento, etc.), Zumbadores (buzzers), Cristales osciladores</p>
+                    </p>
+                    <img src="img/kbaeswdjvhefdbhjasfd.png" alt="HUELLAS" width="300" height="200">
+                </div>
+                
                     </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="mods-process" class="fade-in">
+            <h2 class="section-title"></i>Procedimiento para soldar con cautín</h2>
+
+            <div class="process-steps">
+                <div class="step-card">
+                    <div class="step-number">1</div>
+                    <h3 class="step-title">Limpieza de la placa:</h3>
+                    <p class="step-description">
+                       Primero, limpiamos cuidadosamente la placa electrónica para eliminar restos de polvo, grasa o suciedad. Esto ayuda a que la soldadura se adhiera correctamente y evita fallas en las conexiones.     </p>
+                </div>
+                
+                <div class="step-card">
+                    <div class="step-number">2</div>
+                    <h3 class="step-title">Aplicación de pasta para soldar:</h3>
+                    <p class="step-description">
+                        Luego, colocamos una pequeña cantidad de pasta para soldar (flux) en los puntos donde íbamos a colocar los componentes. Esta pasta facilita que el estaño se derrita y se adhiera de manera uniforme.
+                    </p>
                 </div>
 
                 <div class="step-card">
                     <div class="step-number">3</div>
-                    <h3 class="step-title">Descarga el tapete</h3>
+                    <h3 class="step-title">Preparación del cautín:</h3>
                     <p class="step-description">
-                        Cuando termines, presiona nuevamente el botón debajo de “Home” para descargar el tapete.
+                        Encendimos el cautín y lo ajustamos a una temperatura de 380 °C, que es adecuada para soldar componentes electrónicos sin dañar la placa ni las piezas.
                     </p>
-                    <img src="img/Tapete.png" alt="CIRCUITO MIO" width="300" height="200">
-                    <div class="alert alert-success">
-                        <i class="fas fa-check-circle"></i>
-                        <div> Sostén el tapete con una mano mientras se descarga para evitar que se doble o dañe el material.</div>
-                    </div>
                 </div>
 
                 <div class="step-card">
                     <div class="step-number">4</div>
-                    <h3 class="step-title">Preparar el archivo</h3>
+                    <h3 class="step-title">Preestañado de las uniones:</h3>
                     <p class="step-description">
-                        Antes de comenzar, asegúrate de tener tu archivo guardado en una memoria USB.
-                        La máquina acepta los siguientes formatos:
-                        PHX, PHC, FCM, PES y SVG.
-                    </p>
-                    <img src="img/Archivo.png" alt="CIRCUITO MIO" width="300" height="200">
-                    <div class="alert alert-info">
-                        <i class="fas fa-info-circle"></i>
-                        <div> Verifica que el archivo esté correctamente nombrado y guardado en la raíz de la USB para que sea más fácil de localizar.</div>
+                        Calentamos brevemente con el cautín las zonas donde se colocaría el estaño, y añadimos una pequeña cantidad de este material para crear una base inicial de soldadura. </p>
                     </div>
                 </div>
 
                 <div class="step-card">
                     <div class="step-number">5</div>
-                    <h3 class="step-title">Conectar la USB a la máquina</h3>
+                    <h3 class="step-title">Colocación de los componentes:</h3>
                     <p class="step-description">
-                        Inserta la memoria USB en el puerto ubicado en el costado derecho de la cortadora.
-                        Asegúrate de que esté bien conectada antes de continuar.
-                    </p>
-                    <img src="img/Entrada.png" alt="HUELLAS" width="300" height="200">
-                </div>
+                       Posteriormente, colocamos los componentes electrónicos en su posición correspondiente sobre la placa, asegurándonos de que los pines coincidieran con los puntos previamente estañados.       </p>
+                    </div>
 
                 <div class="step-card">
                     <div class="step-number">6</div>
-                    <h3 class="step-title">Acceder desde la pantalla principal</h3>
+                    <h3 class="step-title">Soldadura final:</h3>
                     <p class="step-description">
-                        Con la máquina encendida y en la pantalla “Home”, selecciona la opción “Retrieve Data”.
-                        Luego, elige la opción “Buscar dentro de USB” para acceder a tus archivos.
-                    </p>
-                    <img src="img/Retriver Data.png" alt="HUELLAS" width="300" height="200">
-                    <img src="img/Archivos.png" alt="HUELLAS" width="300" height="200">
+                        Con el componente en su lugar, aplicamos nuevamente el cautín sobre la unión y dejamos que el estaño se derritiera, asegurando una conexión firme y brillante entre el pin del componente y la pista de la placa.      </div>
                 </div>
 
-                 <div class="step-card">
+                <div class="step-card">
                     <div class="step-number">7</div>
-                    <h3 class="step-title">Seleccionar tu diseño</h3>
+                    <h3 class="step-title">Revisión de las uniones:</h3>
                     <p class="step-description">
-                        Después de unos segundos, la pantalla mostrará todos los archivos compatibles dentro de la memoria USB.
-                        Solo selecciona el diseño que deseas cortar y continúa con la configuración.
-                    </p>
-                    <img src="img/Prederterminadas.jpeg" alt="HUELLAS" width="300" height="200">
-                    <img src="img/Predeterminadas 1.jpeg" alt="HUELLAS" width="300" height="200">
-                      <div class="alert alert-info">
-                        <i class="fas fa-info-circle"></i>
-                        <div> Si tu archivo no aparece, revisa que tenga una de las extensiones compatibles y que la USB esté bien insertada</div>
-                    </div>
-                </div>
-
-                <div class="step-card">
-                    <div class="step-number">8</div>
-                    <h3 class="step-title">Visualiza tu diseño</h3>
-                    <p class="step-description">
-                        Una vez que selecciones el archivo que deseas cortar, aparecerá una cuadrícula en pantalla con tu diseño.
-                    </p>
-                    <img src="img/cuadricula.png" alt="Gerber" width="300" height="200">
-                     <div class="alert alert-warning">
-                        <i class="fas fa-exclamation-triangle"></i>
-                        <div>Revisa que tu material esté colocado correctamente sobre el tapete antes de continuar.</div>
-                    </div>
-                </div>
-
-                <div class="step-card">
-                    <div class="step-number">9</div>
-                    <h3 class="step-title">Verifica la posición del material</h3>
-                    <p class="step-description">
-                        Si el material se encuentra dentro de la cuadrícula, simplemente toca “OK” para comenzar el corte.
-                    </p>
-                    <img src="img/Edit.png" alt="Gerber" width="300" height="200">
-                    <img src="img/3 cuadros.png" alt="Gerber" width="300" height="200">
-                    <div class="alert alert-warning">
-                        <i class="fas fa-exclamation-triangle"></i>
-                        <div>Si no está en la zona correcta, presiona la opción “Edit” y selecciona el ícono con tres cuadrados para abrir las herramientas de ajuste.</div>
-                    </div>
-                </div>
-
-                <div class="step-card">
-                    <div class="step-number">10</div>
-                    <h3 class="step-title">Selecciona la herramienta de movimiento</h3>
-                    <p class="step-description">
-                        Dentro del menú, elige la segunda opción, identificada con dos formas, para activar la función de mover el diseño.
-                    </p>
-                    <img src="img/dos formas.png" alt="HUELLAS" width="300" height="200">
-                </div>
-
-                <div class="step-card">
-                    <div class="step-number">11</div>
-                    <h3 class="step-title">Ajusta la posición del diseño</h3>
-                    <p class="step-description">
-                        Arrastra el dibujo completo con el dedo hasta colocarlo en una zona de la cuadrícula donde sí haya material disponible.
-                    </p>
-                    <img src="img/Arrasta.png" alt="HUELLAS" width="300" height="200">
-                    <div class="alert alert-info">
-                        <i class="fas fa-info-circle"></i>
-                        <div> Mueve el diseño suavemente para colocarlo con precisión y evitar cortes fuera del área del material.</div>
-                    </div>
-                </div>
-
-                <div class="step-card">
-                    <div class="step-number">12</div>
-                    <h3 class="step-title">Configurar los parámetros de corte</h3>
-                    <p class="step-description">
-                        Para comenzar, selecciona qué deseas cortar o el modo “Cut”.
-                        Una vez dentro, abre la opción de configuración
-                    </p>
-                    <img src="img/cut.png" alt="Gerber" width="300" height="200">
-                    <img src="img/Parametro 2.jpeg" alt="Gerber" width="300" height="200">
-                    <div class="alert alert-success">
-                        <i class="fas fa-check-circle"></i>
-                        <div> Asegúrate de colocar el diseño sobre otro material, por ejemplo, vinilo, antes de ajustar los parámetros.</div>
-                    </div>
-                </div>
-
-                <div class="step-card">
-                    <div class="step-number">13</div>
-                    <h3 class="step-title">Ajusta los valores de corte</h3>
-                    <p class="step-description">
-                        Usa los siguientes valores recomendados para obtener un mejor resultado:
-                    </p>
-                     <ul style="margin: 1rem 0; padding-left: 2rem;">
-                        <li><strong>Cut speed:</strong> 3</li>
-                        <li><strong>Cut pressure:</strong> -9</li>
-                        <li><strong>Cut pressure (manual):</strong> -9</li>
-                        <li><strong>Cut amount:</strong> Auto</li>
-                        <li><strong>Half cut:</strong> On</li>
-                        <li><strong>Half cut pressure:</strong> -2</li>
-                    </ul>
-                    <img src="img/parametros de corte.jpeg" alt="Gerber" width="300" height="200">
+                       Finalmente, inspeccionamos las soldaduras para verificar que no hubiera puentes de estaño ni uniones frías, asegurándonos de que todas las conexiones fueran limpias y seguras.     </div>
                 </div>
                 </div>
             </div>
@@ -748,34 +681,51 @@
 
 
         <section id="projects" class="fade-in projects-section">
-            <h2 class="section-title"></i>Nuestro Corte</h2>
+            <h2 class="section-title"></i>Nuestros Proyectos</h2>
             
             <div class="alert alert-info">
                 <i class="fas fa-info-circle"></i>
                 <div>
-                    <strong>Resultados de la práctica:</strong> Los integrantes, en conjunto, realizaron el corte en vinil de una figura preseleccionada que se encontraba cargada en la máquina Brother J103.
+                    <strong>Resultados de la práctica:</strong> Cada integrante del equipo logró soldar sus componentes a las placas, aplicando los conocimientos adquiridos en el proceso completo de producción electrónica.
                 </div>
             </div>
-                
+
+            <div class="project-gallery">
                 <div class="project-card">
-                    <img src="img/caballito de mar.jpeg" alt="PCB diseñada por Michel">
+                    <img src="img/Image.jpg " alt="PCB diseñada por Giovanna">
                     <div class="project-info">
-                        <h3 class="project-title">Corte en vinil: Caballito de mar</h3>
-                        <p class="project-author">Por: Michel Sánchez Dumit, Giovanna González Martínez, Iván Rojas Robles</p>
+                        <h3 class="project-title">Soldadura de Gio</h3>
+                        <p class="project-author">Por: Giovanna González Martínez</p>
                     </div>
                 </div>
+
                 
+                <div class="project-card">
+                    <img src="img/Image (1).jpg" alt="PCB diseñada por Michel">
+                    <div class="project-info">
+                        <h3 class="project-title">Soldadura de Michel</h3>
+                        <p class="project-author">Por: Michel Sánchez Dumit</p>
+                    </div>
+                </div>
+
+                
+                <div class="project-card">
+                    <img src="video/MicrosoftTeams-video.mp4" alt="Video">
+                    <div class="project-info">
+                        <h3 class="project-title">Video Placa Funcionando</h3>
+                        <p class="project-author">Por: Equipo </p>
+                    </div>
+                </div>
             </div>
 
             <div class="tool-info">
                 <h4><i class="fas fa-lightbulb"></i>Lecciones Aprendidas</h4>
                 <ul style="padding-left: 2rem; margin-top: 1rem;">
-                    <li><strong>Importancia de la preparación del material:</strong> Colocar correctamente el vinil sobre el tapete adhesivo garantiza cortes precisos y evita daños en la máquina.</li>
-                    <li><strong>Configuración adecuada de parámetros:</strong> Ajustar correctamente la velocidad, presión y tipo de corte es esencial para obtener un resultado limpio y evitar desperdicio de material.</li>
-                    <li><strong>Atención al detalle:</strong> Supervisar cada etapa del proceso, desde la preparación hasta el corte final, garantiza resultados precisos y profesionales.</li>
-                    <li><strong>Uso correcto del equipo:</strong> Conocer las funciones básicas (encendido, carga de tapete y archivos, edición y corte) permite operar la máquina de manera segura y eficiente.</li>
-                    <li><strong>Trabajo en equipo:</strong> La coordinación entre los integrantes facilita la ejecución de cada paso y fomenta la resolución conjunta de problemas.</li>
-                </ul>
+                    <li><strong>Preparación adecuada:</strong> Tener a la mano todas las herramientas y componentes facilita un proceso de soldado más ordenado y seguro.</li>
+                    <li><strong>Temperatura correcta:</strong> Ajustar bien la temperatura del cautín evita dañar los componentes o las pistas de la PCB.</li>
+                    <li><strong>Aplicación precisa del estaño:</strong> Usar la cantidad justa de estaño garantiza una buena conexión sin provocar cortocircuitos.</li>
+                    <li><strong>Seguridad y limpieza:</strong> Mantener el área de trabajo limpia y usar protección adecuada previene accidentes y mejora la calidad del resultado.</li>
+                    <li><strong>Revisión final:</strong> Inspeccionar cada soldadura ayuda a detectar uniones frías o defectuosas antes de probar el circuito.</li>
                 </ul>
             </div>
         </section>
@@ -786,7 +736,6 @@
                 <div class="participant-card">
                     <img src="../assets/gio.png" alt="Giovanna González Martínez">
                     <h4>Giovanna González Martínez</h4>
-                    <p></i>Diseño de Esquemáticos</p>
                     <p><a href="mailto:giovanna.gonzalez@iberopuebla.mx">
                        </i> giovanna.gonzalez@iberopuebla.mx
                     </a></p>
@@ -794,7 +743,6 @@
                 <div class="participant-card">
                     <img src="../assets/michel.png" alt="Michel Sánchez Dumit">
                     <h4>Michel Sánchez Dumit</h4>
-                    <p></i>Diseño de Esquemáticos</p>
                     <p><a href="mailto:michel.sanchez.dumit@iberopuebla.mx">
                      </i> michel.sanchez.dumit@iberopuebla.mx
                     </a></p>
@@ -802,7 +750,6 @@
                 <div class="participant-card">
                     <img src="../assets/Ivan.png" alt="Iván Rojas Robles">
                     <h4>Iván Rojas Robles</h4>
-                    <p></i> Diseño de Esquemáticos</p>
                     <p><a href="mailto:ivan.rojas@iberopuebla.mx">
                     </i> ivan.rojas@iberopuebla.mx
                     </a></p>
