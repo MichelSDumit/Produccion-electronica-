@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Práctica 2 - Soldaduras | Producción Electrónica</title>
+    <title>Práctica 5 - Altium | Producción Electrónica</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
@@ -562,142 +562,229 @@
         </section>
 
         <section id="kicad-process" class="fade-in">
-            <h2 class="section-title"></i>Información general</h2>
+            <h2 class="section-title"><i class="fas fa-microchip"></i>Guía Técnica Altium Designer</h2>
             
             <div class="tool-info">
-                <h4><i class="fas fa-info-circle"></i>¿Qué es?</h4>
+                <h4><i class="fas fa-info-circle"></i>¿Qué es Altium Designer?</h4>
                 <p>
-                    Altium Designer es un software profesional utilizado para el diseño de circuitos impresos (PCB). Permite crear desde el esquema electrónico hasta la representación física de la placa, integrando herramientas para el diseño, simulación y verificación del circuito. Su objetivo es facilitar el desarrollo de proyectos electrónicos precisos y funcionales, asegurando una correcta conexión entre los componentes y una distribución eficiente de las pistas, listas para su fabricación.
+                    Altium Designer es el estándar de la industria para el diseño de PCBs (Printed Circuit Boards). Unifica todas las facetas del proceso de diseño: esquemático, diseño de PCB, gestión de librerías y simulación, en un único entorno cohesivo. A diferencia de otros softwares, permite una visualización 3D en tiempo real y reglas de diseño (DRC) avanzadas para manufactura profesional.
                 </p>
             </div>
 
             <div class="process-steps">
                 <div class="step-card">
-                    <h3 class="step-title">Paso 1: Creación y Gestión del Proyecto</h3>
-                    <p class="step-description">
-                    <p><strong>Al iniciar:</strong>Cuando instales por primera vez Altium Designer tendras que iniciar sesion con una cuenta ya sea personal o profesional, solo asegurate de tener las licencias necesarias para empezar a diseñar, si no tienes ninguna licencia, no te permitira seguir los siguientes pasos</p>
-                    </p><strong>Crear un Nuevo Proyecto:</strong> En Altium, ve a File > New > Project. Elige el tipo de proyecto adecuado (normalmente PCB Project).</p>
-                    </p><strong>Guardar y Estructurar:</strong>Guarda el proyecto en una ubicación específica. Un proyecto de PCB (.PrjPcb) es la carpeta que contendrá todos los archivos del diseño (esquemático, PCB, librerías, etc.).</p>
-                    </p><strong>Añadir Documentos:</strong> Agrega un nuevo documento esquemático (File > New > Schematic) y un nuevo documento de PCB (File > New > PCB). Guárdalos dentro de la carpeta del proyecto.</p> 
-                    </p>
-                   <img src="img/Interface_Altium.png" alt="Librerías" width="600" height="400">
-                    <div class="alert alert-warning">
-                        <i class="fas fa-exclamation-triangle"></i>
-                        <div>La imagen es una representación visual de como se ve el inicio de la aplicación de Altium y sus primeros pasos .</div>
-                </div>
-                </div>
-                
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="mods-process" class="fade-in">
-            <h2 class="section-title"></i>Circuito 1</h2>
-
-            <div class="process-steps">
-                <div class="step-card">
                     <div class="step-number">1</div>
-                    <h3 class="step-title">Limpieza de la placa:</h3>
+                    <h3 class="step-title">Configuración Inicial y Licencias</h3>
                     <p class="step-description">
-                       Primero, limpiamos cuidadosamente la placa electrónica para eliminar restos de polvo, grasa o suciedad. Esto ayuda a que la soldadura se adhiera correctamente y evita fallas en las conexiones.     </p>
+                        <strong>Licenciamiento:</strong> Al iniciar Altium, es obligatorio iniciar sesión con <em>AltiumLive</em>. Verifica en la esquina superior derecha que tu licencia esté "Active". Sin esto, las herramientas de guardado y exportación estarán bloqueadas.
+                        <br><br>
+                        <strong>Crear Proyecto (.PrjPcb):</strong> Ve a <em>File > New > Project</em>. Selecciona "PCB Project". Este archivo actúa como una carpeta contenedora que vincula lógicamente tus esquemáticos con tu placa. Es vital guardar todo dentro de una misma carpeta de Windows para evitar enlaces rotos.
+                    </p>
                 </div>
-                
+
                 <div class="step-card">
                     <div class="step-number">2</div>
-                    <h3 class="step-title">Aplicación de pasta para soldar:</h3>
+                    <h3 class="step-title">Creación de Librerías y Huellas (Footprints)</h3>
                     <p class="step-description">
-                        Luego, colocamos una pequeña cantidad de pasta para soldar (flux) en los puntos donde íbamos a colocar los componentes. Esta pasta facilita que el estaño se derrita y se adhiera de manera uniforme.
+                        Cuando un componente no existe en las librerías predeterminadas (Manufacturer Part Search), debemos crearlo:
+                        <br>
+                        <strong>1. Símbolo Esquemático (.SchLib):</strong> Dibujamos el cuerpo del componente (rectángulo) y agregamos los pines. Es crucial asignar correctamente el <em>Designator</em> y el número de pin para que coincida con la hoja de datos.
+                        <br>
+                        <strong>2. Huella o Footprint (.PcbLib):</strong> Diseñamos la parte física. Usamos el <em>Pad Placement</em> asegurándonos de usar las medidas exactas del Datasheet (distancia entre pines, tamaño del pad).
+                        <br>
+                        <strong>3. Vinculación:</strong> En el archivo de librería, "Añadimos Footprint" al símbolo esquemático para que Altium sepa qué forma física corresponde al símbolo lógico.
                     </p>
+                    
                 </div>
 
                 <div class="step-card">
                     <div class="step-number">3</div>
-                    <h3 class="step-title">Preparación del cautín:</h3>
+                    <h3 class="step-title">Captura Esquemática y Conexionado</h3>
                     <p class="step-description">
-                        Encendimos el cautín y lo ajustamos a una temperatura de 380 °C, que es adecuada para soldar componentes electrónicos sin dañar la placa ni las piezas.
+                        Arrastramos los componentes a la hoja <em>.SchDoc</em>. Usamos la herramienta <strong>Wire (Ctrl+W)</strong> para realizar las conexiones eléctricas.
+                        <br>
+                        <strong>Etiquetado (Net Labels):</strong> Para mantener el diseño limpio, en lugar de tirar cables por toda la hoja, usamos <em>Net Labels</em> en los pines; dos etiquetas con el mismo nombre (ej. "CLK") están conectadas virtualmente.
+                        <br>
+                        <strong>Annotate Schematics:</strong> Antes de pasar al PCB, usamos esta herramienta para numerar automáticamente los componentes (R1, R2, C1...) y evitar duplicados.
                     </p>
                 </div>
 
                 <div class="step-card">
                     <div class="step-number">4</div>
-                    <h3 class="step-title">Preestañado de las uniones:</h3>
+                    <h3 class="step-title">Transferencia a PCB (Update PCB)</h3>
                     <p class="step-description">
-                        Calentamos brevemente con el cautín las zonas donde se colocaría el estaño, y añadimos una pequeña cantidad de este material para crear una base inicial de soldadura. </p>
-                    </div>
+                        Una vez el esquemático no tiene errores, vamos a <em>Design > Update PCB Document</em>.
+                        <br>
+                        Se abrirá una ventana de <strong>ECO (Engineering Change Order)</strong>. Validamos los cambios y ejecutamos. Esto transportará todos los componentes y sus "rat-lines" (conexiones aéreas) al archivo <em>.PcbDoc</em>.
+                        <br>
+                        <em>Nota:</em> Si hay errores de huellas no encontradas, debemos regresar a las librerías y verificar la vinculación del Paso 2.
+                    </p>
                 </div>
 
                 <div class="step-card">
                     <div class="step-number">5</div>
-                    <h3 class="step-title">Colocación de los componentes:</h3>
+                    <h3 class="step-title">Ruteo de Pistas y Visualización 3D</h3>
                     <p class="step-description">
-                       Posteriormente, colocamos los componentes electrónicos en su posición correspondiente sobre la placa, asegurándonos de que los pines coincidieran con los puntos previamente estañados.       </p>
-                    </div>
+                        <strong>Interactive Routing:</strong> Usamos esta herramienta para convertir las líneas aéreas en pistas de cobre. Podemos cambiar el ancho de la pista dependiendo de si es señal o alimentación.
+                        <br>
+                        <strong>Cambio de Capa:</strong> Al rutear, si presionamos "Ctrl + Shift + Rueda del ratón" cambiamos de capa (Top a Bottom), creando automáticamente una <em>Via</em>.
+                        <br>
+                        <strong>Vista 3D:</strong> Presionando la tecla <strong>"3"</strong>, entramos al modo 3D. Aquí verificamos colisiones mecánicas, altura de componentes y estética de la placa. Presionando "2" regresamos al modo edición 2D.
+                    </p>
+                 <img src="img/altium3d.png" alt="Vista 3D en Altium" class="step-image">
+                </div>
 
                 <div class="step-card">
                     <div class="step-number">6</div>
-                    <h3 class="step-title">Soldadura final:</h3>
+                    <h3 class="step-title">Simulación SPICE</h3>
                     <p class="step-description">
-                        Con el componente en su lugar, aplicamos nuevamente el cautín sobre la unión y dejamos que el estaño se derritiera, asegurando una conexión firme y brillante entre el pin del componente y la pista de la placa.      </div>
-                </div>
-
-                <div class="step-card">
-                    <div class="step-number">7</div>
-                    <h3 class="step-title">Revisión de las uniones:</h3>
-                    <p class="step-description">
-                       Finalmente, inspeccionamos las soldaduras para verificar que no hubiera puentes de estaño ni uniones frías, asegurándonos de que todas las conexiones fueran limpias y seguras.     </div>
-                </div>
+                        Altium permite simular el comportamiento analógico y digital antes de fabricar.
+                        <br>
+                        Debemos asignar un <strong>Modelo de Simulación</strong> a cada componente en las propiedades. Luego, configuramos el perfil de simulación (Transient, DC Sweep o AC Sweep) en el panel de <em>Simulation Dashboard</em>. Esto genera gráficas de voltaje y corriente para verificar que nuestro diseño teórico funciona en la práctica.
+                    </p>
                 </div>
             </div>
         </section>
 
 
-        <section id="projects" class="fade-in projects-section">
-            <h2 class="section-title"></i>Nuestros Proyectos</h2>
+
+        <section id="mods-process" class="fade-in">
+            <h2 class="section-title"><i class="fas fa-project-diagram"></i>Análisis del Circuito 1</h2>
             
             <div class="alert alert-info">
-                <i class="fas fa-info-circle"></i>
+                <i class="fas fa-pen-fancy"></i>
                 <div>
-                    <strong>Resultados de la práctica:</strong> Cada integrante del equipo logró soldar sus componentes a las placas, aplicando los conocimientos adquiridos en el proceso completo de producción electrónica.
+                    <strong>Descripción Funcional:</strong> En esta sección desglosamos el funcionamiento lógico y eléctrico del circuito diseñado en Altium, explicando la función de cada bloque.
                 </div>
             </div>
 
+            <div class="process-steps">
+                <div class="step-card">
+                    <h3 class="step-title">Propósito del Diseño</h3>
+                    <p class="step-description">
+                        El objetivo de este primer circuito fue [AQUÍ DESCRIBE EL OBJETIVO: EJEMPLO: crear una fuente de alimentación regulable / un sistema de luces secuenciales / un amplificador]. Este diseño nos permitió aplicar las herramientas de creación de esquemáticos jerárquicos y reglas de diseño básicas.
+                    </p>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-number">A</div>
+                    <h3 class="step-title">Etapa de Alimentación y Entrada</h3>
+                    <p class="step-description">
+                        Para la alimentación del circuito utilizamos [DESCRIBE: una batería de 9V / entrada USB / bornera]. Se implementaron capacitores de desacoplo de [VALOR, EJ: 100nF] cerca de los pines de alimentación de los circuitos integrados para filtrar ruido de alta frecuencia y estabilizar el voltaje de entrada.
+                    </p>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-number">B</div>
+                    <h3 class="step-title">Núcleo del Circuito y Componentes Clave</h3>
+                    <p class="step-description">
+                        El corazón del circuito se basa en [DESCRIBE LOS COMPONENTES PRINCIPALES: Ej. el microcontrolador ATmega / el timer 555]. 
+                        <br>
+                        Se diseñaron huellas personalizadas para estos componentes asegurando que el <em>Pitch</em> (distancia entre pines) fuera correcto. En el esquemático, configuramos las conexiones lógicas para que [DESCRIBE LA FUNCIÓN: Ej. el timer genere un pulso cada 1 segundo / el sensor envíe datos al procesador].
+                    </p>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-number">C</div>
+                    <h3 class="step-title">Etapa de Salida</h3>
+                    <p class="step-description">
+                        La señal resultante se visualiza o utiliza a través de [DESCRIBE LA SALIDA: Ej. un arreglo de LEDs / un buzzer / un conector de salida]. 
+                        <br>
+                        Durante el diseño del PCB, las pistas de salida se hicieron más [ANCHAS/CORTAS] para soportar la corriente necesaria sin calentamiento excesivo, respetando las normas IPC genéricas configuradas en el DRC de Altium.
+                    </p>
+                </div>
+                
+                <img src="img/Image.jpg" alt="Vista del Circuito 1 Terminado" class="step-image">
+            </div>
+        </section>
+
+
+
+        <section id="mods-process" class="fade-in">
+            <h2 class="section-title"><i class="fas fa-project-diagram"></i>Análisis del Circuito 2</h2>
+            
+            <div class="alert alert-info">
+                <i class="fas fa-pen-fancy"></i>
+                <div>
+                    <strong>Descripción Funcional:</strong> En esta sección desglosamos el funcionamiento lógico y eléctrico del circuito diseñado en Altium, explicando la función de cada bloque.
+                </div>
+            </div>
+
+            <div class="process-steps">
+                <div class="step-card">
+                    <h3 class="step-title">Propósito del Diseño</h3>
+                    <p class="step-description">
+                        El objetivo de este primer circuito fue [AQUÍ DESCRIBE EL OBJETIVO: EJEMPLO: crear una fuente de alimentación regulable / un sistema de luces secuenciales / un amplificador]. Este diseño nos permitió aplicar las herramientas de creación de esquemáticos jerárquicos y reglas de diseño básicas.
+                    </p>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-number">A</div>
+                    <h3 class="step-title">Etapa de Alimentación y Entrada</h3>
+                    <p class="step-description">
+                        Para la alimentación del circuito utilizamos [DESCRIBE: una batería de 9V / entrada USB / bornera]. Se implementaron capacitores de desacoplo de [VALOR, EJ: 100nF] cerca de los pines de alimentación de los circuitos integrados para filtrar ruido de alta frecuencia y estabilizar el voltaje de entrada.
+                    </p>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-number">B</div>
+                    <h3 class="step-title">Núcleo del Circuito y Componentes Clave</h3>
+                    <p class="step-description">
+                        El corazón del circuito se basa en [DESCRIBE LOS COMPONENTES PRINCIPALES: Ej. el microcontrolador ATmega / el timer 555]. 
+                        <br>
+                        Se diseñaron huellas personalizadas para estos componentes asegurando que el <em>Pitch</em> (distancia entre pines) fuera correcto. En el esquemático, configuramos las conexiones lógicas para que [DESCRIBE LA FUNCIÓN: Ej. el timer genere un pulso cada 1 segundo / el sensor envíe datos al procesador].
+                    </p>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-number">C</div>
+                    <h3 class="step-title">Etapa de Salida</h3>
+                    <p class="step-description">
+                        La señal resultante se visualiza o utiliza a través de [DESCRIBE LA SALIDA: Ej. un arreglo de LEDs / un buzzer / un conector de salida]. 
+                        <br>
+                        Durante el diseño del PCB, las pistas de salida se hicieron más [ANCHAS/CORTAS] para soportar la corriente necesaria sin calentamiento excesivo, respetando las normas IPC genéricas configuradas en el DRC de Altium.
+                    </p>
+                </div>
+                
+                <img src="img/Image.jpg" alt="Vista del Circuito 2 Terminado" class="step-image">
+            </div>
+        </section>
+
+
+
+
+        <section id="projects" class="fade-in projects-section">
+            <h2 class="section-title"><i class="fas fa-clipboard-check"></i>Conclusiones y Aprendizaje</h2>
+
             <div class="project-gallery">
                 <div class="project-card">
-                    <img src="img/Image.jpg " alt="PCB diseñada por Giovanna">
+                    <img src="img/Image.jpg" alt="Proyecto Final Altium">
                     <div class="project-info">
-                        <h3 class="project-title">Soldadura de Gio</h3>
-                        <p class="project-author">Por: Giovanna González Martínez</p>
-                    </div>
-                </div>
-
-                
-                <div class="project-card">
-                    <img src="img/Image (1).jpg" alt="PCB diseñada por Michel">
-                    <div class="project-info">
-                        <h3 class="project-title">Soldadura de Michel</h3>
-                        <p class="project-author">Por: Michel Sánchez Dumit</p>
-                    </div>
-                </div>
-
-                
-                <div class="project-card">
-                    <img src="video/MicrosoftTeams-video.mp4" alt="Video">
-                    <div class="project-info">
-                        <h3 class="project-title">Video Placa Funcionando</h3>
-                        <p class="project-author">Por: Equipo </p>
+                        <h3 class="project-title">Resultado Final PCB</h3>
+                        <p class="project-author">Vista 3D y Física</p>
                     </div>
                 </div>
             </div>
 
             <div class="tool-info">
-                <h4><i class="fas fa-lightbulb"></i>Lecciones Aprendidas</h4>
-                <ul style="padding-left: 2rem; margin-top: 1rem;">
-                    <li><strong>Preparación adecuada:</strong> Tener a la mano todas las herramientas y componentes facilita un proceso de soldado más ordenado y seguro.</li>
-                    <li><strong>Temperatura correcta:</strong> Ajustar bien la temperatura del cautín evita dañar los componentes o las pistas de la PCB.</li>
-                    <li><strong>Aplicación precisa del estaño:</strong> Usar la cantidad justa de estaño garantiza una buena conexión sin provocar cortocircuitos.</li>
-                    <li><strong>Seguridad y limpieza:</strong> Mantener el área de trabajo limpia y usar protección adecuada previene accidentes y mejora la calidad del resultado.</li>
-                    <li><strong>Revisión final:</strong> Inspeccionar cada soldadura ayuda a detectar uniones frías o defectuosas antes de probar el circuito.</li>
+                <h4><i class="fas fa-lightbulb"></i>Lecciones Aprendidas en Altium Designer</h4>
+                <ul style="padding-left: 2rem; margin-top: 1rem; list-style-type: none;">
+                    <li style="margin-bottom: 1rem;">
+                        <strong><i class="fas fa-check" style="color: var(--success-color);"></i> Importancia del DRC (Design Rule Check):</strong> 
+                        Aprendimos que configurar las reglas de diseño antes de rutear es vital. El DRC nos salvó de cometer errores como pistas demasiado finas o cortocircuitos por cercanía entre pads.
+                    </li>
+                    <li style="margin-bottom: 1rem;">
+                        <strong><i class="fas fa-check" style="color: var(--success-color);"></i> Gestión de Librerías:</strong> 
+                        Crear nuestras propias huellas fue el reto más grande. Comprendimos que un error de milímetros en la huella (.PcbLib) hace que el componente real no encaje en la placa fabricada.
+                    </li>
+                    <li style="margin-bottom: 1rem;">
+                        <strong><i class="fas fa-check" style="color: var(--success-color);"></i> Integración 3D:</strong> 
+                        La vista 3D no es solo estética; nos permitió ver si los capacitores grandes chocaban con otros componentes cercanos, algo que no se ve en la vista 2D.
+                    </li>
+                    <li style="margin-bottom: 1rem;">
+                        <strong><i class="fas fa-check" style="color: var(--success-color);"></i> Organización del Proyecto:</strong> 
+                        Mantener los esquemáticos limpios y etiquetados facilita enormemente el ruteo. Un esquemático desordenado resulta en un PCB difícil de diseñar.
+                    </li>
                 </ul>
             </div>
         </section>
