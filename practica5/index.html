@@ -658,108 +658,119 @@
 
 
         <section id="mods-process" class="fade-in">
-            <h2 class="section-title"><i class="fas fa-project-diagram"></i>Análisis del Circuito 1</h2>
+            <h2 class="section-title"><i class="fas fa-traffic-light"></i>Circuito: Secuencia LED</h2>
             
             <div class="alert alert-info">
-                <i class="fas fa-pen-fancy"></i>
+                <i class="fas fa-microchip"></i>
                 <div>
-                    <strong>Descripción Funcional:</strong> En esta sección desglosamos el funcionamiento lógico y eléctrico del circuito diseñado en Altium, explicando la función de cada bloque.
+                    <strong>Descripción del Proyecto:</strong> 
+                    Este circuito consiste en una serie de luces LED controladas electrónicamente para generar un efecto visual secuencial. El diseño en Altium se centró en la organización geométrica de los diodos y el ruteo eficiente de las múltiples pistas que conectan la etapa de control con la etapa de visualización.
                 </div>
             </div>
 
             <div class="process-steps">
                 <div class="step-card">
-                    <h3 class="step-title">Propósito del Diseño</h3>
+                    <div class="step-number">1</div>
+                    <h3 class="step-title">Lógica de Control y Generación de Pulsos</h3>
                     <p class="step-description">
-                        El objetivo de este primer circuito fue un sistema de luces secuenciales. Este diseño nos permitió aplicar las herramientas de creación de esquemáticos jerárquicos y reglas de diseño básicas.
-                    </p>
-                </div>
-
-                <div class="step-card">
-                    <div class="step-number">A</div>
-                    <h3 class="step-title">Etapa de Alimentación y Entrada</h3>
-                    <p class="step-description">
-
-                    </p>
-                </div>
-
-                <div class="step-card">
-                    <div class="step-number">B</div>
-                    <h3 class="step-title">Núcleo del Circuito y Componentes Clave</h3>
-                    <p class="step-description">
-
+                        El corazón del circuito se basa en circuitos integrados (como temporizadores y contadores de décadas). En el esquemático de Altium, se diseñó la etapa de control para enviar señales lógicas secuenciales. 
                         <br>
-                        <em>Pitch</em>
+                        <strong>Reto de Diseño:</strong> Se tuvo que asegurar que las huellas (footprints) de los integrados tuvieran el espaciado correcto (Pitch de 2.54mm) para su inserción en la placa, y se añadieron condensadores de filtrado cerca de los pines de alimentación para evitar ruido eléctrico en la conmutación.
                     </p>
                 </div>
 
                 <div class="step-card">
-                    <div class="step-number">C</div>
-                    <h3 class="step-title">Etapa de Salida</h3>
+                    <div class="step-number">2</div>
+                    <h3 class="step-title">Alineación y Ruteo de la Serie LED</h3>
                     <p class="step-description">
-                        
+                        Como se observa en el lado derecho de la placa, la disposición de los LEDs es vertical y uniforme. 
                         <br>
-                       
+                        <strong>Herramientas de Altium:</strong> Utilizamos las herramientas de alineación (<em>Align Vertical Centers</em>) para garantizar que todos los LEDs estuvieran perfectamente rectos. El ruteo de estas pistas fue crítico; se buscó mantener una separación constante (clearance) para evitar cortos durante el fresado CNC, creando un patrón de pistas paralelas estético y funcional.
+                    </p>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-number">3</div>
+                    <h3 class="step-title">Planos de Masa y Ancho de Pista</h3>
+                    <p class="step-description">
+                        Dado que encender múltiples LEDs consume corriente, se calcularon los anchos de pista adecuados para la línea de alimentación común. 
+                        <br>
+                        Se configuraron las reglas de diseño (DRC) para dejar suficiente espacio de aislamiento (isolation) entre el cobre restante y las pistas activas. Esto es vital en la fabricación por sustracción (CNC) para que la herramienta pueda pasar sin levantar las pistas delgadas.
+                    </p>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-number">4</div>
+                    <h3 class="step-title">Fabricación de la PCB</h3>
+                    <p class="step-description">
+                    El Arcivo de Altium se paso a KiCad para generar el arvhibo svg, asi para poder procesarlo desde mods, y asi poder fresar la placa en el CNC.
                     </p>
                 </div>
                 
-                <img src="img/Esquematico_Mich.png" alt="Vista del Circuito 1 Terminado" class="step-image">
-                <img src="img/Diagrama_Mich.png" alt="Vista del Circuito 1 Terminado" class="step-image">
-                <img src="img/PCB_Mich.png" alt="Vista del Circuito 1 Terminado" class="step-image">
+                <img src="img/Placa_Baquelita.jpeg" alt="Placa de circuito secuenciador fresada en baquelita" class="step-image">
+                <div class="alert alert-warning" style="margin-top: 1rem; text-align: center;">
+                    <small>Fotografía real de la placa fresada basada en el diseño de Altium.</small>
+                </div>
             </div>
         </section>
 
 
-
-        <section id="mods-process" class="fade-in">
-            <h2 class="section-title"><i class="fas fa-project-diagram"></i>Análisis del Circuito 2</h2>
+        <section id="circuit-2" class="fade-in">
+            <h2 class="section-title"><i class="fas fa-charging-station"></i>Circuito 2: Fuente de Alimentación USB</h2>
             
             <div class="alert alert-info">
-                <i class="fas fa-pen-fancy"></i>
+                <i class="fas fa-cogs"></i>
                 <div>
-                    <strong>Descripción Funcional:</strong> En esta sección desglosamos el funcionamiento lógico y eléctrico del circuito diseñado en Altium, explicando la función de cada bloque.
+                    <strong>Descripción Técnica:</strong> 
+                    Este proyecto consiste en un módulo convertidor de voltaje DC-DC (Fuente Conmutada). Su función es gestionar la energía de entrada a través del puerto Micro-USB y regularla eficientemente para entregar 5V estables a las dos salidas USB tipo A, permitiendo la alimentación de dispositivos externos.
                 </div>
             </div>
 
             <div class="process-steps">
                 <div class="step-card">
-                    <h3 class="step-title">Propósito del Diseño</h3>
+                    <div class="step-number">1</div>
+                    <h3 class="step-title">Etapa de Potencia y Filtrado</h3>
                     <p class="step-description">
-                        El objetivo de este primer circuito fue crear una fuente de alimentación con salidas de tipo USB-C y USB. Este diseño nos permitió aplicar las herramientas de creación de esquemáticos jerárquicos y reglas de diseño básicas.
-                    </p>
-                </div>
-
-                <div class="step-card">
-                    <div class="step-number">A</div>
-                    <h3 class="step-title">Etapa de Alimentación y Entrada</h3>
-                    <p class="step-description">
-                        Para la alimentación del circuito utilizamos. Se implementaron capacitores de desacoplo de [VALOR, EJ: 100nF] cerca de los pines de alimentación de los circuitos integrados para filtrar ruido de alta frecuencia y estabilizar el voltaje de entrada.
-                    </p>
-                </div>
-
-                <div class="step-card">
-                    <div class="step-number">B</div>
-                    <h3 class="step-title">Núcleo del Circuito y Componentes Clave</h3>
-                    <p class="step-description">
-                        El corazón del circuito se basa en (Info). 
+                        El reto principal en Altium fue la colocación del inductor de potencia (L1) y los capacitores electrolíticos (C1, C2). 
                         <br>
-                        Se diseñaron huellas personalizadas para estos componentes asegurando que el <em>Pitch</em> (distancia entre pines) fuera correcto. En el esquemático, configuramos las conexiones lógicas para que [DESCRIBE LA FUNCIÓN: Ej. el timer genere un pulso cada 1 segundo / el sensor envíe datos al procesador].
+                        <strong>Layout:</strong> Se ubicaron estos componentes lo más cerca posible del IC controlador (PW) para minimizar las pérdidas de energía. En la vista 2D, se aseguraron conexiones directas y cortas para reducir la inductancia parásita, crítica en fuentes conmutadas.
                     </p>
                 </div>
 
                 <div class="step-card">
-                    <div class="step-number">C</div>
-                    <h3 class="step-title">Etapa de Salida</h3>
+                    <div class="step-number">2</div>
+                    <h3 class="step-title">Uso de Polígonos (Polygon Pours)</h3>
                     <p class="step-description">
-                        La señal resultante se visualiza o utiliza a través de (Info). 
+                        Para manejar las corrientes de carga y disipar el calor generado por la conmutación, no solo usamos pistas simples.
                         <br>
-                        Durante el diseño del PCB, las pistas de salida se hicieron más CORTAS para soportar la corriente necesaria sin calentamiento excesivo, respetando las normas IPC genéricas configuradas en el DRC de Altium.
+                        Implementamos <strong>Polygon Pours</strong> (las áreas rellenas visibles en el diseño 2D) conectados a la red de Tierra (GND). Esto crea una gran superficie de cobre que actúa como disipador térmico natural y escudo contra interferencias electromagnéticas (EMI).
                     </p>
                 </div>
-                
-                <img src="img/Esquematico_Ivan.png" alt="Vista del Circuito 2 Terminado" class="step-image">
-                <img src="img/Diagrama_Ivan.png" alt="Vista del Circuito 2 Terminado" class="step-image">
-                <img src="img/PCB_Ivan.png" alt="Vista del Circuito 2 Terminado" class="step-image">
+
+                <div class="step-card">
+                    <div class="step-number">3</div>
+                    <h3 class="step-title">Validación Mecánica en 3D</h3>
+                    <p class="step-description">
+                        Dado el gran volumen del bloque inductor verde y los capacitores, la vista 3D de Altium fue indispensable. 
+                        <br>
+                        Nos permitió verificar que el componente <code>L1</code> no obstruyera el acceso a los componentes SMD más pequeños (`R9`, `C5`) y confirmar que los conectores USB (`J2`, `J3`) sobresalieran correctamente del borde de la placa para encajar en un futuro case o carcasa.
+                    </p>
+                </div>
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1rem; margin-top: 2rem;">
+                    <div>
+                        <img src="img/Esquematico.png" alt="Diseño de Layout 2D en Altium" class="step-image" style="width: 100%; height: auto;">
+                        <p style="text-align: center; color: var(--text-light); margin-top: 0.5rem; font-size: 0.9rem;"><em>Diseño de Layout 2D mostrando ruteo y polígonos.</em></p>
+                    </div>
+                    <div>
+                        <img src="img/3D_altium.png" alt="Renderizado 3D final" class="step-image" style="width: 100%; height: auto;">
+                        <p style="text-align: center; color: var(--text-light); margin-top: 0.5rem; font-size: 0.9rem;"><em>Validación 3D de componentes y conectores.</em></p>
+                    </div>
+                    <div>
+                        <img src="img/Vista 2D.png" alt="Renderizado 3D final" class="step-image" style="width: 100%; height: auto;">
+                        <p style="text-align: center; color: var(--text-light); margin-top: 0.5rem; font-size: 0.9rem;"><em>Validación 3D de componentes y conectores.</em></p>
+                    </div>
+                </div>
             </div>
         </section>
 
