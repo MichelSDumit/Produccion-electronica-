@@ -624,60 +624,50 @@ En esta práctica aprendimos a usar la máquina láser xTool F1 como una opción
         </section>
 
         <section id="mods-process" class="fade-in">
-            <h2 class="section-title"></i>Procedimiento para soldar con cautín</h2>
+            <h2 class="section-title"></i>Procedimiento para utilizar la XTool F1 Ultra. </h2>
 
             <div class="process-steps">
                 <div class="step-card">
                     <div class="step-number">1</div>
-                    <h3 class="step-title">Limpieza de la placa:</h3>
+                    <h3 class="step-title">Importación y posicionamiento del archivo:</h3>
                     <p class="step-description">
-                       Primero, limpiamos cuidadosamente la placa electrónica para eliminar restos de polvo, grasa o suciedad. Esto ayuda a que la soldadura se adhiera correctamente y evita fallas en las conexiones.     </p>
+                      Primero, se abre el software xTool Creative Space (XCS) y se importa el archivo DXF de la PCB arrastrándolo al área de trabajo. Es importante verificar que las dimensiones del diseño coincidan con las de la placa física para evitar problemas de escala. La xTool F1 incluye una cámara integrada que permite ver la placa en tiempo real, lo que facilita superponer el diseño digital sobre la placa física. Con esto se puede ajustar la posición, rotación y alineación del archivo para que coincida exactamente con la placa antes de comenzar el grabado.    </p>
                 </div>
                 
                 <div class="step-card">
                     <div class="step-number">2</div>
-                    <h3 class="step-title">Aplicación de pasta para soldar:</h3>
+                    <h3 class="step-title">Medición automática de altura:</h3>
                     <p class="step-description">
-                        Luego, colocamos una pequeña cantidad de pasta para soldar (flux) en los puntos donde íbamos a colocar los componentes. Esta pasta facilita que el estaño se derrita y se adhiera de manera uniforme.
-                    </p>
+                        Antes de iniciar el grabado, la máquina debe determinar la altura exacta de la superficie de la placa. En XCS se selecciona la función de medición de altura, y el láser realiza mediciones en varios puntos de la placa. Con esta información, el software ajusta automáticamente el enfoque del láser para toda el área de trabajo. Es fundamental que la placa esté completamente plana, ya que cualquier curvatura o irregularidad significativa puede afectar la precisión del grabado. Esta medición permite compensar pequeñas variaciones en la superficie.  </p>
                 </div>
 
                 <div class="step-card">
                     <div class="step-number">3</div>
-                    <h3 class="step-title">Preparación del cautín:</h3>
+                    <h3 class="step-title">Configuración de parámetros del láser:</h3>
                     <p class="step-description">
-                        Encendimos el cautín y lo ajustamos a una temperatura de 380 °C, que es adecuada para soldar componentes electrónicos sin dañar la placa ni las piezas.
-                    </p>
+                        Una vez que la placa está alineada y medida, se ajustan los parámetros del láser de fibra IR en XCS. Se selecciona el modo Fibra IR, con alimentación al 100%, velocidad de 750 mm/s, paso 3, 300 líneas por centímetro, grabado unidireccional y frecuencia de 30 kHz. Estos parámetros permiten que el láser elimine el cobre con precisión y rapidez, garantizando que las pistas queden definidas sin dañar la placa. Ajustar correctamente estos valores es clave para obtener un grabado limpio y eficiente.    </p>
                 </div>
 
                 <div class="step-card">
                     <div class="step-number">4</div>
-                    <h3 class="step-title">Preestañado de las uniones:</h3>
+                    <h3 class="step-title">Grabado de la placa:</h3>
                     <p class="step-description">
-                        Calentamos brevemente con el cautín las zonas donde se colocaría el estaño, y añadimos una pequeña cantidad de este material para crear una base inicial de soldadura. </p>
-                    </div>
+                       Antes de iniciar el trabajo, se revisa la vista previa en XCS para confirmar que el recorrido del láser corresponde al diseño esperado. Luego, se presiona Start para comenzar el grabado. Durante todo el proceso es imprescindible mantener la cubierta cerrada y asegurarse de que el sistema de enfriamiento esté funcionando, ya que el láser de fibra IR es invisible y extremadamente peligroso. Este paso permite que las pistas de la PCB se definan con precisión siguiendo la máscara de aislamiento preparada previamente. </p>     
                 </div>
 
                 <div class="step-card">
                     <div class="step-number">5</div>
-                    <h3 class="step-title">Colocación de los componentes:</h3>
+                    <h3 class="step-title">Procesos adicionales en monoFab SRM-20:</h3>
                     <p class="step-description">
-                       Posteriormente, colocamos los componentes electrónicos en su posición correspondiente sobre la placa, asegurándonos de que los pines coincidieran con los puntos previamente estañados.       </p>
-                    </div>
+                      Después de completar el grabado láser, la placa necesita procesos mecánicos adicionales realizados en la fresadora CNC monoFab SRM-20. Primero se perforan los orificios para los componentes through-hole, usando brocas de 0.8 a 1.0 mm con velocidad reducida para evitar romperlas. Luego, se realiza el corte del contorno de la placa usando una fresa de 1/32”, con profundidad suficiente para cortar completamente el sustrato y darle la forma final a la PCB. Estos pasos complementan el grabado y dejan la placa lista para ensamblaje. </p>      
+                 </div>
 
-                <div class="step-card">
+                      <div class="step-card">
                     <div class="step-number">6</div>
-                    <h3 class="step-title">Soldadura final:</h3>
+                    <h3 class="step-title">Flujo de trabajo completo:</h3>
                     <p class="step-description">
-                        Con el componente en su lugar, aplicamos nuevamente el cautín sobre la unión y dejamos que el estaño se derritiera, asegurando una conexión firme y brillante entre el pin del componente y la pista de la placa.      </div>
-                </div>
-
-                <div class="step-card">
-                    <div class="step-number">7</div>
-                    <h3 class="step-title">Revisión de las uniones:</h3>
-                    <p class="step-description">
-                       Finalmente, inspeccionamos las soldaduras para verificar que no hubiera puentes de estaño ni uniones frías, asegurándonos de que todas las conexiones fueran limpias y seguras.     </div>
-                </div>
+                        En resumen, el flujo de trabajo consiste en usar la xTool F1 para grabar las pistas del PCB mediante láser de fibra IR, y posteriormente la monoFab SRM-20 para perforar los orificios y cortar el contorno de la placa. El resultado es una PCB completamente lista para ensamblar, con pistas precisas, orificios correctos y forma definida, lista para colocar los componentes y probar el circuito.   </p>      
+                    </div>
                 </div>
             </div>
         </section>
@@ -689,46 +679,19 @@ En esta práctica aprendimos a usar la máquina láser xTool F1 como una opción
             <div class="alert alert-info">
                 <i class="fas fa-info-circle"></i>
                 <div>
-                    <strong>Resultados de la práctica:</strong> Cada integrante del equipo logró soldar sus componentes a las placas, aplicando los conocimientos adquiridos en el proceso completo de producción electrónica.
-                </div>
-            </div>
-
-            <div class="project-gallery">
-                <div class="project-card">
-                    <img src="img/Image.jpg " alt="PCB diseñada por Giovanna">
-                    <div class="project-info">
-                        <h3 class="project-title">Soldadura de Gio</h3>
-                        <p class="project-author">Por: Giovanna González Martínez</p>
-                    </div>
-                </div>
-
-                
-                <div class="project-card">
-                    <img src="img/Image (1).jpg" alt="PCB diseñada por Michel">
-                    <div class="project-info">
-                        <h3 class="project-title">Soldadura de Michel</h3>
-                        <p class="project-author">Por: Michel Sánchez Dumit</p>
-                    </div>
-                </div>
-
-                
-                <div class="project-card">
-                    <img src="video/MicrosoftTeams-video.mp4" alt="Video">
-                    <div class="project-info">
-                        <h3 class="project-title">Video Placa Funcionando</h3>
-                        <p class="project-author">Por: Equipo </p>
-                    </div>
+                    <strong>Limitaciones y Resultados de la práctica:</strong> En esta práctica no se obtuvieron resultados físicos de la PCB, ya que la xTool F1 estaba descalibrada. Debido a esta descalibración, el láser no pudo grabar correctamente las pistas de cobre, lo que impidió completar el prototipo físico. Este problema demuestra la importancia de verificar la calibración de la máquina antes de iniciar el grabado, ya que incluso archivos y configuraciones correctos no producen resultados adecuados si el equipo no está correctamente ajustado. A pesar de esto, el proceso permitió aprender la preparación de archivos, la configuración del software y los pasos de posicionamiento y medición, conocimientos que serán útiles una vez que la máquina esté calibrada.
                 </div>
             </div>
 
             <div class="tool-info">
                 <h4><i class="fas fa-lightbulb"></i>Lecciones Aprendidas</h4>
                 <ul style="padding-left: 2rem; margin-top: 1rem;">
-                    <li><strong>Preparación adecuada:</strong> Tener a la mano todas las herramientas y componentes facilita un proceso de soldado más ordenado y seguro.</li>
-                    <li><strong>Temperatura correcta:</strong> Ajustar bien la temperatura del cautín evita dañar los componentes o las pistas de la PCB.</li>
-                    <li><strong>Aplicación precisa del estaño:</strong> Usar la cantidad justa de estaño garantiza una buena conexión sin provocar cortocircuitos.</li>
-                    <li><strong>Seguridad y limpieza:</strong> Mantener el área de trabajo limpia y usar protección adecuada previene accidentes y mejora la calidad del resultado.</li>
-                    <li><strong>Revisión final:</strong> Inspeccionar cada soldadura ayuda a detectar uniones frías o defectuosas antes de probar el circuito.</li>
+                    <li><strong>Preparación del archivo y la placa:</strong> Antes de comenzar, es fundamental tener el archivo DXF correctamente preparado desde Altium y la placa bien limpia y fijada en la máquina. Esto asegura que el grabado láser se realice de forma precisa y evita errores durante el proceso.</li>
+                    <li><strong>Posicionamiento y alineación:</strong> Utilizar correctamente la cámara integrada y verificar la superposición del diseño digital sobre la placa ayuda a lograr un grabado exacto. Ajustes finos en la posición y rotación previenen desalineaciones que podrían afectar las pistas del PCB.</li>
+                    <li><strong>Medición de altura y superficie plana:</strong> Asegurarse de que la placa esté completamente plana y permitir que la máquina realice la medición automática de altura es clave para mantener la precisión del grabado. Cualquier irregularidad puede generar variaciones en el corte o quemado del cobre.</li>
+                    <li><strong>Configuración de parámetros del láser:</strong> Ajustar correctamente la potencia, velocidad, paso y frecuencia del láser según el material de la placa permite obtener un grabado limpio y consistente. La configuración incorrecta puede dañar la PCB o generar pistas incompletas. </li>
+                    <li><strong>Seguridad y control:</strong> Mantener la cubierta cerrada, utilizar el sistema de enfriamiento y seguir las normas de seguridad evita accidentes con el láser de fibra IR, que es invisible y muy peligroso. La atención constante durante el grabado garantiza un proceso seguro y eficiente.</li>
+                    <li><strong>Revisión y continuidad del proceso:</strong>Verificar el grabado al finalizar y luego continuar con la perforación y corte en la fresadora CNC monoFab asegura que la PCB quede lista para ensamblaje sin errores. La inspección temprana de posibles fallas evita retrabajos y mejora la calidad del prototipo final.</li>
                 </ul>
             </div>
         </section>
