@@ -1,0 +1,948 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Práctica 6 - XTool F1 Ultra | Producción Electrónica</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #e72d2d;
+            --primary-alpha: rgba(231, 45, 45, 0.9);
+            --secondary-color: #2c3e50;
+            --dark-bg: rgba(0, 0, 0, 0.8);
+            --light-bg: rgba(255, 255, 255, 0.95);
+            --text-dark: #333;
+            --text-light: #666;
+            --border-radius: 15px;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            --hover-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+            --success-color: #27ae60;
+            --info-color: #3498db;
+            --warning-color: #f39c12;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        /* Video de fondo */
+        #video-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            overflow: hidden;
+        }
+
+        #video-bg video {
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            object-fit: cover;
+            filter: brightness(0.6) contrast(1.1);
+        }
+
+        #video-bg::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(231, 45, 45, 0.2), rgba(0, 0, 0, 0.7));
+            z-index: -1;
+        }
+
+        #main-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Header mejorado */
+        header {
+            background: var(--dark-bg);
+            backdrop-filter: blur(15px);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 3px solid var(--primary-color);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .home-button {
+            background: linear-gradient(45deg, var(--primary-color), #ff6b6b);
+            color: white;
+            padding: 0.7rem 1.5rem;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(231, 45, 45, 0.3);
+        }
+
+        .home-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(231, 45, 45, 0.4);
+        }
+
+        .page-title {
+            color: white;
+            font-size: 1.3rem;
+            font-weight: 500;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            background: var(--primary-alpha);
+            transform: translateY(-2px);
+        }
+
+        /* Secciones */
+        section {
+            margin: 3rem auto;
+            max-width: 1200px;
+            padding: 3rem 2rem;
+            background: var(--light-bg);
+            backdrop-filter: blur(15px);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Introducción */
+        #intro {
+            text-align: center;
+            background: linear-gradient(135deg, var(--light-bg), rgba(231, 45, 45, 0.05));
+        }
+
+        .intro-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .intro-title {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .intro-subtitle {
+            font-size: 1.3rem;
+            color: var(--text-light);
+            margin-bottom: 2rem;
+        }
+
+        .intro-description {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            text-align: left;
+            color: var(--text-dark);
+        }
+
+        /* Títulos de sección */
+        .section-title {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+            font-weight: 700;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-color), #ff6b6b);
+            border-radius: 2px;
+        }
+
+        .section-title i {
+            margin-right: 1rem;
+        }
+
+        /* Pasos del proceso */
+        .process-steps {
+            display: grid;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .step-card {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            border-left: 5px solid var(--primary-color);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .step-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--hover-shadow);
+        }
+
+        .step-number {
+            position: absolute;
+            top: -15px;
+            left: 20px;
+            background: linear-gradient(45deg, var(--primary-color), #ff6b6b);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+            box-shadow: 0 5px 15px rgba(231, 45, 45, 0.3);
+        }
+
+        .step-title {
+            color: var(--primary-color);
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            margin-top: 0.5rem;
+            font-weight: 600;
+        }
+
+        .step-description {
+            color: var(--text-dark);
+            line-height: 1.7;
+            margin-bottom: 1rem;
+        }
+
+        .step-image {
+            width: 100%;
+            max-width: 400px;
+            border-radius: var(--border-radius);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            margin: 1rem auto;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+
+        .step-image:hover {
+            transform: scale(1.02);
+        }
+
+        /* Información de herramientas */
+        .tool-info {
+            background: linear-gradient(135deg, rgba(52, 152, 219, 0.1), rgba(46, 204, 113, 0.1));
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            margin: 2rem 0;
+            border-left: 4px solid var(--info-color);
+        }
+
+        .tool-info h4 {
+            color: var(--info-color);
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* Galería de proyectos */
+        .projects-section {
+            margin-top: 4rem;
+        }
+
+        .project-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .project-card {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--hover-shadow);
+        }
+
+        .project-card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .project-card:hover img {
+            transform: scale(1.05);
+        }
+
+        .project-info {
+            padding: 1.5rem;
+        }
+
+        .project-title {
+            color: var(--primary-color);
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-author {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Participantes */
+        .participants-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            padding: 2rem 0;
+        }
+
+        .participant-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(231, 45, 45, 0.05));
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: all 0.4s ease;
+            border: 1px solid rgba(231, 45, 45, 0.1);
+        }
+
+        .participant-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: var(--hover-shadow);
+        }
+
+        .participant-card img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--primary-color);
+            margin-bottom: 1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 25px rgba(231, 45, 45, 0.3);
+        }
+
+        .participant-card:hover img {
+            transform: scale(1.1);
+            border-color: #ff6b6b;
+        }
+
+        .participant-card h4 {
+            color: var(--primary-color);
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .participant-card p {
+            color: var(--text-light);
+            margin-bottom: 0.5rem;
+        }
+
+        .participant-card a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-size: 0.9rem;
+            word-wrap: break-word;
+            transition: color 0.3s ease;
+        }
+
+        .participant-card a:hover {
+            color: #ff6b6b;
+            text-decoration: underline;
+        }
+
+        /* Alertas y notas */
+        .alert {
+            padding: 1rem 1.5rem;
+            border-radius: 10px;
+            margin: 1rem 0;
+            border-left: 4px solid;
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .alert-success {
+            background: rgba(39, 174, 96, 0.1);
+            border-color: var(--success-color);
+            color: #1e8449;
+        }
+
+        .alert-info {
+            background: rgba(52, 152, 219, 0.1);
+            border-color: var(--info-color);
+            color: #2471a3;
+        }
+
+        .alert-warning {
+            background: rgba(243, 156, 18, 0.1);
+            border-color: var(--warning-color);
+            color: #b7950b;
+        }
+
+        .alert i {
+            font-size: 1.2rem;
+            margin-top: 0.2rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+                gap: 1rem;
+                padding: 1rem;
+            }
+
+            .nav-left {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .nav-links {
+                gap: 1rem;
+            }
+
+            section {
+                margin: 2rem 1rem;
+                padding: 2rem 1rem;
+            }
+
+            .intro-title {
+                font-size: 2.5rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .project-gallery {
+                grid-template-columns: 1fr;
+            }
+
+            .participants-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Scroll indicator */
+        .scroll-indicator {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.2);
+            z-index: 9999;
+        }
+
+        .scroll-progress {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary-color), #ff6b6b);
+            width: 0%;
+            transition: width 0.1s ease;
+        }
+    </style>
+</head>
+<body>
+    <!-- Scroll indicator -->
+    <div class="scroll-indicator">
+        <div class="scroll-progress" id="scrollProgress"></div>
+    </div>
+
+    <div id="video-bg">
+        <video autoplay muted loop playsinline>
+            <source src="../assets/intro.mp4" type="video/mp4">
+        </video>
+    </div>
+
+    <div id="main-content">
+        <header>
+            <nav>
+                <div class="nav-left">
+                    <a href="../index.html" class="home-button"></i> MENÚ PRINCIPAL</a>
+                </div>
+                <div class="nav-links">
+                    <a href="#intro"></i> Introducción</a>
+                    <a href="#kicad-process"></i> Información general </a>
+                    <a href="#mods-process"></i> Proceso </a>
+                    <a href="#projects"></i> Proyectos </a>
+                    <a href="#participants"></i> Equipo</a>
+                </div>
+            </nav>
+        </header>
+
+        <section id="intro" class="fade-in">
+            <div class="intro-content">
+                <h1 class="intro-title">Práctica 6</h1>
+                <p class="intro-subtitle">XTool F1 Ultra</p>
+                <div class="intro-description">
+                    <p>  Aquí tienes una versión más sencilla y directa:
+
+---
+
+En esta práctica aprendimos a usar la máquina láser xTool F1 como una opción para fabricar placas de circuito impreso (PCB). Vimos cómo el láser infrarrojo puede eliminar el cobre de la placa para formar las pistas, sin necesidad de usar una fresadora CNC. También trabajamos en la preparación de los archivos desde Altium Designer, configuramos los parámetros en el software xTool Creative Space (XCS) y realizamos pruebas sobre placas de FR4 y baquelita. Con esto pudimos evaluar qué tan útil es esta técnica para hacer prototipos rápidos, destacando su buena precisión y velocidad.
+</p>
+                    
+                    <div class="alert alert-info">
+                        <i class="fas fa-lightbulb"></i>
+                        <div>
+                            <strong>Objetivo:</strong>  Desarrollar habilidades en el uso de la máquina láser xTool F1 para la fabricación básica de placas de circuito impreso (PCB), comprendiendo el proceso de preparación de archivos desde Altium Designer, la configuración de parámetros en xTool Creative Space (XCS) y la ejecución del grabado láser. Al finalizar la práctica, el estudiante será capaz de aplicar esta tecnología para crear prototipos rápidos con buena precisión y organización en el proceso de trabajo.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="kicad-process" class="fade-in">
+            <h2 class="section-title"></i>Información general</h2>
+            
+            <div class="tool-info">
+                <h4><i class="fas fa-info-circle"></i>¿Qué es?</h4>
+                <p>La xTool F1 Ultra es una máquina de grabado y corte láser de escritorio pensada tanto para trabajos creativos como para producción más seria. Está equipada con dos tipos de láser: un láser de fibra (20 W) y un láser de diodo/azul (20 W) — lo que le da gran versatilidad para trabajar sobre una amplia variedad de materiales. </p>
+            </div>
+
+            <div class="process-steps">
+                <div class="step-card">
+                    <h3 class="step-title">Características</h3>
+                    <p class="step-description">
+                     </p><strong>Láser de Fibra IR:</strong> Para grabado en metales como cobre</p>
+                    </p><strong>Área de trabajo:</strong> 220 × 220 mm (y puede ampliarse hasta ~220 × 500 mm con accesorios).</p>
+                    </p><strong>Precisión:</strong> Alta resolución para trabajos detallados.</p> 
+                    </p><strong>Sistema de enfoque:</strong> Medición automática de altura</p>
+                    </p><strong>Cámara integrada:</strong> Para posicionamiento preciso</p>
+                    </p><strong>Sistema de enfriamiento:</strong> Requerido para operación del láser de fibra    </p>
+                </p><strong>Software:</strong>  xTool Creative Space (XCS) </p>
+                </p>
+                   <img src="img/Captura de pantalla_9-12-2025_103643_www.bing.com.jpeg" alt="Librerías" width="300" height="200">
+                    <div class="alert alert-warning">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <div> Antes de iniciar cualquier trabajo con la fibra IR, es obligatorio encender el sistema de enfriamiento de la máquina. Operar sin enfriamiento puede dañar permanentemente el láser.</div>
+                </div>
+                </div>
+
+                <div class="step-card">
+                    <h3 class="step-title">Preparación de Archivos desde Altium</h3>
+                    <p class="step-description">
+                        </p>Para poder usar la xTool F1 y que el láser elimine el cobre que no necesitamos, primero debemos crear una máscara de aislamiento en Altium. Esta máscara será la imagen que exportaremos al software del láser.</p>
+                       </p><strong> Crear un polígono que cubra toda la placa:</strong> Se selecciona el contorno de la placa (Board Shape) y se coloca un Polygon Pour desde Place → Polygon Pour, dibujándolo de forma que cubra toda el área de la PCB.​</p>
+                       </p><strong>Configurar el polígono:</strong> En las propiedades del polígono se ajusta la configuración para que funcione como máscara, asignando Net: No Net, Layer: Top Layer, Estilo: Solid, y desactivando Remove Dead Copper para mantener todo el cobre.​ </p>
+                       </p><strong>Rellenar el cobre:</strong> Finalmente, se actualiza el relleno haciendo clic derecho sobre el polígono y seleccionando Polygon Actions → Repour All, dejando lista la máscara para exportarla al láser.​ </p>
+                      </p><strong>Exportación como DXF:</strong> Para obtener el archivo que usará la xTool F1, se debe ir a File → Fabrication Outputs → DXF. Allí se elige el formato DXF, se selecciona la Top Layer (donde está el polígono ya rellenado), y se configuran las unidades en milímetros para evitar cambios de escala. Finalmente, se guarda el archivo DXF, el cual luego se podrá importar directamente en el software XCS para preparar el grabado láser.​ </p>
+                    </p>
+                    <img src="img/dxf.png" alt="HUELLAS" width="300" height="200">
+                    </ul>
+                </div>
+
+                <div class="step-card">
+                    <h3 class="step-title">Exportación como DXF</h3>
+                    <p class="step-description">
+                    <p><strong>Componentes pasivos:</strong> Resistencias, Capacitores (condensadores), Inductores (bobinas), Potenciómetros </p>
+                    <p><strong>Componentes pasivos:</strong> Diodos (rectificadores, LED, zéner), Transistores (NPN, PNP, MOSFET), Circuitos integrados (ICs), Reguladores de voltaje</p>
+                    <p><strong>Componentes pasivos:</strong> Pines y cabezales (headers), Conectores macho y hembra, Borneras (terminal blocks), Cables y jumpers</p>
+                    <p><strong>Componentes pasivos:</strong> Interruptores y pulsadores, Relevadores (relés), Motores pequeños o servos (con terminales para soldar)</p>
+                    <p><strong>Componentes pasivos:</strong> Displays (de 7 segmentos o LCD), Sensores (de temperatura, luz, movimiento, etc.), Zumbadores (buzzers), Cristales osciladores</p>
+                    </p>
+                    <img src="img/dxf.png" alt="HUELLAS" width="300" height="200">
+                </div>
+                
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="mods-process" class="fade-in">
+            <h2 class="section-title"></i>Procedimiento para soldar con cautín</h2>
+
+            <div class="process-steps">
+                <div class="step-card">
+                    <div class="step-number">1</div>
+                    <h3 class="step-title">Limpieza de la placa:</h3>
+                    <p class="step-description">
+                       Primero, limpiamos cuidadosamente la placa electrónica para eliminar restos de polvo, grasa o suciedad. Esto ayuda a que la soldadura se adhiera correctamente y evita fallas en las conexiones.     </p>
+                </div>
+                
+                <div class="step-card">
+                    <div class="step-number">2</div>
+                    <h3 class="step-title">Aplicación de pasta para soldar:</h3>
+                    <p class="step-description">
+                        Luego, colocamos una pequeña cantidad de pasta para soldar (flux) en los puntos donde íbamos a colocar los componentes. Esta pasta facilita que el estaño se derrita y se adhiera de manera uniforme.
+                    </p>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-number">3</div>
+                    <h3 class="step-title">Preparación del cautín:</h3>
+                    <p class="step-description">
+                        Encendimos el cautín y lo ajustamos a una temperatura de 380 °C, que es adecuada para soldar componentes electrónicos sin dañar la placa ni las piezas.
+                    </p>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-number">4</div>
+                    <h3 class="step-title">Preestañado de las uniones:</h3>
+                    <p class="step-description">
+                        Calentamos brevemente con el cautín las zonas donde se colocaría el estaño, y añadimos una pequeña cantidad de este material para crear una base inicial de soldadura. </p>
+                    </div>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-number">5</div>
+                    <h3 class="step-title">Colocación de los componentes:</h3>
+                    <p class="step-description">
+                       Posteriormente, colocamos los componentes electrónicos en su posición correspondiente sobre la placa, asegurándonos de que los pines coincidieran con los puntos previamente estañados.       </p>
+                    </div>
+
+                <div class="step-card">
+                    <div class="step-number">6</div>
+                    <h3 class="step-title">Soldadura final:</h3>
+                    <p class="step-description">
+                        Con el componente en su lugar, aplicamos nuevamente el cautín sobre la unión y dejamos que el estaño se derritiera, asegurando una conexión firme y brillante entre el pin del componente y la pista de la placa.      </div>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-number">7</div>
+                    <h3 class="step-title">Revisión de las uniones:</h3>
+                    <p class="step-description">
+                       Finalmente, inspeccionamos las soldaduras para verificar que no hubiera puentes de estaño ni uniones frías, asegurándonos de que todas las conexiones fueran limpias y seguras.     </div>
+                </div>
+                </div>
+            </div>
+        </section>
+
+
+        <section id="projects" class="fade-in projects-section">
+            <h2 class="section-title"></i>Nuestros Proyectos</h2>
+            
+            <div class="alert alert-info">
+                <i class="fas fa-info-circle"></i>
+                <div>
+                    <strong>Resultados de la práctica:</strong> Cada integrante del equipo logró soldar sus componentes a las placas, aplicando los conocimientos adquiridos en el proceso completo de producción electrónica.
+                </div>
+            </div>
+
+            <div class="project-gallery">
+                <div class="project-card">
+                    <img src="img/Image.jpg " alt="PCB diseñada por Giovanna">
+                    <div class="project-info">
+                        <h3 class="project-title">Soldadura de Gio</h3>
+                        <p class="project-author">Por: Giovanna González Martínez</p>
+                    </div>
+                </div>
+
+                
+                <div class="project-card">
+                    <img src="img/Image (1).jpg" alt="PCB diseñada por Michel">
+                    <div class="project-info">
+                        <h3 class="project-title">Soldadura de Michel</h3>
+                        <p class="project-author">Por: Michel Sánchez Dumit</p>
+                    </div>
+                </div>
+
+                
+                <div class="project-card">
+                    <img src="video/MicrosoftTeams-video.mp4" alt="Video">
+                    <div class="project-info">
+                        <h3 class="project-title">Video Placa Funcionando</h3>
+                        <p class="project-author">Por: Equipo </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tool-info">
+                <h4><i class="fas fa-lightbulb"></i>Lecciones Aprendidas</h4>
+                <ul style="padding-left: 2rem; margin-top: 1rem;">
+                    <li><strong>Preparación adecuada:</strong> Tener a la mano todas las herramientas y componentes facilita un proceso de soldado más ordenado y seguro.</li>
+                    <li><strong>Temperatura correcta:</strong> Ajustar bien la temperatura del cautín evita dañar los componentes o las pistas de la PCB.</li>
+                    <li><strong>Aplicación precisa del estaño:</strong> Usar la cantidad justa de estaño garantiza una buena conexión sin provocar cortocircuitos.</li>
+                    <li><strong>Seguridad y limpieza:</strong> Mantener el área de trabajo limpia y usar protección adecuada previene accidentes y mejora la calidad del resultado.</li>
+                    <li><strong>Revisión final:</strong> Inspeccionar cada soldadura ayuda a detectar uniones frías o defectuosas antes de probar el circuito.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="participants" class="fade-in">
+            <h2 class="section-title"></i>Nuestro Equipo</h2>
+            <div class="participants-container">
+                <div class="participant-card">
+                    <img src="../assets/gio.png" alt="Giovanna González Martínez">
+                    <h4>Giovanna González Martínez</h4>
+                    <p><a href="mailto:giovanna.gonzalez@iberopuebla.mx">
+                       </i> giovanna.gonzalez@iberopuebla.mx
+                    </a></p>
+                </div>
+                <div class="participant-card">
+                    <img src="../assets/michel.png" alt="Michel Sánchez Dumit">
+                    <h4>Michel Sánchez Dumit</h4>
+                    <p><a href="mailto:michel.sanchez.dumit@iberopuebla.mx">
+                     </i> michel.sanchez.dumit@iberopuebla.mx
+                    </a></p>
+                </div>
+                <div class="participant-card">
+                    <img src="../assets/Ivan.png" alt="Iván Rojas Robles">
+                    <h4>Iván Rojas Robles</h4>
+                    <p><a href="mailto:ivan.rojas@iberopuebla.mx">
+                    </i> ivan.rojas@iberopuebla.mx
+                    </a></p>
+                </div>
+            </div>
+
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // Scroll progress indicator
+        window.addEventListener('scroll', function() {
+            const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+            const scrollHeight = document.documentElement.scrollHeight || document.body.scrollHeight;
+            const clientHeight = document.documentElement.clientHeight || window.innerHeight;
+            const scrollPercent = scrollTop / (scrollHeight - clientHeight) * 100;
+            document.getElementById('scrollProgress').style.width = scrollPercent + '%';
+        });
+
+        // Intersection Observer for fade-in animations
+        document.addEventListener("DOMContentLoaded", function() {
+            const sections = document.querySelectorAll('.fade-in');
+
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px 0px -100px 0px',
+                threshold: 0.1
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry, index) => {
+                    if (entry.isIntersecting) {
+                        setTimeout(() => {
+                            entry.target.classList.add('visible');
+                        }, index * 200);
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+        });
+
+        // Smooth scroll for navigation links
+        document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add parallax effect to video background
+        window.addEventListener('scroll', function() {
+            const scrolled = window.pageYOffset;
+            const video = document.querySelector('#video-bg video');
+            if (video) {
+                video.style.transform = `translate(-50%, -50%) translateY(${scrolled * 0.3}px)`;
+            }
+        });
+
+        // Dynamic header background on scroll
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(0, 0, 0, 0.95)';
+                header.style.borderBottom = '3px solid var(--primary-color)';
+            } else {
+                header.style.background = 'rgba(0, 0, 0, 0.8)';
+                header.style.borderBottom = '3px solid var(--primary-color)';
+            }
+        });
+
+        // Image lightbox effect
+        document.querySelectorAll('.project-card img').forEach(img => {
+            img.addEventListener('click', function() {
+                const overlay = document.createElement('div');
+                overlay.style.cssText = `
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background: rgba(0, 0, 0, 0.9);
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    z-index: 10000;
+                    cursor: pointer;
+                `;
+                
+                const imgClone = this.cloneNode(true);
+                imgClone.style.cssText = `
+                    max-width: 90%;
+                    max-height: 90%;
+                    object-fit: contain;
+                    border-radius: 10px;
+                    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+                `;
+                
+                overlay.appendChild(imgClone);
+                document.body.appendChild(overlay);
+                
+                overlay.addEventListener('click', () => {
+                    document.body.removeChild(overlay);
+                });
+            });
+        });
+
+        // Add step counter animation
+        function animateStepCounters() {
+            const stepNumbers = document.querySelectorAll('.step-number');
+            stepNumbers.forEach((step, index) => {
+                setTimeout(() => {
+                    step.style.transform = 'scale(1.2)';
+                    setTimeout(() => {
+                        step.style.transform = 'scale(1)';
+                    }, 200);
+                }, index * 300);
+            });
+        }
+
+        // Trigger step animation when KiCad section is visible
+        const kicadSection = document.querySelector('#kicad-process');
+        const kicadObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateStepCounters();
+                    kicadObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.3 });
+
+        if (kicadSection) {
+            kicadObserver.observe(kicadSection);
+        }
+
+        // Add hover effects to step cards
+        document.querySelectorAll('.step-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.borderLeft = '5px solid #ff6b6b';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.borderLeft = '5px solid var(--primary-color)';
+            });
+        });
+
+        // Add typing effect to alerts
+        function typeEffect(element, text, speed = 50) {
+            let i = 0;
+            element.innerHTML = '';
+            function type() {
+                if (i < text.length) {
+                    element.innerHTML += text.charAt(i);
+                    i++;
+                    setTimeout(type, speed);
+                }
+            }
+            type();
+        }
+
+        // Initialize typing effect on success alerts
+        document.querySelectorAll('.alert-success').forEach(alert => {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const textElement = entry.target.querySelector('div');
+                        if (textElement && !textElement.classList.contains('typed')) {
+                            textElement.classList.add('typed');
+                            const originalText = textElement.textContent;
+                            typeEffect(textElement, originalText, 30);
+                        }
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.5 });
+            
+            observer.observe(alert);
+        });
+    </script>
+</body>
+</html>
